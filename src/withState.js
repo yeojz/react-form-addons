@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
-import get from 'lodash/get';
+import update from 'react-addons-update';
 import isEqual from 'lodash/isEqual';
-import isFunction from 'lodash/isFunction';
+import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 import omit from 'lodash/omit';
+import * as handlers from './handlers';
 
 export const propTypes = {
     defaultValue: PropTypes.object,
@@ -19,8 +20,26 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export function withState(Form, defaultFormData = {}, updateSideEffects = null) {
-    return class FormWithState extends React.Component {
+export const defaultGetStateOnReceiveProps = (instance) => (nextProps) => {
+    const defaultValue = get(nextProps, 'defaultValue');
+    const propsDefaultValue = get(instance, 'props.defaultValue');
+
+    if (isEqual(defaultValue, propsDefaultValue)) {
+        return null;
+    }
+
+    return {
+        formData: update(defaultValue, {
+            $merge: get(instance, 'state.formData', {})
+        })
+    }
+}
+
+export function withState(Component, options = {}) {
+    const defaultFormData = get(options, 'defaultFormData', {});
+    const getStateOnReceiveProps = get(options, 'getStateOnReceiveProps', defaultGetStateOnReceiveProps);
+
+    return class ComponentWithState extends React.Component {
         static propTypes = propTypes;
         static defaultProps = defaultProps;
 
@@ -37,70 +56,10 @@ export function withState(Form, defaultFormData = {}, updateSideEffects = null) 
         }
 
         componentWillReceiveProps = (nextProps) => {
-            if (isEqual(nextProps.defaultValue, this.props.defaultValue)) {
-                return;
+            const newState = getStateOnReceiveProps(this)(nextProps);
+            if (!isEmpty(newState)) {
+                this.setState(newState);
             }
-            const formData = {
-                ...this.props.defaultValue,
-                ...this.state.formData
-            }
-            this.setState({formData});
-        }
-
-        eventPreventDefault = (event) => {
-            if (isFunction(event)) {
-                event.preventDefault();
-            }
-        }
-
-        handleSideEffects = (formData, prevData) => {
-            if (updateSideEffects && isFunction(updateSideEffects)) {
-                return updateSideEffects({
-                    formData,
-                    name,
-                    prevData,
-                    props: this.props
-                });
-            }
-
-            return formData;
-        }
-
-        insertIntoFormData = (name, value) => {
-            const formData = {
-                ...this.state.formData,
-                [name]: value
-            }
-
-            return this.handleSideEffects(formData, this.state.formData);
-        }
-
-        updateFormData = (event, name, value) => {
-            this.eventPreventDefault(event);
-            const formData = this.insertIntoFormData(name, value);
-            this.setState({formData}, () => this.props.onChange(event, formData));
-        }
-
-        handleCancel = (event) => {
-            this.eventPreventDefault(event);
-            this.props.onCancel(event, this.state.formData);
-        }
-
-        handleChange = (event) => {
-            const name = get(event, 'target.name');
-            const value = get(event, 'target.value');
-            this.updateFormData(event, name, value);
-        }
-
-        handleToggle = (event) => {
-            const name = get(event, 'target.name');
-            const value = get(this.state, ['formData', name]) ? false : true;
-            this.updateFormData(event, name, value);
-        }
-
-        handleSubmit = (event, extraData) => {
-            this.eventPreventDefault(event);
-            this.props.onSubmit(event, this.state.formData, extraData);
         }
 
         render() {
@@ -109,10 +68,10 @@ export function withState(Form, defaultFormData = {}, updateSideEffects = null) 
                 <Form
                     {...props}
                     formData={this.state.formData}
-                    onCancel={this.handleCancel}
-                    onChange={this.handleChange}
-                    onToggle={this.handleToggle}
-                    onSubmit={this.handleSubmit} />
+                    onCancel={handlers.onCancel(this)}
+                    onChange={handlers.onChange(this)}
+                    onToggle={handlers.onToggle(this)}
+                    onSubmit={handlers.onSubmit(this)} />
             )
         }
     }
