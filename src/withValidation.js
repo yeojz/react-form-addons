@@ -1,5 +1,8 @@
 import React, {PropTypes} from 'react';
-import omit from 'lodash/omit';
+import get from 'lodash.get';
+import isFunction from 'lodash.isfunction';
+import omit from 'lodash.omit';
+import * as fx from 'fx';
 
 export const propTypes = {
     onCancel: PropTypes.func,
@@ -13,13 +16,53 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export function withValidation(Component) {
+export function withValidation(Component, validator) {
     return class ComponentWithValidation extends React.Component {
         static propTypes = propTypes;
         static defaultProps = defaultProps;
 
         state = {
-            formError: void 0
+            formError: {}
+        }
+
+        propagateUp = (handler, evt, formData, err) => {
+            const {formError} = this.state;
+            get(this.props, handler)(evt, formData, err || formError);
+        }
+
+        runValidation = (formData, actionType) => {
+            if (!isFunction(validator)) {
+               return {};
+            }
+            return validator(formData, this.props, actionType);
+        }
+
+        handleCancel = (evt, formData) => {
+            this.propagateUp('onCancel', evt, formData);
+        }
+
+        handleChange = (evt, formData) => {
+            const formError = this.runValidation(formData, 'change');
+            const callback = () => this.propagateUp('onChange', evt, formData);
+            this.setState({formError}, callback);
+        }
+
+        handleSubmit = (evt, formData) => {
+            const formError = this.runValidation(formData, 'submit');
+            const callback = () => this.propagateUp('onSubmit', evt, formData);
+            this.setState({formError}, callback);
+        }
+
+        render() {
+            const propPass = omit(this.props, propTypes);
+            return (
+                <Component
+                    {...propPass}
+                    formError={this.state.formError}
+                    onCancel={this.handleCancel}
+                    onChange={this.handleChange}
+                    onSubmit={this.handleSubmit} />
+            )
         }
     }
 }

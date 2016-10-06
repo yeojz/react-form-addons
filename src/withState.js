@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
-import update from 'react-addons-update';
-import isEqual from 'lodash/isEqual';
-import isEmpty from 'lodash/isEmpty';
-import noop from 'lodash/noop';
-import omit from 'lodash/omit';
-import * as handlers from './handlers';
+import get from 'lodash.get';
+import isEmpty from 'lodash.isempty';
+import noop from 'lodash.noop';
+import omit from 'lodash.omit';
+import * as fx from './fx';
 
 export const propTypes = {
     defaultValue: PropTypes.object,
@@ -20,24 +19,9 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export const defaultGetStateOnReceiveProps = (instance) => (nextProps) => {
-    const defaultValue = get(nextProps, 'defaultValue');
-    const propsDefaultValue = get(instance, 'props.defaultValue');
-
-    if (isEqual(defaultValue, propsDefaultValue)) {
-        return null;
-    }
-
-    return {
-        formData: update(defaultValue, {
-            $merge: get(instance, 'state.formData', {})
-        })
-    }
-}
-
 export function withState(Component, options = {}) {
     const defaultFormData = get(options, 'defaultFormData', {});
-    const getStateOnReceiveProps = get(options, 'getStateOnReceiveProps', defaultGetStateOnReceiveProps);
+    const getFormDataOnReceiveProps = get(options, 'getFormDataOnReceiveProps', fx.defaultGetFormDataOnReceiveProps);
 
     return class ComponentWithState extends React.Component {
         static propTypes = propTypes;
@@ -56,22 +40,60 @@ export function withState(Component, options = {}) {
         }
 
         componentWillReceiveProps = (nextProps) => {
-            const newState = getStateOnReceiveProps(this)(nextProps);
-            if (!isEmpty(newState)) {
-                this.setState(newState);
+            const formData = getFormDataOnReceiveProps(this)(nextProps);
+            if (!isEmpty(formData)) {
+                this.setState({formData});
             }
         }
 
+        propagateUp = (handler, evt, formData) => {
+            return get(this.props, handler)(evt, formData);
+        }
+
+        getFormData = (evt, handler) => {
+            const {formData} = this.state;
+            return get(fx, handler)(evt, formData);
+        }
+
+        handleSetFormData = (formData) => {
+            const evt = {bulk: true};
+            const callback = () => this.propagateUp('onChange', evt, formData);
+            this.setState({formData}, callback);
+        }
+
+        handleChange = (evt) => {
+            const formData = this.getFormData(evt, 'onChange');
+            const callback = () => this.propagateUp('onChange', evt, formData);
+            this.setState({formData}, callback);
+        }
+
+        handleToggle = (evt) => {
+            const formData = this.getFormData(evt, 'onToggle');
+            const callback = () => this.propagateUp('onChange', evt, formData);
+            this.setState({formData}, callback);
+        }
+
+        handleCancel = (evt, ...args) => {
+            const {formData} = this.state;
+            this.propagateUp('onCancel', evt, formData);
+        }
+
+        handleSubmit = (evt, ...args) => {
+            const {formData} = this.state;
+            this.propagateUp('onSubmit', evt, formData);
+        }
+
         render() {
-            const props = omit(this.props, propTypes);
+            const propPass = omit(this.props, propTypes);
             return (
-                <Form
-                    {...props}
+                <Component
+                    {...propPass}
                     formData={this.state.formData}
-                    onCancel={handlers.onCancel(this)}
-                    onChange={handlers.onChange(this)}
-                    onToggle={handlers.onToggle(this)}
-                    onSubmit={handlers.onSubmit(this)} />
+                    setFormData={this.handleSetFormData}
+                    onCancel={this.handleCancel}
+                    onChange={this.handleChange}
+                    onToggle={this.handleToggle}
+                    onSubmit={this.handleSubmit} />
             )
         }
     }

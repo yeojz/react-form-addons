@@ -1,29 +1,50 @@
-// updateSideEffects({
-//     formData,
-//     name,
-//     prevData,
-//     props: this.props
-// });
-
 import React, {PropTypes} from 'react';
-import noop from 'lodash/noop';
+import get from 'lodash.get';
+import noop from 'lodash.noop';
+import * as fx from 'fx';
 
 export const propTypes = {
-    onCancel: PropTypes.func,
+    formData: PropTypes.object,
     onChange: PropTypes.func,
-    onSubmit: PropTypes.func
+    onToggle: PropTypes.func,
+    setFormData: PropTypes.func
 }
 
 export const defaultProps = {
-    onCancel: noop,
+    formData: {},
     onChange: noop,
-    onSubmit: noop
+    onToggle: noop
 }
 
-export default withSideEffect = (Component) => {
+const propagateUp = (props, handler, evt, formData) => {
+    if (isFunction(props.setFormData)) {
+        props.setFormData(formData);
+        return;
+    }
+    get(props, handler)(evt, formData, ...args)
+}
+
+export const handleEvents = (sideEffects, props) => (handler) => (evt) => {
+    const name = get(evt, 'target.name');
+    const formData = get(fx, handler)(evt, props.formData);
+    const finalData = sideEffects(formData, name, {
+        prevData: props.formData,
+        props
+    });
+    propgateUp(props, handler, evt, finalData)
+}
+
+export default withSideEffect = (Component, sideEffects = fx.passthrough) => {
     const ComponentWithSideEffect = (props) => {
+        const propPass = omit(props, propTypes);
+        const events = handleEvents(sideEffects, props);
+
         return (
-            <div />
+            <Component
+                {...propPass}
+                formData={props.formData}
+                onChange={events('onChange')}
+                onToggle={events('onToggle')} />
         )
     }
 
