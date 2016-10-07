@@ -19,11 +19,11 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export function withState(Component, options = {}) {
+export const withState = (options = {}) => (Component) => {
     const defaultFormData = get(options, 'defaultFormData', {});
     const getFormDataOnReceiveProps = get(options, 'getFormDataOnReceiveProps', fx.defaultGetFormDataOnReceiveProps);
 
-    return class ComponentWithState extends React.Component {
+    class ComponentWithState extends React.Component {
         static propTypes = propTypes;
         static defaultProps = defaultProps;
 
@@ -97,6 +97,8 @@ export function withState(Component, options = {}) {
             )
         }
     }
+
+    return ComponentWithState;
 }
 
 export default withState;

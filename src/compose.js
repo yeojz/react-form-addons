@@ -1,9 +1,9 @@
-import reduceRight from 'lodash/reduceRight';
+import reduceRight from 'lodash.reduceright';
 
-export default function compose(...functionList) {
+export default function compose(...decorators) {
     return (component) => {
         return reduceRight(
-            functionList,
+            decorators,
             (wrapped, fn) => fn(wrapped),
             component
         )

@@ -49,7 +49,7 @@ const initComponents = (components) => (props) => {
     });
 }
 
-export function connect(components) {
+export const connect = (components) => {
     if (!Array.isArray(components)) {
         return invalidParameter(components);
     }
@@ -57,7 +57,7 @@ export function connect(components) {
     const getComponents = initComponents(components);
 
     const ConnectedComponents = (props) => {
-        const classes = `rfa-connect ${props.className}`;
+        const classes = `form-addons-connect ${props.className}`;
         return <div className={classes}>{getComponents(props)}</div>;
     }
 

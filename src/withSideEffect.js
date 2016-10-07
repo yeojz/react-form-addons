@@ -34,7 +34,7 @@ export const handleEvents = (sideEffects, props) => (handler) => (evt) => {
     propgateUp(props, handler, evt, finalData)
 }
 
-export default withSideEffect = (Component, sideEffects = fx.passthrough) => {
+export default withSideEffect = (sideEffects = fx.passthrough) => (Component) => {
     const ComponentWithSideEffect = (props) => {
         const propPass = omit(props, propTypes);
         const events = handleEvents(sideEffects, props);

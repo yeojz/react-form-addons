@@ -16,8 +16,8 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export function withValidation(Component, validator) {
-    return class ComponentWithValidation extends React.Component {
+export const withValidation = (validator = null) => (Component) => {
+    class ComponentWithValidation extends React.Component {
         static propTypes = propTypes;
         static defaultProps = defaultProps;
 
@@ -65,4 +65,6 @@ export function withValidation(Component, validator) {
             )
         }
     }
+
+    return ComponentWithValidation;
 }
