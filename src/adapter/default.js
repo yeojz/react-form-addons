@@ -10,7 +10,7 @@ export const eventPreventDefault = (evt) => {
     }
 }
 
-export const updateFormData = (state, name, value) => {
+export const updateFormData = (formData, name, value) => {
     const delta = {
         $merge: {
             [name]: value
@@ -19,13 +19,13 @@ export const updateFormData = (state, name, value) => {
     return update(formData, delta);
 }
 
-export const onChange = (formData, evt) => {
+export const onChange = (evt, formData) => {
     const name = get(evt, 'target.name');
     const value = get(evt, 'target.value');
     return updateFormData(formData, name, value);
 }
 
-export const onToggle = (formData, evt) => {
+export const onToggle = (evt, formData) => {
     const name = get(evt, 'target.name');
     const value = get(formData, name) ? false : true;
     return updateFormData(formData, name, value);

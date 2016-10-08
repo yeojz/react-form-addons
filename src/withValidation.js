@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import get from 'lodash.get';
 import isFunction from 'lodash.isfunction';
 import omit from 'lodash.omit';
+import noop from 'lodash.noop';
 
 export const propTypes = {
     onCancel: PropTypes.func,
@@ -67,3 +68,5 @@ export const withValidation = (validator = null) => (Component) => {
 
     return ComponentWithValidation;
 }
+
+export default withValidation;
