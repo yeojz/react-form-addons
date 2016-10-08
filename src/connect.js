@@ -11,14 +11,6 @@ const defaultProps = {
     classNames: ''
 }
 
-const invalidParameter = (components) => {
-    console.warn(`
-        Parameter of 'connect' should of type array.
-        ${typeof components} provided.
-    `)
-    return <div />;
-}
-
 const isComponentActive = (name, formData, props = {}) => {
     if (isFunction(name)) {
         return name(formData, props);
@@ -49,11 +41,7 @@ const initComponents = (components) => (props) => {
     });
 }
 
-export const connect = (components) => {
-    if (!Array.isArray(components)) {
-        return invalidParameter(components);
-    }
-
+export const connect = (components = []) => {
     const getComponents = initComponents(components);
 
     const ConnectedComponents = (props) => {
