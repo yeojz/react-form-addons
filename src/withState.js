@@ -3,7 +3,7 @@ import get from 'lodash.get';
 import isEmpty from 'lodash.isempty';
 import noop from 'lodash.noop';
 import omit from 'lodash.omit';
-import * as fx from './fx';
+import * as defaultFx from './adapter/default';
 
 export const propTypes = {
     defaultValue: PropTypes.object,
@@ -19,10 +19,7 @@ export const defaultProps = {
     onSubmit: noop
 }
 
-export const withState = (options = {}) => (Component) => {
-    const defaultFormData = get(options, 'defaultFormData', {});
-    const getFormDataOnReceiveProps = get(options, 'getFormDataOnReceiveProps', fx.defaultGetFormDataOnReceiveProps);
-
+export const withState = (defaultFormData = {}, adapter = defaultFx) => (Component) => {
     class ComponentWithState extends React.Component {
         static propTypes = propTypes;
         static defaultProps = defaultProps;
@@ -40,8 +37,11 @@ export const withState = (options = {}) => (Component) => {
         }
 
         componentWillReceiveProps = (nextProps) => {
-            const formData = getFormDataOnReceiveProps(this)(nextProps);
-            if (!isEmpty(formData)) {
+            const shouldAllow = adapter.shouldApplyDefaultValue(this.props, nextProps);
+            if (shouldAllow) {
+                const formData = update(nextProps.defaultValue, {
+                    $merge: get(this.state, 'formData', {})
+                });
                 this.setState({formData});
             }
         }
@@ -52,7 +52,7 @@ export const withState = (options = {}) => (Component) => {
 
         getFormData = (evt, handler) => {
             const {formData} = this.state;
-            return get(fx, handler)(evt, formData);
+            return get(adapter, handler)(evt, formData);
         }
 
         handleSetFormData = (formData) => {

@@ -4,8 +4,6 @@ import isFunction from 'lodash.isfunction';
 import isObject from 'lodash.isobject';
 import update from 'react-addons-update';
 
-export const passthrough = (data) => data;
-
 export const eventPreventDefault = (evt) => {
     if (isObject(evt) && isFunction(evt.preventDefault)) {
         evt.preventDefault();
@@ -33,14 +31,12 @@ export const onToggle = (formData, evt) => {
     return updateFormData(formData, name, value);
 }
 
-export const defaultGetFormDataOnReceiveProps = (instance) => (nextProps) => {
+export const shouldApplyDefaultValue = (props, nextProps) => {
     const defaultValue = get(nextProps, 'defaultValue');
-    const propsDefaultValue = get(instance, 'props.defaultValue');
+    const propsDefaultValue = get(props, 'defaultValue');
 
     if (isEqual(defaultValue, propsDefaultValue)) {
-        return null;
+        return false;
     }
-    return update(defaultValue, {
-        $merge: get(instance, 'state.formData', {})
-    })
+    return true;
 }

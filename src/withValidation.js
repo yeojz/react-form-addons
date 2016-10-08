@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import get from 'lodash.get';
 import isFunction from 'lodash.isfunction';
 import omit from 'lodash.omit';
-import * as fx from 'fx';
 
 export const propTypes = {
     onCancel: PropTypes.func,

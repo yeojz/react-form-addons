@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash.get';
 import noop from 'lodash.noop';
-import * as fx from 'fx';
+import reduce from 'lodash.reduce';
+import * as defaultFx from './adapter/default';
 
 export const propTypes = {
     formData: PropTypes.object,
@@ -16,6 +17,8 @@ export const defaultProps = {
     onToggle: noop
 }
 
+const passthrough = (data) => data;
+
 const propagateUp = (props, handler, evt, formData) => {
     if (isFunction(props.setFormData)) {
         props.setFormData(formData);
@@ -24,20 +27,28 @@ const propagateUp = (props, handler, evt, formData) => {
     get(props, handler)(evt, formData, ...args)
 }
 
-export const handleEvents = (sideEffects, props) => (handler) => (evt) => {
+export const applySideEffects = (sideEffects, formData, name, props) => {
+    if (!Array.isArray(sideEffects)) {
+        sideEffects = [sideEffects];
+    }
+    return reduce(
+        sideEffects,
+        (newData, fn) => fn(newData, name, props),
+        formData
+    );
+}
+
+export const handleEvents = (sideEffects, props, adapter) => (handler) => (evt) => {
     const name = get(evt, 'target.name');
-    const formData = get(fx, handler)(evt, props.formData);
-    const finalData = sideEffects(formData, name, {
-        prevData: props.formData,
-        props
-    });
+    const formData = get(adapter, handler)(evt, props.formData);
+    const finalData = applySideEffects(sideEffects, formData, name, props);
     propgateUp(props, handler, evt, finalData)
 }
 
-export default withSideEffect = (sideEffects = fx.passthrough) => (Component) => {
+export default withSideEffect = (sideEffects = passthrough, adapter = defaultFx) => (Component) => {
     const ComponentWithSideEffect = (props) => {
         const propPass = omit(props, propTypes);
-        const events = handleEvents(sideEffects, props);
+        const events = handleEvents(sideEffects, props, adapter);
 
         return (
             <Component
