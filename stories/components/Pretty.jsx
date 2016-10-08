@@ -5,17 +5,16 @@ const propTypes = {
     data: PropTypes.object
 }
 
-const FormData = (props) => {
+const Pretty = (props) => {
     const html = {
         __html: pretty(props.data, 4, 'html')
     }
     return (
-        <div className='col-6 p2 border-box border'>
+        <div className='p2 border-box border'>
             <span dangerouslySetInnerHTML={html} />
         </div>
     )
 }
 
-FormData.propTypes = propTypes;
-
-export default FormData
+Pretty.propTypes = propTypes;
+export default Pretty;

@@ -3,7 +3,8 @@ import Pretty from './Pretty';
 
 const propTypes = {
     formData: PropTypes.object,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    print: PropTypes.bool 
 }
 
 const Inputs = (props) => {
@@ -23,7 +24,7 @@ const Inputs = (props) => {
                 onChange={props.onChange}
                 value={props.formData.second || ''} />
 
-            <Pretty data={props.formData} />
+            {props.print ? <Pretty data={props.formData} /> : null}
         </div>
     )
 }

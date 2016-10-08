@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash.get';
-import isEmpty from 'lodash.isempty';
 import noop from 'lodash.noop';
 import omit from 'lodash.omit';
 import * as defaultFx from './adapter/default';

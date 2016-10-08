@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
+import isFunction from 'lodash.isfunction';
 import get from 'lodash.get';
 import noop from 'lodash.noop';
+import omit from 'lodash.omit';
 import reduce from 'lodash.reduce';
 import * as defaultFx from './adapter/default';
 
@@ -42,7 +44,7 @@ export const handleEvents = (sideEffects, props, adapter) => (handler) => (evt) 
     const name = get(evt, 'target.name');
     const formData = get(adapter, handler)(evt, props.formData);
     const finalData = applySideEffects(sideEffects, formData, name, props);
-    propgateUp(props, handler, evt, finalData)
+    propagateUp(props, handler, evt, finalData)
 }
 
 export const withSideEffect = (sideEffects = passthrough, adapter = defaultFx) => (Component) => {

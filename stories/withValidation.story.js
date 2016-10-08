@@ -1,7 +1,7 @@
 import React from 'react';
 import {storiesOf, action} from '@kadira/storybook';
 
-import withValidation from '../src/withValidation';
+import withValidation from 'src/withValidation';
 import Inputs from './components/Inputs';
 import Story from './components/Story';
 

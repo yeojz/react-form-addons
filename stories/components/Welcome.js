@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import 'github-markdown-css'
-import readme from '../../README.md';
+import readme from 'README.md';
 import './_welcome.css';
 
 const Welcome = (props) => {

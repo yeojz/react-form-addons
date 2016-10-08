@@ -11,6 +11,7 @@ module.exports = {
         }]
     },
     resolve: {
+        root: path.resolve(__dirname, '..'),
         extensions: ['', '.jsx', '.js', '.css'],
         modulesDirectories: ['node_modules']
     }
