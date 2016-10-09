@@ -6,6 +6,7 @@ Higher Order Form Components and Helpers
 
 1. [About](#about)
 1. [Usage](#usage)
+1. [Demo](https://yeojz.github.io/react-form-addons)
 1. API
 	- [Notes](#api-notes)
 	- [Documentaiton](/docs)
@@ -107,10 +108,8 @@ Below is a list of props that the components will propagate down
 	* As such, if you don't want the `onSubmit` to perform the default action, you have to call `preventDefault` manually in your handlers
 * All event handlers propagate upwards.
 	* **Example**: if you provide your an `onChange` prop to component that has been wrapped with `withState`, your `onChange` will be fired after the manipulation of state within `withState`
-* `formData` is a flat structure. 
+* `formData` is a flat structure.
 	* i.e. if 2 inputs have the same name, then it'll be pointing to the same key.
-
-More detailed API documentation can be found within the [/docs](/docs) folder.
 
 ## License
 

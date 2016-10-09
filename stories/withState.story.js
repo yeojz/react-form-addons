@@ -16,7 +16,7 @@ const Component = (props) => (
 
 storiesOf('withState', module)
   .addDecorator(Story)
-  .add('basic use', () => {
+  .add('basic usage', () => {
     const Wrapped = withState()(Component);
     return <Wrapped />;
   })

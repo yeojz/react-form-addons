@@ -26,7 +26,7 @@ const basicUse = (newData, name) => {
 
 storiesOf('withSideEffect', module)
   .addDecorator(Story)
-  .add('basic use', () => {
+  .add('basic usage', () => {
     const Wrapped = withState()(
       withSideEffect(basicUse)(Component)
     );

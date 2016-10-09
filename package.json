@@ -1,12 +1,14 @@
 {
   "name": "react-form-addons",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Higher Order Component addons for forms",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
+    "build": "node ./node_modules/babel-cli/bin/babel.js ./src -d ./lib",
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -31,6 +33,8 @@
   "homepage": "https://github.com/yeojz/react-form-addons#readme",
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
+    "@kadira/storybook-addon-options": "^1.0.1",
+    "@kadira/storybook-deployer": "^1.2.0",
     "babel-cli": "^6.16.0",
     "babel-eslint": "^7.0.0",
     "babel-plugin-transform-class-properties": "^6.16.0",
