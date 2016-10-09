@@ -20,7 +20,7 @@ The API attempts to be unobtrusive, so that you can plug and play.
 Install via [npm](https://www.npmjs.com/):
 
     $ npm install --save react-form-addons
-    
+
 Example:
 
 ```js
@@ -62,10 +62,10 @@ export default compose(
 
 ```
 
-If you have multiple form components that should share the same state, you can pass it to connect first:
+If you have multiple form components that should share the same state, you can pass it to group them first:
 
 ```js
-const ConnectedForm = connect([
+const Form = createForm([
 	CustomerBasic,
 	CustomerAdvanced,
 	[CustomerPayment, 'payment_allowed']
@@ -75,7 +75,7 @@ const ConnectedForm = connect([
 export default compose(
 	withState(),
 	withSideEffect()
-)(ConnectedForm)
+)(Form)
 ```
 
 More samples can be found in this package's storybook. You can run it by:
@@ -93,7 +93,7 @@ npm run storybook
 
 Below is a list of props that the components will propagate down
 
-| Props 	| Description 
+| Props 	| Description
 |:-------	|:-------
 | `props.formData` 		| the form state which contains all your keys (`withState`)
 | `props.formError` 	| the error state (`withValidation`)
@@ -103,9 +103,9 @@ Below is a list of props that the components will propagate down
 
 **Notes**
 
-* All event handlers passed down do not have `event.preventDefault()` called. 
+* All event handlers passed down do not have `event.preventDefault()` called.
 	* As such, if you don't want the `onSubmit` to perform the default action, you have to call `preventDefault` manually in your handlers
-* All event handlers propagate upwards. 
+* All event handlers propagate upwards.
 	* **Example**: if you provide your an `onChange` prop to component that has been wrapped with `withState`, your `onChange` will be fired after the manipulation of state within `withState`
 
 More detailed API documentation can be found within the [/docs](/docs) folder.

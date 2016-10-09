@@ -19,6 +19,12 @@ export const defaultProps = {
     onSubmit: noop
 }
 
+const customEvent = (type) => ({
+    _eventType: type,
+    preventDefault: noop,
+    stopPropagation: noop
+});
+
 export const withState = (defaultFormData = {}, adapter = defaultFx) => (Component) => {
     class ComponentWithState extends React.Component {
         static propTypes = propTypes;
@@ -56,7 +62,7 @@ export const withState = (defaultFormData = {}, adapter = defaultFx) => (Compone
         }
 
         handleSetFormData = (formData) => {
-            const evt = {bulk: true};
+            const evt = customEvent('bulk-update');
             const callback = () => this.propagateUp('onChange', evt, formData);
             this.setState({formData}, callback);
         }

@@ -1,10 +1,11 @@
 # Table Of Contents
 
 * Basic Usage
-* Advance Usage
-    * compose
-    * connect
+* Advanced Usage
 * Components
+    * compose
+    * createForm
+    * fromModal
     * withState
     * withSideEffect
     * withValidation
