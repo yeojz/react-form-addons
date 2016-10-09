@@ -1,19 +1,20 @@
 h5 {
-    margin-left: 1em;
+  margin-left: 1em;
 }
+
 pre {
-    background: #efefef;
-    padding: 1em;
+  background: #efefef;
+  padding: 1em;
 }
 
 .stories-story {
-    box-sizing: border-box;
-    margin: 2em;
-    padding: 1em;
-    width: 40em;
+  box-sizing: border-box;
+  margin: 2em;
+  padding: 1em;
+  width: 40em;
 }
 
 .input {
-    box-sizing: border-box;
-    margin: 0 1em;
+  box-sizing: border-box;
+  margin: 0 1em;
 }

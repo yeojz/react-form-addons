@@ -7,11 +7,11 @@ import './_story';
 injectTapEventPlugin();
 
 const Story = (story) => (
-    <MuiThemeProvider>
-        <div className='stories-story clearfix'>
-            {story()}
-        </div>
-    </MuiThemeProvider>
+  <MuiThemeProvider>
+    <div className='stories-story clearfix'>
+      {story()}
+    </div>
+  </MuiThemeProvider>
 );
 
-export default Story
+export default Story;
