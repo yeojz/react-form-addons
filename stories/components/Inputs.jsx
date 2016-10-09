@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
+import TextField from 'material-ui/TextField';
 
 const propTypes = {
     formData: PropTypes.object,
+    formError: PropTypes.object,
     onChange: PropTypes.func,
     print: PropTypes.bool 
 }
@@ -9,16 +11,18 @@ const propTypes = {
 const Inputs = (props) => {
     return (
         <div className='story-inputs'>
-            <label className='label'>First</label>
-            <input
+            <TextField
                 className='input'
+                errorText={props.formError.first || ''}
+                floatingLabelText='First'
                 name='first'
                 onChange={props.onChange}
                 value={props.formData.first || ''} />
-
-            <label className='label'>Second</label>
-            <input
+            <br />
+            <TextField
                 className='input'
+                errorText={props.formError.second || ''}
+                floatingLabelText='Second'
                 name='second'
                 onChange={props.onChange}
                 value={props.formData.second || ''} />

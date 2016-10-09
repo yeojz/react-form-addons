@@ -1,5 +1,6 @@
 import React from 'react';
-import {storiesOf, action} from '@kadira/storybook';
+import {storiesOf} from '@kadira/storybook';
+import {Card} from 'material-ui/Card';
 
 import withState from 'src/withState';
 import Inputs from './components/Inputs';
@@ -7,10 +8,10 @@ import Pretty from './components/Pretty';
 import Story from './components/Story';
 
 const Component = (props) => (
-    <div>
+    <Card>
         <Inputs {...props} />
         <Pretty data={props.formData} />
-    </div>
+    </Card>
 );
 
 storiesOf('withState', module)

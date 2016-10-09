@@ -1,15 +1,17 @@
 import React, {PropTypes} from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import 'basscss/css/basscss.min';
-import 'basscss-forms';
 import './_story';
 
+injectTapEventPlugin();
+
 const Story = (story) => (
-    <div className='stories-story clearfix'>
-        <div className='col col-6'>
+    <MuiThemeProvider>
+        <div className='stories-story clearfix'>
             {story()}
         </div>
-    </div>
+    </MuiThemeProvider>
 );
 
 export default Story

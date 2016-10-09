@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import './_welcome.css';
 
 const GITHUB_URL = 'https://github.com/yeojz/react-form-addons';
 const NPM_URL = 'https://www.npmjs.com/package/react-form-addons';
