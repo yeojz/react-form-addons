@@ -4,6 +4,6 @@ import Story from './components/Story';
 import Welcome from './components/Welcome';
 
 storiesOf('Welcome', module)
-    .add('Readme', () => (
+    .add('README', () => (
         <Welcome onClick={linkTo} />
     ));

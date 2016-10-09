@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import Pretty from './Pretty';
 
 const propTypes = {
     formData: PropTypes.object,
@@ -23,8 +22,6 @@ const Inputs = (props) => {
                 name='second'
                 onChange={props.onChange}
                 value={props.formData.second || ''} />
-
-            {props.print ? <Pretty data={props.formData} /> : null}
         </div>
     )
 }
