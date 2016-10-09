@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import update from 'react-addons-update';
-import get from 'lodash.get';
-import noop from 'lodash.noop';
-import omit from 'lodash.omit';
+import get from 'lodash/get';
+import noop from 'lodash/noop';
+import omit from 'lodash/omit';
 import * as defaultFx from './adapter/default';
 
 export const propTypes = {

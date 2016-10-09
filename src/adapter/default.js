@@ -1,7 +1,7 @@
-import get from 'lodash.get';
-import isEqual from 'lodash.isequal';
-import isFunction from 'lodash.isfunction';
-import isObject from 'lodash.isobject';
+import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 import update from 'react-addons-update';
 
 export const eventPreventDefault = (evt) => {

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import noop from 'lodash.noop';
+import noop from 'lodash/noop';
 import withSideEffect from 'src/withSideEffect';
 import Inputs from './Inputs';
 import Pretty from './Pretty';

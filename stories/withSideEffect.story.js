@@ -15,7 +15,10 @@ storiesOf('withSideEffect', module)
     .add('basic use', () => {
         const fn = (newData, name) => {
             if (name === 'first') {
-                newData.second = newData[name];
+                newData.second = newData.first;
+            }
+            if (name === 'second') {
+                newData.first = newData.second;
             }
             return newData;
         }

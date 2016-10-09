@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
-import isFunction from 'lodash.isfunction';
-import get from 'lodash.get';
-import noop from 'lodash.noop';
-import omit from 'lodash.omit';
-import reduce from 'lodash.reduce';
+import isFunction from 'lodash/isFunction';
+import get from 'lodash/get';
+import noop from 'lodash/noop';
+import omit from 'lodash/omit';
+import reduce from 'lodash/reduce';
 import * as defaultFx from './adapter/default';
 
 export const propTypes = {

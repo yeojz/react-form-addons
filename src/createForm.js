@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import get from 'lodash.get';
-import isFunction from 'lodash.isfunction';
-import map from 'lodash.map';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import map from 'lodash/map';
 
 const propTypes = {
     classNames: PropTypes.string

@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
-import get from 'lodash.get';
-import isFunction from 'lodash.isfunction';
-import omit from 'lodash.omit';
-import noop from 'lodash.noop';
+import get from 'lodash/get';
+import isFunction from 'lodash/isFunction';
+import omit from 'lodash/omit';
+import noop from 'lodash/noop';
 
 export const propTypes = {
     onCancel: PropTypes.func,
