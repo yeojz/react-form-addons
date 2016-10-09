@@ -1,25 +1,115 @@
 # react-form-addons
-Helpers and Higher Order Components for forms
 
-## Methods
-### compose
+Higher Order Form Components and Helpers
 
-### connect
+## Table of Contents
 
+1. [About](#about)
+1. [Usage](#usage)
+1. API
+	- [Notes](#api-notes)
+	- [Documentaiton](/docs)
 
-## Components
-### withState
+## About
+This library aims to help keep form input components as pure stateless components by abstracting the state and various other utilities out into Higher Order methods.
+
+The API attempts to be unobtrusive, so that you can plug and play.
+
+## Usage
+
+Install via [npm](https://www.npmjs.com/):
+
+    $ npm install --save react-form-addons
+    
+Example:
+
 ```js
-import withState from 'react-form-addons/lib/withState';
+import React, {PropTypes} from 'react';
+import {withState} from 'react-form-addons';
+
+const Form = (props) => {
+    return (
+        <form onSubmit={props.onSubmit}>
+            <input
+                name='user'
+                onChange={props.onChange}
+                value={props.formData.user || ''} />
+
+            <input
+                name='email'
+                onChange={props.onChange}
+                value={props.formData.email || ''} />
+        </form>
+    )
+}
+
+Form.propTypes = {
+    onChange: PropTypes.func,
+    onSubmit: PropTypes.func
+}
+
+// Decorate your component
+export default withState()(Form)
 ```
 
-### withSideEffect
+You may also compose multiple form decorators together using `compose`:
+
 ```js
-import withSideEffect from 'react-form-addons/lib/withSideEffect';
+export default compose(
+	withState(),
+	withSideEffect()
+)(Form)
 
 ```
 
-### withValidation
+If you have multiple form components that should share the same state, you can pass it to connect first:
+
 ```js
-import withSideEffect from 'react-form-addons/lib/withSideEffect';
+const ConnectedForm = connect([
+	CustomerBasic,
+	CustomerAdvanced,
+	[CustomerPayment, 'payment_allowed']
+	FormSubmit
+])
+
+export default compose(
+	withState(),
+	withSideEffect()
+)(ConnectedForm)
 ```
+
+More samples can be found in this package's storybook. You can run it by:
+
+```
+git clone git@github.com:yeojz/react-form-addons
+cd react-form-addons
+npm i
+npm run storybook
+
+# Access storybook via http://localhost:6006
+```
+
+## API Notes
+
+Below is a list of props that the components will propagate down
+
+| Props 	| Description 
+|:-------	|:-------
+| `props.formData` 		| the form state which contains all your keys (`withState`)
+| `props.formError` 	| the error state (`withValidation`)
+| `props.onChange` 		| value change callback
+| `props.onToggle` 		| like onChange, but for checkboxes
+| `props.onSubmit` 		| for submitting the form.
+
+**Notes**
+
+* All event handlers passed down do not have `event.preventDefault()` called. 
+	* As such, if you don't want the `onSubmit` to perform the default action, you have to call `preventDefault` manually in your handlers
+* All event handlers propagate upwards. 
+	* **Example**: if you provide your an `onChange` prop to component that has been wrapped with `withState`, your `onChange` will be fired after the manipulation of state within `withState`
+
+More detailed API documentation can be found within the [/docs](/docs) folder.
+
+## License
+
+MIT [`License`](/LICENSE) © Gerald Yeo
