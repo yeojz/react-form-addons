@@ -66,7 +66,7 @@ export default compose(
 If you have multiple form components that should share the same state, you can pass it to group them first:
 
 ```js
-const Form = createForm([
+const Form = connect([
 	CustomerBasic,
 	CustomerAdvanced,
 	[CustomerPayment, 'payment_allowed']
