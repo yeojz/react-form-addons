@@ -19,6 +19,8 @@ export const defaultProps = {
   onSubmit: noop
 }
 
+const propKeys = Object.keys(propTypes);
+
 const customEvent = (type) => ({
   _eventType: type,
   preventDefault: noop,
@@ -90,7 +92,7 @@ export const withState = (defaultFormData = {}, adapter = defaultFx) => (Compone
     }
 
     render() {
-      const propPass = omit(this.props, propTypes);
+      const propPass = omit(this.props, propKeys);
       return (
         <Component
           {...propPass}

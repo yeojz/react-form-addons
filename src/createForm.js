@@ -11,17 +11,17 @@ const defaultProps = {
   classNames: ''
 }
 
-const isComponentActive = (name, formData, props = {}) => {
-  if (isFunction(name)) {
-    return name(formData, props);
+const isComponentActive = (validationKey, formData, props = {}) => {
+  if (isFunction(validationKey)) {
+    return validationKey(formData, props);
   }
-  return get(formData, name);
+  return get(formData, validationKey);
 }
 
-const validateComponent = (entry, props) => {
-  const name = get(entry, 1);
+const processEntry = (entry, props) => {
+  const validationKey = get(entry, 1);
   const formData = get(props, 'formData');
-  if (isComponentActive(name, formData, props)) {
+  if (isComponentActive(validationKey, formData, props)) {
     return get(entry, 0);
   }
   return void 0;
@@ -29,7 +29,7 @@ const validateComponent = (entry, props) => {
 
 const parseToComponent = (entry, props) => {
   if (Array.isArray(entry)) {
-    return validateComponent(entry, props);
+    return processEntry(entry, props);
   }
   return entry;
 }
@@ -45,7 +45,7 @@ export const createForm = (components = []) => {
   const getComponents = initComponents(components);
 
   function CreatedForm(props) {
-    const classes = `form-addons-connect ${props.className}`;
+    const classes = `rfa-form ${props.className}`;
     return <div className={classes}>{getComponents(props)}</div>;
   }
 
