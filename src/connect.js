@@ -46,7 +46,8 @@ export const connect = (components = []) => {
 
   function ConnectedForm(props) {
     const classes = `rfa-connect ${props.className}`;
-    return <div className={classes}>{getComponents(props)}</div>;
+    const mapped = getComponents(props);
+    return <div className={classes}>{mapped}</div>;
   }
 
   ConnectedForm.propTypes = propTypes;

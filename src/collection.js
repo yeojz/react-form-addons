@@ -14,7 +14,7 @@ const defaultProps = {
 
 const handleEvent = (name, callback) => (evt, formData, formError) => {
   const target = {
-    error: formError,
+    formError,
     name,
     value: formData
   }
@@ -32,12 +32,9 @@ const getComponents = (name, components, props) => {
 }
 
 export const collection = (name, components = []) => {
-  const CollectionForm = (props) => {
-    return (
-      <div className='rfa-collection'>
-        {getComponents(name, components, props)}
-      </div>
-    );
+  function CollectionForm(props) {
+    const mapped = getComponents(name, components, props)
+    return <div className='rfa-collection'>{mapped}</div>;
   }
 
   CollectionForm.propTypes = propTypes;
