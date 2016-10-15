@@ -114,7 +114,7 @@ export const createForm = (model = [], opt = {}) => {
   const Form = get(options, 'type');
 
   function CreatedForm(props) {
-    const classes = `rfa-model ${options.className} ${props.className}`;
+    const classes = `rfa-form ${options.className} ${props.className}`;
     const fields = map(model, (entry, idx) => fieldRenderer(entry, idx, props, options));
     const formProps = getFormProps(options, props);
 

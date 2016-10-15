@@ -45,7 +45,7 @@ export const connect = (components = []) => {
   const getComponents = initComponents(components);
 
   function ConnectedForm(props) {
-    const classes = `rfa-form ${props.className}`;
+    const classes = `rfa-connect ${props.className}`;
     return <div className={classes}>{getComponents(props)}</div>;
   }
 
