@@ -1,3 +1,4 @@
+export {default as collection} from './collection';
 export {default as compose} from './compose';
 export {default as connect} from './connect';
 export {default as createForm} from './createForm';

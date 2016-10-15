@@ -81,12 +81,12 @@ export const withState = (defaultFormData = {}, adapter = defaultFx) => (Compone
       this.setState({formData}, callback);
     }
 
-    handleCancel = (evt, ...args) => {
+    handleCancel = (evt) => {
       const {formData} = this.state;
       this.propagateUp('onCancel', evt, formData);
     }
 
-    handleSubmit = (evt, ...args) => {
+    handleSubmit = (evt) => {
       const {formData} = this.state;
       this.propagateUp('onSubmit', evt, formData);
     }
