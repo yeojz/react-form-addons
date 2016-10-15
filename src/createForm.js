@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import defaults from 'lodash/defaults';
 import get from 'lodash/get';
+import indexOf from 'lodash/indexOf';
 import isFunction from 'lodash/isFunction';
 import map from 'lodash/map';
 import noop from 'lodash/noop';
@@ -29,8 +30,8 @@ const propKeys = Object.keys(propTypes);
 
 export const reservedModelKeys = ['className', 'component', 'defaultValue', 'value'];
 
-export const isToggle = (entry) => {
-  return entry.type === 'checkbox';
+export const isToggle = (entry, options) => {
+  return indexOf(options.toggleTypes, entry.type) > -1;
 }
 
 export const initProps = (entry, props) => ({
@@ -44,11 +45,11 @@ export const addPrefix = (obj, entry, options) => {
   return obj;
 }
 
-export const addStateAndHandlers = (obj, entry, props) => {
+export const addStateAndHandlers = (obj, entry, props, options) => {
   const disabled = get(props, ['formDisabled', entry.name], props.disabled);
 
   obj.disabled = disabled;
-  obj.onChange = isToggle(entry) ? props.onToggle : props.onChange;
+  obj.onChange = isToggle(entry, options) ? props.onToggle : props.onChange;
 
   return obj;
 }
@@ -71,18 +72,17 @@ export const setValue = (obj, entry, props) => {
 }
 
 const mergeProps = (entry, props, options) => {
-  let obj;
+  let obj = initProps(entry, props);
 
-  obj = initProps(entry, props);
   obj = addPrefix(obj, entry, options);
-  obj = addStateAndHandlers(obj, entry, props);
+  obj = addStateAndHandlers(obj, entry, props, options);
   obj = setValue(obj, entry, props);
   obj = options.mutateProps(obj, props);
 
   return obj;
 }
 
-const fieldRenderer = (entry, idx, props, options) => {
+const fieldRenderer = (options, props) => (entry, idx) => {
   const Component = get(entry, 'component');
   const className = get(entry, 'className', '');
   const classes = `rfa-model-field ${className}`;
@@ -108,6 +108,7 @@ export const createForm = (model = [], opt = {}) => {
     className: '',
     mutateProps: (obj) => obj,
     prefix: '',
+    toggleTypes: ['checkbox'],
     type: 'div'
   });
 
@@ -115,10 +116,16 @@ export const createForm = (model = [], opt = {}) => {
 
   function CreatedForm(props) {
     const classes = `rfa-form ${options.className} ${props.className}`;
-    const fields = map(model, (entry, idx) => fieldRenderer(entry, idx, props, options));
+    const fields = map(model, fieldRenderer(options, props));
     const formProps = getFormProps(options, props);
 
-    return <Form className={classes} {...formProps}>{fields}</Form>;
+    return (
+      <Form
+        {...formProps}
+        className={classes}>
+        {fields}
+      </Form>
+    );
   }
 
   CreatedForm.propTypes = propTypes;
