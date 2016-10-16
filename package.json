@@ -1,6 +1,6 @@
 {
   "name": "react-form-addons",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A set of higher-order components for composing forms in React",
   "main": "lib/index.js",
   "scripts": {
