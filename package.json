@@ -1,7 +1,7 @@
 {
   "name": "react-form-addons",
   "version": "0.1.1",
-  "description": "A set of higher-order components that helps keep form handling composible",
+  "description": "A set of higher-order components for composing forms in React",
   "main": "lib/index.js",
   "scripts": {
     "build": "node ./node_modules/babel-cli/bin/babel.js ./src -d ./lib",
@@ -24,7 +24,7 @@
     "hoc",
     "builder",
     "factory",
-    "composible"
+    "composing"
   ],
   "author": "Gerald Yeo <contact@fusedthought.com>",
   "license": "MIT",

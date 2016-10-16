@@ -21,7 +21,7 @@ const isComponentActive = (validationKey, formData, props = {}) => {
 const processEntry = (entry, props) => {
   const validationKey = get(entry, 1);
   const formData = get(props, 'formData');
-  if (isComponentActive(validationKey, formData, props)) {
+  if (!!isComponentActive(validationKey, formData, props)) {
     return get(entry, 0);
   }
   return void 0;
@@ -52,7 +52,7 @@ export const connect = (components = []) => {
 
   ConnectedForm.propTypes = propTypes;
   ConnectedForm.defaultProps = defaultProps;
-  return Formset;
+  return ConnectedForm;
 }
 
 export default connect;

@@ -1,6 +1,4 @@
 import React, {PropTypes} from 'react';
-import {getQueryParam} from '@kadira/storybook-ui';
-import addons from '@kadira/storybook-addons';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import startCase from 'lodash/startCase';

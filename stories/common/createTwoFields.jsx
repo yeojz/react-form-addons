@@ -13,7 +13,7 @@ const renderFormError = (showFormError, formError) => {
   if (showFormError) {
     return (
       <Print
-        className='box'
+        className='box inverse'
         header='formError'
         data={formError} />
     );
@@ -22,7 +22,7 @@ const renderFormError = (showFormError, formError) => {
 
 const renderFormData = (formData) => (
   <Print
-    className='box'
+    className='box inverse'
     header='formData'
     data={formData} />
 )
@@ -36,14 +36,24 @@ const renderInput = (name, props) => (
     value={get(props, ['formData', name], '')} />
 )
 
+const renderDescription = (text) => {
+  if (text) {
+    return (
+      <div className='box inverse'>
+        {text}
+      </div>
+    )
+  }
+}
+
 const createTwoFields = (text, showFormError = false) => {
   function TwoFields(props) {
     return (
-      <div className='basic-add-state'>
+      <div className='common-create-two-fields'>
+        {renderDescription(text)}
 
         <div className='input-area box'>
-          <h3>Inputs</h3>
-          <p>{text}</p>
+          <h3>Form</h3>
           {renderInput('fieldOne', props)}
           {renderInput('fieldTwo', props)}
         </div>

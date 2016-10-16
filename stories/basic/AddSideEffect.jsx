@@ -13,7 +13,12 @@ const copyEffect = (newData, name) => {
   return newData;
 }
 
-const text = 'Both fields will be updated upon typing in either one';
+const text = (
+  <section>
+    <p>Side effects are data changes that will trigger or cause an update to other data.</p>
+    <p>In this example, both fields will update simultaneously upon input</p>
+  </section>
+)
 const AddSideEffect = createTwoFields(text);
 const SideEffect = withSideEffect(copyEffect)(AddSideEffect);
 export default withState()(SideEffect);

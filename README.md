@@ -1,15 +1,14 @@
 # react-form-addons
 
-Higher Order Form Components and Helpers
+A set of higher-order components for composing forms in React
 
 ## Table of Contents
 
 1. [About](#about)
 1. [Usage](#usage)
-1. [Demo](https://yeojz.github.io/react-form-addons)
+1. [Example](https://yeojz.github.io/react-form-addons)
 1. API
 	- [Notes](#api-notes)
-	- [Documentaiton](/docs)
 
 ## About
 This library aims to help keep form input components as pure stateless components by abstracting the state and various other utilities out into Higher Order methods.

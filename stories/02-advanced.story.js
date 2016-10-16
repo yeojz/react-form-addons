@@ -1,7 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@kadira/storybook';
 
+import Connect from 'stories/advanced/Connect';
+
 storiesOf('Advanced', module)
-  .add('Composing forms', () => <div />)
+  .add('Connect', () => <Connect />)
   .add('Models', () => <div />)
-  .add('Collections', () => <div />);
+  .add('Collections', () => <div />)
+  .add('Compose', () => <div />);

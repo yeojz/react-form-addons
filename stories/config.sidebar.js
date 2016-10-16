@@ -5,9 +5,10 @@ export default {
     'Add Validation'
   ],
   'Advanced': [
-    'Composing forms',
+    'Connect',
     'Models',
-    'Collections'
+    'Collections',
+    'Compose'
   ],
   'Example': [
     'Login',

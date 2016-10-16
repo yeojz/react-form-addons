@@ -63,5 +63,10 @@ textarea {
       margin: 2em;
       padding: 1em;
     }
+
+    .inverse {
+      background: $spacegrey-10;
+      color: $white;
+    }
   }
 }

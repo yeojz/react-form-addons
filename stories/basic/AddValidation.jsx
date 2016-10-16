@@ -14,7 +14,16 @@ const validator = (formData, props) => {
   return errors;
 }
 
-const text = 'fieldOne should = "test" and fieldTwo should not be empty';
+const text = (
+  <section>
+    <p>
+      Provides the mechanism for validation, but not the validation logic.
+      <br />You can easily plug in your own validation engine
+      (eg: validate.js or joi), as long as the result set is an object.
+    </p>
+    <p>In this example, <em>fieldOne</em> should equal "test" and <em>fieldTwo</em> should not be empty</p>
+  </section>
+);
 const AddValidation = createTwoFields(text, true);
 const hasState = withState()(AddValidation);
 export default withValidation(validator)(hasState);
