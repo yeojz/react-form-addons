@@ -3,9 +3,9 @@ import {linkTo} from '@kadira/storybook-addon-links';
 import get from 'lodash/get';
 
 const propTypes = {
-  active: PropTypes.string,
+  active: PropTypes.object,
   group: PropTypes.string,
-  link: PropTypes.array,
+  link: PropTypes.string,
   onActiveChange: PropTypes.func
 }
 
@@ -16,18 +16,13 @@ const getLinkClass = (active, link) => {
   return 'navlink';
 }
 
-const navigate = (onActiveChange, group, link) => () => {
-  onActiveChange(link);
-  linkTo(group, link)();
-}
-
 const Link = (props) => {
   const {active, group, link, onActiveChange} = props;
 
   return (
     <span
-      className={getLinkClass(active, link)}
-      onClick={navigate(onActiveChange, group, link)}>
+      className={getLinkClass(active.story, link)}
+      onClick={linkTo(group, link)}>
       {link}
     </span>
   )
