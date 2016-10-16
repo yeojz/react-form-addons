@@ -1,0 +1,43 @@
+html {
+  height: 100%;
+}
+
+body {
+  color: $black;
+  height: 100%;
+  margin: 0;
+
+  & > div {
+    &:first-child {
+      height: 100%;
+    }
+  }
+}
+
+.stories-common-root {
+  display: flex;
+  height: 100%;
+
+  .story-list,
+  .story-viewer {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .story-list {
+    $box-shadow-1: rgba($black, 0.16);
+    $box-shadow-2: rgba($black, 0.12);
+
+    box-shadow: 0 2px 5px 0 $box-shadow-1, 0 2px 10px 0 $box-shadow-2;
+    flex: 1;
+    min-width: 18em;
+  }
+
+  .story-viewer {
+    flex: 4;
+
+    .content {
+      padding: 1em;
+    }
+  }
+}

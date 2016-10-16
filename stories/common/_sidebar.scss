@@ -1,0 +1,46 @@
+$spacegrey-80: rgba($spacegrey, 0.8);
+$spacegrey-05: rgba($spacegrey, 0.05);
+
+.sidebar {
+  border-right: 1px $spacegrey-10 solid;
+  height: 100%;
+
+  h1 {
+    border-bottom: 1px $spacegrey-10 solid;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 1em;
+  }
+
+  p {
+    line-height: 1.5em;
+    padding: 0.5em 1em;
+  }
+
+  p,
+  .navlink {
+    color: $spacegrey-80;
+  }
+
+  .group {
+    margin-bottom: 1em;
+
+    h2 {
+      border-bottom: 1px $spacegrey-10 solid;
+      font-size: 1em;
+      margin: 0 1em;
+      padding: 0.5em 0;
+    }
+
+    .navlink {
+      display: block;
+      padding: 0.5em 1.5em;
+
+      &:hover {
+        background: $spacegrey-05;
+        color: $spacegrey;
+        cursor: pointer;
+      }
+    }
+  }
+}
