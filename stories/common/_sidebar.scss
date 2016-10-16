@@ -32,9 +32,10 @@
     .navlink {
       display: block;
       padding: 0.5em 1.5em;
+      text-decoration: none;
 
       &:hover {
-        color: $spacegrey;
+        color: $red;
         cursor: pointer;
       }
 

@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from 'stories/common/Sidebar';
 
 export default function(story) {
   return (

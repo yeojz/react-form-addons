@@ -2,10 +2,12 @@ import React, {PropTypes} from 'react';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import startCase from 'lodash/startCase';
-import config from 'stories/config.sidebar';
-import pkg from 'package';
 import queryString from 'query-string';
-import Link from './Link'
+import pkg from 'package';
+
+import config from 'stories/config.sidebar';
+import Link from 'stories/common/Link';
+import ProjectLinks from 'stories/common/ProjectLinks';
 
 export const getActiveStory = (search) => {
   const {selectedStory} = queryString.parse(search);
@@ -16,18 +18,18 @@ const handleActiveChange = (value) => {
   window._storyActiveLink = value;
 }
 
-const renderLink = (link, text) => (
+const renderLink = (group) => (link) => (
   <Link
     active={window._storyActiveLink}
     link={link}
-    key={text}
-    text={text}
+    group={group}
+    key={link}
     onActiveChange={handleActiveChange} />
 )
 
 const renderLinks = () => {
   return map(config, (group, title) => {
-    const list = map(group, renderLink);
+    const list = map(group, renderLink(group));
 
     return (
       <div className='group' key={title}>
@@ -50,6 +52,7 @@ class Sidebar extends React.Component {
         <h1>{startCase(pkg.name)}</h1>
         <p>{pkg.description}</p>
         {renderLinks()}
+        <ProjectLinks />
       </aside>
     )
   }

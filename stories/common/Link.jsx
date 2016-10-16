@@ -4,33 +4,31 @@ import get from 'lodash/get';
 
 const propTypes = {
   active: PropTypes.string,
+  group: PropTypes.string,
   link: PropTypes.array,
-  onActiveChange: PropTypes.func,
-  text: PropTypes.string
+  onActiveChange: PropTypes.func
 }
 
 const getLinkClass = (active, link) => {
-  const current = get(link, link.length - 1);
-  if (active === current) {
+  if (active === link) {
     return 'navlink active';
   }
   return 'navlink';
 }
 
-const navigate = (onActiveChange, link) => () => {
-  const current = get(link, link.length - 1);
-  onActiveChange(current);
-  linkTo(...link)();
+const navigate = (onActiveChange, group, link) => () => {
+  onActiveChange(link);
+  linkTo(group, link)();
 }
 
 const Link = (props) => {
-  const {active, link, onActiveChange, text} = props;
+  const {active, group, link, onActiveChange} = props;
 
   return (
     <span
       className={getLinkClass(active, link)}
-      onClick={navigate(onActiveChange, link)}>
-      {text}
+      onClick={navigate(onActiveChange, group, link)}>
+      {link}
     </span>
   )
 }
