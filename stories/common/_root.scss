@@ -14,7 +14,17 @@ body {
   }
 }
 
+button,
+input,
+select,
+textarea {
+  &:focus {
+    outline: none;
+  }
+}
+
 .stories-common-root {
+  border: 1px $spacegrey-20 solid;
   display: flex;
   height: 100%;
 
@@ -25,18 +35,32 @@ body {
   }
 
   .story-list {
-    $box-shadow-1: rgba($black, 0.16);
-    $box-shadow-2: rgba($black, 0.12);
-
-    box-shadow: 0 2px 5px 0 $box-shadow-1, 0 2px 10px 0 $box-shadow-2;
+    background: $white;
     flex: 1;
     min-width: 18em;
   }
 
   .story-viewer {
+    $bg-color-viewer: #333;
+    background: $bg-color-viewer;
     flex: 4;
 
+    h3 {
+      border-bottom: 1px $spacegrey-10 solid;
+      font-size: 1.2em;
+      margin: 0;
+      padding: 0 0 0.5em;
+    }
+
     .content {
+      padding: 1em;
+    }
+
+    .box {
+      background: $white;
+      border: 1px $spacegrey-20 solid;
+      border-radius: 5px;
+      margin: 2em;
       padding: 1em;
     }
   }

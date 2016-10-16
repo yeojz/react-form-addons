@@ -1,13 +1,10 @@
-$spacegrey-80: rgba($spacegrey, 0.8);
-$spacegrey-05: rgba($spacegrey, 0.05);
-
 .sidebar {
-  border-right: 1px $spacegrey-10 solid;
+  border-right: 1px $spacegrey-20 solid;
   height: 100%;
 
   h1 {
     border-bottom: 1px $spacegrey-10 solid;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     margin: 0;
     padding: 1em;
   }
@@ -28,7 +25,7 @@ $spacegrey-05: rgba($spacegrey, 0.05);
     h2 {
       border-bottom: 1px $spacegrey-10 solid;
       font-size: 1em;
-      margin: 0 1em;
+      margin: 0 1em 0.5em;
       padding: 0.5em 0;
     }
 
@@ -37,9 +34,13 @@ $spacegrey-05: rgba($spacegrey, 0.05);
       padding: 0.5em 1.5em;
 
       &:hover {
-        background: $spacegrey-05;
         color: $spacegrey;
         cursor: pointer;
+      }
+
+      &.active {
+        background: $spacegrey-05;
+        color: $red;
       }
     }
   }

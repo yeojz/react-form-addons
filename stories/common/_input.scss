@@ -1,0 +1,23 @@
+.stories-input {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+
+  input {
+    border: 1px $spacegrey-50 solid;
+    box-shadow: none;
+    font-size: 1em;
+    padding: 0.25em;
+  }
+}
+
+.stories-input-label,
+.stories-input-error {
+  display: block;
+  margin: 0.5em 0;
+  opacity: 0.8;
+}
+
+.stories-input-error {
+  color: $red;
+}
