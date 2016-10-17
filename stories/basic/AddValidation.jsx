@@ -16,6 +16,7 @@ const validator = (formData, props) => {
 
 const text = (
   <section>
+    <h3>withValidation</h3>
     <p>
       Provides the mechanism for validation, but not the validation logic.
       <br />You can easily plug in your own validation engine

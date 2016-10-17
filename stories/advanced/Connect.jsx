@@ -12,6 +12,7 @@ const Connect = (props) => {
   return (
     <div className='advanced-connect'>
       <div className='box inverse'>
+        <h3>connect</h3>
         <p>
           Allows creation of complex forms which consist of various sub-sections
           that may be dependent on the status of other fields.

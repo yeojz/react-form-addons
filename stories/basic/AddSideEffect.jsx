@@ -15,6 +15,7 @@ const copyEffect = (newData, name) => {
 
 const text = (
   <section>
+    <h3>withSideEffect</h3>
     <p>Side effects are data changes that will trigger or cause an update to other data.</p>
     <p>In this example, both fields will update simultaneously upon input</p>
   </section>

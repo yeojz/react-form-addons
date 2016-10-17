@@ -6,8 +6,8 @@ export default {
   ],
   'Advanced': [
     'Connect',
-    'Models',
-    'Collections',
+    'Model',
+    'Collection',
     'Compose'
   ],
   'Example': [

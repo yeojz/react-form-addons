@@ -54,7 +54,7 @@ export const addStateAndHandlers = (obj, entry, props, options) => {
   return obj;
 }
 
-export const setValue = (obj, entry, props) => {
+export const setValue = (obj, entry, props, options) => {
   const defaultValue = get(entry, 'defaultValue', '');
   const value = get(entry, 'value');
 
@@ -62,7 +62,7 @@ export const setValue = (obj, entry, props) => {
     value(props.formData, defaultValue) :
     get(props, ['formData', obj.name], defaultValue);
 
-  if (isToggle(entry)) {
+  if (isToggle(entry, options)) {
     obj.checked = value;
     return obj;
   }
@@ -76,7 +76,7 @@ const mergeProps = (entry, props, options) => {
 
   obj = addPrefix(obj, entry, options);
   obj = addStateAndHandlers(obj, entry, props, options);
-  obj = setValue(obj, entry, props);
+  obj = setValue(obj, entry, props, options);
   obj = options.mutateProps(obj, props);
 
   return obj;

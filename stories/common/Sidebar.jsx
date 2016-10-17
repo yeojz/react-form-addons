@@ -41,7 +41,10 @@ const Sidebar = (props) => (
     {renderLinks(props.active)}
     <ProjectLinks />
 
-    <span className='credits'>Built using React Storybook</span>
+    <span className='credits'>
+      Built using React Storybook,
+      with custom navigation by gerald.
+    </span>
   </aside>
 )
 
