@@ -25,7 +25,6 @@ textarea {
 
 .stories-common-root {
   border: 1px $spacegrey-20 solid;
-  display: flex;
   height: 100%;
 
   .story-list,
@@ -36,14 +35,12 @@ textarea {
 
   .story-list {
     background: $white;
-    flex: 1;
     min-width: 18em;
   }
 
   .story-viewer {
     $bg-color-viewer: #333;
     background: $bg-color-viewer;
-    flex: 4;
 
     h3 {
       border-bottom: 1px $spacegrey-10 solid;
@@ -67,6 +64,57 @@ textarea {
     .inverse {
       background: $spacegrey-10;
       color: $white;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .stories-common-root {
+    .hamburger {
+      left: 5px;
+      position: absolute;
+      top: 5px;
+      transition: right 0.25s ease-in;
+      z-index: 2;
+    }
+
+    .story-list {
+      left: 0;
+      position: fixed;
+      top: 0;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease-in-out;
+      width: 100%;
+      z-index: 1;
+    }
+
+    &.is-active {
+      .hamburger {
+        left: auto;
+        right: 5px;
+      }
+
+      .story-list {
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .stories-common-root {
+    display: flex;
+
+    .hamburger {
+      display: none;
+    }
+
+    .story-viewer {
+      flex: 4;
+    }
+
+    .story-list {
+      flex: 1;
     }
   }
 }
