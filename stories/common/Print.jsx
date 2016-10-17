@@ -17,7 +17,7 @@ const renderHeader = (header) => {
 }
 
 const Print = (props) => (
-  <div className={`stories-print ${props.className}`}>
+  <div className={`stories-print overflow ${props.className}`}>
     {renderHeader(props.header)}
     <pre>{JSON.stringify(props.data, null, 2)}</pre>
   </div>

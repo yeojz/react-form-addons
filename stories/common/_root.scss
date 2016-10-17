@@ -66,6 +66,10 @@ textarea {
       background: $spacegrey-20;
       color: $white;
     }
+
+    .overflow {
+      overflow: auto;
+    }
   }
 }
 
