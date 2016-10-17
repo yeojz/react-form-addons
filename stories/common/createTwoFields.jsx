@@ -33,6 +33,7 @@ const renderInput = (name, props) => (
     label={name}
     name={name}
     onChange={props.onChange}
+    type='text'
     value={get(props, ['formData', name], '')} />
 )
 

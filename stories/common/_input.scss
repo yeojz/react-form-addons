@@ -2,13 +2,23 @@
   display: block;
   font-size: 1.2em;
   margin-bottom: 1em;
+  position: relative;
 
   input {
     border: 1px $spacegrey-50 solid;
     box-shadow: none;
+    box-sizing: border-box;
     font-size: 1em;
     padding: 0.25em;
+
+    &[type='text'] {
+      width: 100%;
+    }
   }
+}
+
+.stories-input-field {
+  position: relative;
 }
 
 .stories-input-label,

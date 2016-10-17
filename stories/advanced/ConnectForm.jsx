@@ -16,20 +16,21 @@ const SectionOne = (props) => {
     <div className='section-one'>
       <Input
         checked={get(props, 'formData.flag_section_two', false)}
-        type='checkbox'
         label='Enable section 2'
         name='flag_section_two'
-        onChange={props.onToggle} />
+        onChange={props.onToggle}
+        type='checkbox' />
       <Input
         checked={get(props, 'formData.flag_section_three', false)}
-        type='checkbox'
         label='Enable section 3'
         name='flag_section_three'
-        onChange={props.onToggle} />
+        onChange={props.onToggle}
+        type='checkbox' />
       <Input
         label='Enable section 4 if value = "four"'
         name='randomString'
         onChange={props.onChange}
+        type='text'
         value={get(props, 'formData.randomString', '')} />
     </div>
   )
@@ -44,6 +45,7 @@ const createSubSection = (className, name) => {
         <Input
           name={name}
           onChange={props.onChange}
+          type='text'
           value={get(props, ['formData', name], '')} />
       </div>
     )

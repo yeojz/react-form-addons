@@ -59,10 +59,11 @@ textarea {
       border-radius: 5px;
       margin: 2em;
       padding: 1em;
+      position: relative;
     }
 
     .inverse {
-      background: $spacegrey-10;
+      background: $spacegrey-20;
       color: $white;
     }
   }
