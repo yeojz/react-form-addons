@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import get from 'lodash/get';
 import omit from 'lodash/omit';
 
 const propTypes = {
@@ -27,6 +28,16 @@ const Input = (props) => {
     </div>
   )
 }
+
+export const renderInput = (name, props) => (
+  <Input
+    error={get(props, ['formError', name], '')}
+    label={name}
+    name={name}
+    onChange={props.onChange}
+    type='text'
+    value={get(props, ['formData', name], '')} />
+)
 
 Input.propTypes = propTypes;
 export default Input;

@@ -1,16 +1,23 @@
 import React, {PropTypes} from 'react';
-import map from 'lodash/map';
+import get from 'lodash/get';
 import noop from 'lodash/noop';
+import omit from 'lodash/omit';
 
 const propTypes = {
+  className: PropTypes.string,
+  formData: PropTypes.object,
+  formError: PropTypes.object,
   onChange: PropTypes.func,
   onToggle: PropTypes.func
 }
 
 const defaultProps = {
+  className: '',
   onChange: noop,
   onToggle: noop
 }
+
+const propKeys = Object.keys(propTypes);
 
 const handleEvent = (name, callback) => (evt, formData, formError) => {
   const target = {
@@ -18,26 +25,29 @@ const handleEvent = (name, callback) => (evt, formData, formError) => {
     name,
     value: formData
   }
-  callback({...evt, target});
+  callback({target});
 }
 
-const getComponents = (name, components, props) => {
-  return map(components, (Component, idx) => (
-    <Component
-      {...props}
-      key={`${name}-collection-${idx}`}
-      onChange={handleEvent(name, props.onChange)}
-      onToggle={handleEvent(name, props.onToggle)} />
-  ));
-}
-
-export const collection = (name, components = []) => {
+export const collection = (name) => (ConnectedForm) => {
   function CollectionForm(props) {
-    const mapped = getComponents(name, components, props)
-    return <div className='rfa-collection'>{mapped}</div>;
+    const propPass = omit(props, propKeys);
+    const formData = get(props, ['formData', name], {});
+    const formError= get(props, ['formError', name], {});
+
+    return (
+      <div className={`rfa-collection ${props.className}`}>
+        <ConnectedForm
+          {...propPass}
+          formData={formData}
+          formError={formError}
+          onChange={handleEvent(name, props.onChange)}
+          onToggle={handleEvent(name, props.onToggle)} />
+      </div>
+    );
   }
 
   CollectionForm.propTypes = propTypes;
+  CollectionForm.defaultProps = defaultProps;
   return CollectionForm;
 }
 

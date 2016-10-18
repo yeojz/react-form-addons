@@ -1,14 +1,42 @@
 import React, {PropTypes} from 'react';
 import collection from 'src/collection';
-import createForm from 'src/createForm';
+import connect from 'src/connect';
+import compose from 'src/compose';
 import withState from 'src/withState';
 
-import Input from 'stories/common/Input';
+import Input, {renderInput} from 'stories/common/Input';
 import Print from 'stories/common/Print';
 
 const propTypes = {
   formData: PropTypes.object
 }
+
+const InputGroupOne = (props) => (
+  <div className='input-group'>
+    {renderInput('fieldOne', props)}
+    {renderInput('fieldTwo', props)}
+  </div>
+);
+
+const InputGroupTwo = (props) => (
+  <div className='input-group'>
+    {renderInput('fieldThree', props)}
+    {renderInput('fieldFour', props)}
+  </div>
+);
+
+const InputGroupThree = (props) => (
+  <div className='input-group'>
+    {renderInput('fieldFive', props)}
+    {renderInput('fieldSix', props)}
+  </div>
+);
+
+const InputGroupCollection = compose(
+  collection('grouped'),
+  withState(),
+  connect,
+)([InputGroupOne, InputGroupTwo])
 
 const Collection = (props) => {
   return (
@@ -22,6 +50,12 @@ const Collection = (props) => {
 
       <div className='box'>
         <h3>Form</h3>
+        <div className='box'>
+          <h3>Grouped</h3>
+          <InputGroupCollection {...props} />
+        </div>
+
+        <InputGroupThree {...props} />
       </div>
 
       <Print

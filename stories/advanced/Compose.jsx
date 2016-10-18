@@ -1,14 +1,19 @@
-import React, {PropTypes} from 'react';
-import compose from 'src/compose';
-import createForm from 'src/createForm';
-import withState from 'src/withState';
+import React from 'react';
 
-import Input from 'stories/common/Input';
-import Print from 'stories/common/Print';
+const text = `
+  const Inputs = (props) => (
+    <div className='input-group'>
+      <Input {...props} />
+      <Input {...props} />
+    </div>
+  );
 
-const propTypes = {
-  formData: PropTypes.object
-}
+  const Form = compose(
+    withValidation(validationFn)
+    withState(),
+    withSideEffect(sideEffectFn)
+  )(Inputs)
+`;
 
 const Compose = (props) => {
   return (
@@ -21,16 +26,10 @@ const Compose = (props) => {
       </div>
 
       <div className='box'>
-        <h3>Form</h3>
+        <pre>{text}</pre>
       </div>
-
-      <Print
-        className='box inverse'
-        header='formData'
-        data={props.formData} />
     </div>
   )
 }
 
-Compose.propTypes = propTypes;
-export default withState()(Compose);
+export default Compose;

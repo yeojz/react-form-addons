@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import Input from 'stories/common/Input';
+import Input, {renderInput} from 'stories/common/Input';
 import Print from 'stories/common/Print';
 
 const propTypes = {
@@ -25,16 +25,6 @@ const renderFormData = (formData) => (
     className='box inverse'
     header='formData'
     data={formData} />
-)
-
-const renderInput = (name, props) => (
-  <Input
-    error={get(props, ['formError', name], '')}
-    label={name}
-    name={name}
-    onChange={props.onChange}
-    type='text'
-    value={get(props, ['formData', name], '')} />
 )
 
 const renderDescription = (text) => {
