@@ -93,13 +93,13 @@ npm run storybook
 
 Below is a list of props that the components will propagate down
 
-| Props 	| Description
-|:-------	|:-------
-| `props.formData` 		| the form state which contains all your keys (`withState`)
-| `props.formError` 	| the error state (`withValidation`)
-| `props.onChange` 		| value change callback
-| `props.onToggle` 		| like onChange, but for checkboxes
-| `props.onSubmit` 		| for submitting the form.
+| Props   | Description
+|:--------|:--------
+| `props.formData` | the form state which contains all your keys (`withState`)
+| `props.formError`| the error state (`withValidation`)
+| `props.onChange` | value change callback
+| `props.onToggle` | like onChange, but for checkboxes
+| `props.onSubmit` | for submitting the form.
 
 **Notes**
 
