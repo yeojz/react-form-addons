@@ -1,57 +1,42 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import defaults from 'lodash/defaults';
 import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
 import map from 'lodash/map';
+import createField from './createField';
 
-const propTypes = {
-  classNames: PropTypes.string
-}
-
-const defaultProps = {
-  classNames: ''
-}
-
-const isComponentActive = (name, formData, props = {}) => {
-  if (isFunction(name)) {
-    return name(formData, props);
+const getFormProps = (options, props) => {
+  let obj = {}
+  if (options.type === 'form') {
+    obj.onSubmit = props.onSubmit;
   }
-  return get(formData, name);
+  return obj;
 }
 
-const validateComponent = (entry, props) => {
-  const name = get(entry, 1);
-  const formData = get(props, 'formData');
-  if (isComponentActive(name, formData, props)) {
-    return get(entry, 0);
-  }
-  return void 0;
-}
-
-const parseToComponent = (entry, props) => {
-  if (Array.isArray(entry)) {
-    return validateComponent(entry, props);
-  }
-  return entry;
-}
-
-const initComponents = (components) => (props) => {
-  return map(components, (entry, key) => {
-    const Component = parseToComponent(entry, props);
-    return Component ? <Component {...props} key={key} /> : null;
+export const createForm = (model = [], opt = {}) => {
+  const options = defaults({}, opt, {
+    className: '',
+    mutateProps: (obj) => obj,
+    prefix: '',
+    toggleTypes: ['checkbox'],
+    type: 'div'
   });
-}
 
-export const createForm = (components = []) => {
-  const getComponents = initComponents(components);
+  const FormType = get(options, 'type');
+  const renderers = map(model, (entry) => createField(entry, options))
 
-  function CreatedForm(props) {
-    const classes = `form-addons-connect ${props.className}`;
-    return <div className={classes}>{getComponents(props)}</div>;
+  function Form(props) {
+    const classes = `rfa-form ${options.className} ${props.className}`;
+    const fields = map(renderers, (Renderer, idx) => <Renderer {...props} key={idx} />);
+    const formProps = getFormProps(options, props);
+
+    return (
+      <FormType {...formProps} className={classes}>
+        {fields}
+      </FormType>
+    );
   }
 
-  CreatedForm.propTypes = propTypes;
-  CreatedForm.defaultProps = defaultProps;
-  return CreatedForm;
+  return Form;
 }
 
 export default createForm;

@@ -4,6 +4,7 @@
 * Advanced Usage
 * Components
     * compose
+    * connect
     * createForm
     * fromModal
     * withState

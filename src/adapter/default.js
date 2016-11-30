@@ -23,11 +23,11 @@ export const onToggle = (evt, formData) => {
   return updateFormData(formData, name, value);
 }
 
-export const shouldApplyDefaultValue = (props, nextProps) => {
-  const defaultValue = get(nextProps, 'defaultValue');
-  const propsDefaultValue = get(props, 'defaultValue');
+export const shouldApplyFormDataFromProps = (props, nextProps) => {
+  const nextFormData = get(nextProps, 'formData');
+  const currentformData = get(props, 'formData');
 
-  if (isEqual(defaultValue, propsDefaultValue)) {
+  if (isEqual(nextFormData, currentformData)) {
     return false;
   }
   return true;
@@ -36,6 +36,6 @@ export const shouldApplyDefaultValue = (props, nextProps) => {
 export default {
   onChange,
   onToggle,
-  shouldApplyDefaultValue,
+  shouldApplyFormDataFromProps,
   updateFormData
 }

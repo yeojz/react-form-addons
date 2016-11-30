@@ -19,6 +19,8 @@ export const defaultProps = {
   onToggle: noop
 }
 
+const propKeys = Object.keys(propTypes);
+
 const passthrough = (data) => data;
 
 const propagateUp = (props, handler, evt, formData) => {
@@ -48,7 +50,7 @@ export const handleEvents = (sideEffects, props, adapter) => (handler) => (evt) 
 
 export const withSideEffect = (sideEffects = passthrough, adapter = defaultFx) => (Component) => {
   function ComponentWithSideEffect(props) {
-    const propPass = omit(props, propTypes);
+    const propPass = omit(props, propKeys);
     const events = handleEvents(sideEffects, props, adapter);
 
     return (

@@ -16,6 +16,8 @@ export const defaultProps = {
   onSubmit: noop
 }
 
+const propKeys = Object.keys(propTypes);
+
 export const withValidation = (validator = null) => (Component) => {
   class ComponentWithValidation extends React.Component {
     static propTypes = propTypes;
@@ -25,9 +27,9 @@ export const withValidation = (validator = null) => (Component) => {
       formError: {}
     }
 
-    propagateUp = (handler, evt, formData, err) => {
+    propagateUp = (handler, evt, formData) => {
       const {formError} = this.state;
-      get(this.props, handler)(evt, formData, err || formError);
+      get(this.props, handler)(evt, formData, formError);
     }
 
     runValidation = (formData, actionType) => {
@@ -54,7 +56,7 @@ export const withValidation = (validator = null) => (Component) => {
     }
 
     render() {
-      const propPass = omit(this.props, propTypes);
+      const propPass = omit(this.props, propKeys);
       return (
         <Component
           {...propPass}

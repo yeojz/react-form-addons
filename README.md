@@ -1,15 +1,14 @@
 # react-form-addons
 
-Higher Order Form Components and Helpers
+A set of higher-order components for composing forms in React
 
 ## Table of Contents
 
 1. [About](#about)
 1. [Usage](#usage)
-1. [Demo](https://yeojz.github.io/react-form-addons)
+1. [Example](https://yeojz.github.io/react-form-addons)
 1. API
 	- [Notes](#api-notes)
-	- [Documentaiton](/docs)
 
 ## About
 This library aims to help keep form input components as pure stateless components by abstracting the state and various other utilities out into Higher Order methods.
@@ -66,7 +65,7 @@ export default compose(
 If you have multiple form components that should share the same state, you can pass it to group them first:
 
 ```js
-const Form = createForm([
+const Form = connect([
 	CustomerBasic,
 	CustomerAdvanced,
 	[CustomerPayment, 'payment_allowed']
@@ -94,13 +93,13 @@ npm run storybook
 
 Below is a list of props that the components will propagate down
 
-| Props 	| Description
-|:-------	|:-------
-| `props.formData` 		| the form state which contains all your keys (`withState`)
-| `props.formError` 	| the error state (`withValidation`)
-| `props.onChange` 		| value change callback
-| `props.onToggle` 		| like onChange, but for checkboxes
-| `props.onSubmit` 		| for submitting the form.
+| Props   | Description
+|:--------|:--------
+| `props.formData` | the form state which contains all your keys (`withState`)
+| `props.formError`| the error state (`withValidation`)
+| `props.onChange` | value change callback
+| `props.onToggle` | like onChange, but for checkboxes
+| `props.onSubmit` | for submitting the form.
 
 **Notes**
 
