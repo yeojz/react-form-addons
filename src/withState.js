@@ -6,14 +6,14 @@ import omit from 'lodash/omit';
 import * as defaultFx from './adapter/default';
 
 export const propTypes = {
-  defaultValue: PropTypes.object,
+  formData: PropTypes.object,
   onCancel: PropTypes.func,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func
 }
 
 export const defaultProps = {
-  defaultValue: {},
+  formData: {},
   onCancel: noop,
   onChange: noop,
   onSubmit: noop
@@ -39,15 +39,15 @@ export const withState = (defaultFormData = {}, adapter = defaultFx) => (Compone
     componentWillMount = () => {
       const formData = {
         ...defaultFormData,
-        ...this.props.defaultValue
+        ...this.props.formData
       }
       this.setState({formData});
     }
 
     componentWillReceiveProps = (nextProps) => {
-      const shouldAllow = adapter.shouldApplyDefaultValue(this.props, nextProps);
+      const shouldAllow = adapter.shouldApplyFormDataFromProps(this.props, nextProps);
       if (shouldAllow) {
-        const formData = update(nextProps.defaultValue, {
+        const formData = update(nextProps.formData, {
           $merge: get(this.state, 'formData', {})
         });
         this.setState({formData});

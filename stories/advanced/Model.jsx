@@ -35,7 +35,7 @@ const Model = (props) => {
           Allows creation of forms using a simple DSL
         </p>
         <p>
-          Other than the reserved keys (className, component, defaultValue, value),
+          Other than the reserved keys (className, component, formData, value),
           all other keys are passed down AS-IS.
         </p>
       </div>
