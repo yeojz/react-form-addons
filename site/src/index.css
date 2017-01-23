@@ -1,0 +1,146 @@
+body {
+  background: #fafafa;
+  color: #313748;
+  font-family: sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 1px #ddd solid;
+  font-weight: 300;
+  font-size: 2em;
+  padding: 1.2em;
+}
+
+h3 {
+  color: #622cb1;
+  font-size: 1.4em;
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+
+h4 {
+  border-bottom: 1px #ddd dotted;
+  font-weight: 600;
+  margin: 0 0 1em;
+  padding-bottom: 0.5em;
+}
+
+h5 {
+  font-weight: 300;
+  padding: 1em 0.5em 0.5em;
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+code.hljs {
+  background-color: #f9f9f9;
+}
+
+.checkbox {
+  margin-top: 0.3em;
+}
+
+.app-header {
+  border-bottom: 1px #ddd dotted;
+  padding: 1em 2em;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+.app-header h1 {
+  margin-top: -10px;
+  font-size: 1.5em;
+  font-family: 'Roboto';
+}
+.app-header .logo {
+  height: 64px;
+}
+
+.app-nav {
+  border-bottom: 1px #ddd dotted;
+}
+
+.app-nav h1 {
+  font-size: 1em;
+}
+
+.app-nav aside {
+  padding: 1em 3em;
+}
+
+.display-section {
+  background: #fff;
+  border: 1px #ddd dotted;
+  display: block;
+  padding: 3em 2em 1em;
+  margin: 3em 1em 1em;
+  position: relative;
+}
+
+.display-section:last-child {
+  border-bottom: 0;
+}
+
+.display-section .scrolltop {
+  color: #2457d7;
+  cursor: pointer;
+  margin-top: 5em;
+  text-decoration: none;
+}
+
+.display-section__content {
+  padding: 0.5em;
+}
+
+.display-section__content .column:not(:last-child) {
+  border-right: 1px #ddd dotted;
+}
+
+.description-section {
+  margin-bottom: 3em;
+}
+
+.description-section__content {
+  border-left: 3px #622cb1 solid;
+  padding-left: 1em;
+  margin-left: 1em;
+}
+
+.form-section .control-label {
+  padding-top: 0;
+}
+
+.form-section .inputset {
+  margin-bottom: 0.5em;
+}
+
+.printer__dataset:not(:first-child) h4 {
+  margin-top: 2em;
+}
+
+.form-section .help {
+  text-align: right;
+  margin-top: -5px
+}
+
+@media (min-width: 769px) {
+  .app-nav {
+    background: #fff;
+    border-right: 1px #ddd solid;
+    height: 100vh;
+    overflow: auto;
+    position: fixed;
+  }
+
+  .app-nav aside {
+    padding: 1em;
+  }
+
+  .display-section:last-child {
+    margin-bottom: 35vh;
+  }
+}

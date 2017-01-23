@@ -1,7 +1,8 @@
-export {default as collection} from './collection';
-export {default as compose} from './compose';
-export {default as connect} from './connect';
-export {default as createForm} from './createForm';
-export {default as withSideEffect} from './withSideEffect';
-export {default as withState} from './withState';
-export {default as withValidation} from './withValidation';
+export SyntheticFormEvent from './utils/SyntheticFormEvent';
+export branch from './branch';
+export collection from './collection';
+export compose from './compose';
+export withProps from './withProps';
+export withSideEffects from './withSideEffects';
+export withState from './withState';
+export withValidation from './withValidation';

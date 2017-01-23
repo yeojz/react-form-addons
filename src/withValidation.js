@@ -1,74 +1,48 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
-import omit from 'lodash/omit';
-import noop from 'lodash/noop';
+import getDataFromKey from './utils/getDataFromKey';
+import withSideEffects from './withSideEffects';
 
-export const propTypes = {
-  onCancel: PropTypes.func,
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func
-}
+const propTypes = {
+  formMeta: PropTypes.object
+};
 
-export const defaultProps = {
-  onCancel: noop,
-  onChange: noop,
-  onSubmit: noop
-}
+const passthrough = () => void 0;
 
-const propKeys = Object.keys(propTypes);
+const getErrors = (rules, formData) => (
+  rules.reduce(
+    (err, fn) => fn(err, formData),
+    void 0
+  )
+);
 
-export const withValidation = (validator = null) => (Component) => {
-  class ComponentWithValidation extends React.Component {
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
+const applyValidations = (rules) => (event) => {
+  const formData = event.formData;
+  let formMeta = event.formMeta;
 
-    state = {
-      formError: {}
-    }
+  formMeta.errors = getErrors(rules, formData);
+  event.formMeta = formMeta;
 
-    propagateUp = (handler, evt, formData) => {
-      const {formError} = this.state;
-      get(this.props, handler)(evt, formData, formError);
-    }
+  return event;
+};
 
-    runValidation = (formData, actionType) => {
-      if (!isFunction(validator)) {
-         return {};
-      }
-      return validator(formData, this.props, actionType);
-    }
+const withValidation = (...validations) => (Component) => {
+  const rules = validations.length > 0 ? validations : [passthrough];
+  const validator = applyValidations(rules)
+  const AppliedComponent = withSideEffects(validator)(Component);
 
-    handleCancel = (evt, formData) => {
-      this.propagateUp('onCancel', evt, formData);
-    }
+  function ComponentWithValidation(props) {
+    const errors = get(props, 'formMeta.errors');
 
-    handleChange = (evt, formData) => {
-      const formError = this.runValidation(formData, 'change');
-      const callback = () => this.propagateUp('onChange', evt, formData);
-      this.setState({formError}, callback);
-    }
-
-    handleSubmit = (evt, formData) => {
-      const formError = this.runValidation(formData, 'submit');
-      const callback = () => this.propagateUp('onSubmit', evt, formData);
-      this.setState({formError}, callback);
-    }
-
-    render() {
-      const propPass = omit(this.props, propKeys);
-      return (
-        <Component
-          {...propPass}
-          formError={this.state.formError}
-          onCancel={this.handleCancel}
-          onChange={this.handleChange}
-          onSubmit={this.handleSubmit} />
-      )
-    }
+    return (
+      <AppliedComponent
+        {...props}
+        getFormError={getDataFromKey(errors)}
+      />
+    );
   }
-
+  ComponentWithValidation.propTypes = propTypes;
   return ComponentWithValidation;
-}
+};
 
 export default withValidation;

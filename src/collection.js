@@ -1,54 +1,52 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import noop from 'lodash/noop';
-import omit from 'lodash/omit';
+import isFunction from 'lodash/isFunction';
 
 const propTypes = {
-  className: PropTypes.string,
-  formData: PropTypes.object,
-  formError: PropTypes.object,
-  onChange: PropTypes.func,
-  onToggle: PropTypes.func
-}
+  className: PropTypes.string
+};
 
 const defaultProps = {
-  className: '',
-  onChange: noop,
-  onToggle: noop
-}
+  className: ''
+};
 
-const propKeys = Object.keys(propTypes);
-
-const handleEvent = (name, callback) => (evt, formData, formError) => {
-  const target = {
-    formError,
-    name,
-    value: formData
+const isActive = (rule, props) => {
+  if (isFunction(rule)) {
+    return rule(props.formData, props);
   }
-  callback({target});
-}
+  return !!get(props.formData, rule);
+};
 
-export const collection = (name) => (ConnectedForm) => {
-  function CollectionForm(props) {
-    const propPass = omit(props, propKeys);
-    const formData = get(props, ['formData', name], {});
-    const formError= get(props, ['formError', name], {});
+const validateEntry = (component, props) => {
+  if (Array.isArray(component)) {
+    const [Entry, rule] = component;
+    return isActive(rule, props) ? Entry : void 0;
+  }
+  return component;
+};
 
-    return (
-      <div className={`rfa-collection ${props.className}`}>
-        <ConnectedForm
-          {...propPass}
-          formData={formData}
-          formError={formError}
-          onChange={handleEvent(name, props.onChange)}
-          onToggle={handleEvent(name, props.onToggle)} />
-      </div>
-    );
+const renderComponents = (components, props) => (
+  components.map((component, key) => {
+    const Entry = validateEntry(component, props);
+    return Entry ? <Entry {...props} key={key} /> : null;
+  })
+);
+
+const collection = (components = []) => {
+  if (!Array.isArray(components)) {
+    throw new Error('expect argument 1 of collection to be an array');
   }
 
-  CollectionForm.propTypes = propTypes;
-  CollectionForm.defaultProps = defaultProps;
-  return CollectionForm;
+  function FormCollection({className, ...props}) {
+    const classes = `rfa-collection ${className}`;
+    const rendered = renderComponents(components, props);
+
+    return <div className={classes}>{rendered}</div>;
+  }
+
+  FormCollection.propTypes = propTypes;
+  FormCollection.defaultProps = defaultProps;
+  return FormCollection;
 }
 
 export default collection;
