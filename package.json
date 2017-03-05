@@ -1,7 +1,7 @@
 {
   "name": "react-form-addons",
   "version": "1.0.0",
-  "description": "A set of higher-order components for composing forms in React",
+  "description": "A set of higher-order components / decorators for composing forms in React",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",
@@ -20,17 +20,18 @@
   "homepage": "https://yeojz.github.io/react-form-addons",
   "keywords": [
     "react",
+    "reactjs",
     "form",
     "forms",
     "addons",
-    "higher",
-    "order",
+    "decorator",
+    "higher-order",
     "component",
     "hoc",
     "builder",
     "factory",
-    "composing",
-    "utility"
+    "composer",
+    "state"
   ],
   "author": "Gerald Yeo <contact@fusedthought.com>",
   "license": "MIT",

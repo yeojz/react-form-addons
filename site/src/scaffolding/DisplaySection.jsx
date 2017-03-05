@@ -14,7 +14,7 @@ const DisplaySection = (props) => (
     name={props.name}
     className={`display-section ${props.className || ''}`}
   >
-    <div className='display-section__content'>
+    <div id={props.name} className='display-section__content'>
       <Description
         title={props.name}
         text={props.description}
