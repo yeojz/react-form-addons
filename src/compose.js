@@ -1,11 +1,13 @@
-import reduceRight from 'lodash/reduceRight';
+const compose = (...decorators) => {
+  const reversed = decorators.reverse();
 
-export const compose = (...decorators) => (component) => {
-    return reduceRight(
-      decorators,
+  return (Component) => (
+    reversed.reduce(
       (wrapped, fn) => fn(wrapped),
-      component
-    );
+      Component
+    )
+  );
 }
+
 
 export default compose;

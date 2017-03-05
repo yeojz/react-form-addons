@@ -1,112 +1,79 @@
 import React, {PropTypes} from 'react';
-import update from 'react-addons-update';
+import update from 'immutability-helper';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
-import omit from 'lodash/omit';
-import * as defaultFx from './adapter/default';
+import isPropKeyEqual from './utils/isPropKeyEqual';
 
-export const propTypes = {
+const propTypes = {
   formData: PropTypes.object,
-  onCancel: PropTypes.func,
+  formMeta: PropTypes.object,
   onChange: PropTypes.func,
   onSubmit: PropTypes.func
-}
+};
 
-export const defaultProps = {
+const defaultProps = {
   formData: {},
-  onCancel: noop,
+  formMeta: {},
   onChange: noop,
   onSubmit: noop
-}
+};
 
-const propKeys = Object.keys(propTypes);
-
-const customEvent = (type) => ({
-  _eventType: type,
-  preventDefault: noop,
-  stopPropagation: noop
-});
-
-export const withState = (defaultFormData = {}, adapter = defaultFx) => (Component) => {
+const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) => {
   class ComponentWithState extends React.Component {
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
-
     state = {
-      formData: {}
+      formData: {},
+      formMeta: {}
     }
 
     componentWillMount = () => {
       const formData = {
         ...defaultFormData,
         ...this.props.formData
-      }
-      this.setState({formData});
+      };
+      const formMeta = {
+        ...defaultFormMeta,
+        ...this.props.formMeta
+      };
+      this.setState({formData, formMeta});
     }
 
     componentWillReceiveProps = (nextProps) => {
-      const shouldAllow = adapter.shouldApplyFormDataFromProps(this.props, nextProps);
-      if (shouldAllow) {
-        const formData = update(nextProps.formData, {
-          $merge: get(this.state, 'formData', {})
+      this.validateAndRefreshData('formData', nextProps);
+      this.validateAndRefreshData('formMeta', nextProps);
+    }
+
+    validateAndRefreshData = (key, nextProps) => {
+      if (isPropKeyEqual(key,this.props, nextProps)) {
+        const data = update(nextProps[key], {
+          $merge: get(this, ['state', key], {})
         });
-        this.setState({formData});
+        this.setState({[key]: data});
       }
     }
 
-    propagateUp = (handler, evt, formData) => {
-      return get(this.props, handler)(evt, formData);
-    }
-
-    getFormData = (evt, handler) => {
-      const {formData} = this.state;
-      return get(adapter, handler)(evt, formData);
-    }
-
-    handleSetFormData = (formData) => {
-      const evt = customEvent('bulk-update');
-      const callback = () => this.propagateUp('onChange', evt, formData);
-      this.setState({formData}, callback);
-    }
-
-    handleChange = (evt) => {
-      const formData = this.getFormData(evt, 'onChange');
-      const callback = () => this.propagateUp('onChange', evt, formData);
-      this.setState({formData}, callback);
-    }
-
-    handleToggle = (evt) => {
-      const formData = this.getFormData(evt, 'onToggle');
-      const callback = () => this.propagateUp('onChange', evt, formData);
-      this.setState({formData}, callback);
-    }
-
-    handleCancel = (evt) => {
-      const {formData} = this.state;
-      this.propagateUp('onCancel', evt, formData);
-    }
-
-    handleSubmit = (evt) => {
-      const {formData} = this.state;
-      this.propagateUp('onSubmit', evt, formData);
+    handleChange = (syntheticFormEvent) => {
+      this.setState({
+        formData: syntheticFormEvent.formData,
+        formMeta: syntheticFormEvent.formMeta
+      });
+      this.props.onChange(syntheticFormEvent);
     }
 
     render() {
-      const propPass = omit(this.props, propKeys);
       return (
         <Component
-          {...propPass}
+          {...this.props}
           formData={this.state.formData}
-          setFormData={this.handleSetFormData}
-          onCancel={this.handleCancel}
+          formMeta={this.state.formMeta}
           onChange={this.handleChange}
-          onToggle={this.handleToggle}
-          onSubmit={this.handleSubmit} />
+        />
       );
     }
   }
 
+  ComponentWithState.propTypes = propTypes;
+  ComponentWithState.defaultProps = defaultProps;
   return ComponentWithState;
-}
+};
 
 export default withState;
