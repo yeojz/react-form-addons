@@ -1,7 +1,5 @@
 import React from 'react';
-import logo from '../logo.svg';
-const propTypes = {
-}
+import logo from '../../public/react-form-addons.svg';
 
 const Header = () => (
   <header className='app-header'>
@@ -10,5 +8,4 @@ const Header = () => (
   </header>
 );
 
-Header.propTypes = propTypes;
 export default Header;
