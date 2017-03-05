@@ -8,6 +8,7 @@
   "dependencies": {
     "bulma": "^0.3.2",
     "classnames": "^2.2.5",
+    "gh-pages": "^0.12.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-highlight": "^0.9.0",
@@ -15,9 +16,11 @@
     "validate.js": "^0.11.1"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "deploy": "npm run build && npm run filecopy && gh-pages -d build",
+    "eject": "react-scripts eject",
+    "filecopy": "cp circle.yml ./build/circle.yml",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   }
 }

@@ -11,7 +11,7 @@ describe('index', function () {
   });
 
   it('exports branch', function () {
-    expect(exposed.connect).to.not.be.undefined;
+    expect(exposed.branch).to.not.be.undefined;
   });
 
   it('exports collection', function () {
