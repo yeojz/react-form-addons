@@ -17,6 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/yeojz/react-form-addons.git"
   },
+  "homepage": "https://yeojz.github.io/react-form-addons",
   "keywords": [
     "react",
     "form",
@@ -36,7 +37,6 @@
   "bugs": {
     "url": "https://github.com/yeojz/react-form-addons/issues"
   },
-  "homepage": "https://github.com/yeojz/react-form-addons#readme",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^6.1.2",
