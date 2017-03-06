@@ -33,16 +33,16 @@ npm install react-form-addons --save
 import React from 'react';
 import {compose, withProps, withState} from 'react-form-addons';
 
-const Form = (props) => {
-	<div>
-		<input
-			name='input1'
-	      onChange={props.onChange}
-	      value={props.getFormData('input1')}
-	   />
-	   // ...other inputs
-	</div>
-};
+const Form = (props) => (
+  <div>
+    <input
+      name='input1'
+      onChange={props.onChange}
+      value={props.getFormData('input1')}
+    />
+    // ...other inputs
+  </div>
+);
 
 export default compose(
 	withState(),
@@ -85,19 +85,19 @@ While the focus on v2 rewrite still hinges on Component State, we can easily ext
 For example, in it's simplest form:
 
 ```js
- export default compose(
-    withState(),
-    withProps()
-  )(Form);
+export default compose(
+  withState(),
+  withProps()
+)(Form);
 ```
 
 can become
 
 ```js
- export default compose(
-    withReduxState(),
-    withProps()
-  )(Form);
+export default compose(
+  withReduxState(),
+  withProps()
+)(Form);
 ```
 
 For now, this library does not provide the `redux` connector, but it is highly possible that it'll be sheduled for a future release. PRs are welcome! :)
