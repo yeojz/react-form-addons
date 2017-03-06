@@ -37,11 +37,14 @@ const collection = (components = []) => {
     throw new Error('expect argument 1 of collection to be an array');
   }
 
-  function FormCollection({className, ...props}) {
-    const classes = `rfa-collection ${className}`;
-    const rendered = renderComponents(components, props);
+  class FormCollection extends React.Component {
+    render() {
+      const {className, ...props} = this.props;
+      const classes = `rfa-collection ${className}`;
+      const rendered = renderComponents(components, props);
 
-    return <div className={classes}>{rendered}</div>;
+      return <div className={classes}>{rendered}</div>;
+    }
   }
 
   FormCollection.propTypes = propTypes;

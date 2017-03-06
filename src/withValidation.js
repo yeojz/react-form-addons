@@ -31,15 +31,17 @@ const withValidation = (...validations) => (Component) => {
   const validator = applyValidations(rules)
   const AppliedComponent = withSideEffects(validator)(Component);
 
-  function ComponentWithValidation(props) {
-    const errors = get(props, 'formMeta.errors');
+  class ComponentWithValidation extends React.Component {
+    render() {
+      const errors = get(this.props, 'formMeta.errors');
 
-    return (
-      <AppliedComponent
-        {...props}
-        getFormError={getDataFromKey(errors)}
-      />
-    );
+      return (
+        <AppliedComponent
+          {...this.props}
+          getFormError={getDataFromKey(errors)}
+        />
+      );
+    }
   }
   ComponentWithValidation.propTypes = propTypes;
   return ComponentWithValidation;
