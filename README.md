@@ -6,13 +6,13 @@
 
 ## About
 
-`react-form-addons` provides a set of methods and components for composing forms in React. Conceptually it adopts on the style of `decorators` or `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
+`react-form-addons` provides a set of methods and components for composing forms in React. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
 
 ## Motivation
 
-During the course of my work which involves building an internal admin panel and Content Management System, the amount of forms that the team have to build was not small. Every single form had it's own set of rules and side-effects, which may or may not be interconnected or nested. As such, there was a need to ensure a standard interface for forms since they may be reused across the modules and we would like it to drop-in without more work. However, existing solutions didn't quite fit in, leading me to this project. 
+During the course of my work which involves building an internal admin panel, the amount of forms that have to be built is not small. Every single form has it's own set of rules and side-effects, which may be nested or have a dependency in other form.
 
-This project is both an exploration and learning on form handling as well as on better component functionality splitting. 
+This project is an exploration of possible ways of splitting responsibility during a form lifecycle to make it more maintainable.
 
 ## Links
 
@@ -24,7 +24,7 @@ This project is both an exploration and learning on form handling as well as on 
 Install the library:
 
 ```
-npm install react-form-addons --save
+npm install react react-form-addons --save
 ```
 
 ## Quick Look
@@ -57,6 +57,7 @@ For more examples, check out the [documentation site][doc-link]
 This library has been totally reworked for v2. As such there are some breaking changes in the way the higher-order components (hoc) work. The biggest change is that Component properties are now decoupled to a `withProps` hoc and `withState` only handles keeping of state and not any of the state manipulations.
 
 **The following are temporarily deprecated.**
+
 It may make a comeback in a future release.
 
  - createField
