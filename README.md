@@ -10,9 +10,9 @@
 
 ## Motivation
 
-During the course of my work which involves building an internal admin panel and Content Management System, the amount of forms that the team have to build was bordering ridiculous. Every single form had it's own set of rules and side-effects, and having to declare and manage state all the time, be it via redux or even component state was getting insane. 
+During the course of my work which involves building an internal admin panel and Content Management System, the amount of forms that the team have to build was not small. Every single form had it's own set of rules and side-effects, which may or may not be interconnected or nested. As such, there was a need to ensure a standard interface for forms since they may be reused across the modules and we would like it to drop-in without more work. However, existing solutions didn't quite fit in, leading me to this project. 
 
-Furthermore, there was a need to ensure a standard interface for forms since they may be reused across the modules and we would like it to drop-in without more work. However, existing solutions didn't quite fit the customizability that I needed for my project, which lead me to this library.
+This project is both an exploration and learning on form handling as well as on better component functionality splitting. 
 
 ## Links
 
