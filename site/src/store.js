@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from 'redux';
-import {reducer as formReducer} from '../../lib/redux';
+import {formReducer} from '../../lib/redux';
 
 const reducers = combineReducers({
   forms: formReducer

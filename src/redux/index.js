@@ -1,4 +1,4 @@
-export actions from './actions';
 export constants from './constants';
-export reducer from './reducer';
+export formActions from './formActions';
+export formReducer from './formReducer';
 export withReduxState from './withReduxState';

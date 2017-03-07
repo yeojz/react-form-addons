@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
-import actions from './actions';
+import formActions from './formActions';
 
 const propTypes = {
   getReduxData: PropTypes.func,
@@ -62,8 +62,8 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
   });
 
   const mapDispatchToProps = {
-    onChange: actions.update,
-    onReset: actions.reset
+    onChange: formActions.update,
+    onReset: formActions.reset
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(ComponentWithReduxState);

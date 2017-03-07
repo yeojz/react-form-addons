@@ -19,7 +19,7 @@ const getCode = () => (
     withProps()
   )(FormInputs);
 
-  // Usage (note: prop "name" is important)
+  // Usage (note: prop "name" is required)
   <Form name='example' />
   `
 );
