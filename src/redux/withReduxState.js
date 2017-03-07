@@ -5,8 +5,7 @@ import noop from 'lodash/noop';
 import actions from './actions';
 
 const propTypes = {
-  formData: PropTypes.object,
-  formMeta: PropTypes.object,
+  getReduxData: PropTypes.func,
   name: PropTypes.string,
   onChange: PropTypes.func,
   onReset: PropTypes.func,
@@ -14,8 +13,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  formData: {},
-  formMeta: {},
   name: 'default',
   onChange: noop,
   onSubmit: noop
@@ -34,15 +31,18 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
     }
 
     handleSubmit = () => {
-      this.props.onSubmit(this.state.formData, this.state.formMeta);
+      const data = this.props.getReduxData(this.props.name);
+      this.props.onSubmit(data.formData, data.formMeta);
     }
 
     render() {
+      const data = this.props.getReduxData(this.props.name);
+
       return (
         <Component
           {...this.props}
-          formData={this.props.formData}
-          formMeta={this.props.formMeta}
+          formData={data.formData}
+          formMeta={data.formMeta}
           name={void 0}
           onChange={this.handleChange}
           onReset={this.handleReset}
@@ -55,9 +55,11 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
   ComponentWithReduxState.propTypes = propTypes;
   ComponentWithReduxState.defaultProps = defaultProps;
 
-  const mapStateToProps = (state, ownProps) => ({
-    formData: get(state, [reducerKey, ownProps.name, 'formData'], {}),
-    formMeta: get(state, [reducerKey, ownProps.name, 'formMeta'], {})
+  const mapStateToProps = (state) => ({
+    getReduxData: (name) => ({
+      formData: get(state, [reducerKey, 'data', name, 'formData'], {}),
+      formMeta: get(state, [reducerKey, 'data', name, 'formMeta'], {})
+    })
   });
 
   const mapDispatchToProps = {

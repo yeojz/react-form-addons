@@ -118,13 +118,23 @@ code.hljs {
   margin-bottom: 0.5em;
 }
 
-.printer__dataset:not(:first-child) h4 {
+.jsonoutput__dataset:not(:first-child) h4 {
   margin-top: 2em;
 }
 
 .form-section .help {
   text-align: right;
   margin-top: -5px
+}
+
+.form-section:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.form-section .button {
+  float: right;
 }
 
 @media (min-width: 769px) {

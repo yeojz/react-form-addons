@@ -6,11 +6,11 @@ import BranchForm from './components/BranchForm';
 import CollectionFrom from './components/CollectionForm';
 import Composition from './components/Composition';
 import PropsForm from './components/PropsForm';
+import ReduxForm from './components/ReduxForm';
 import SideEffectForm from './components/SideEffectForm';
 import StatefulForm from './components/StatefulForm';
 import SyntheticFormEvent from './components/SyntheticFormEvent';
 import ValidationForm from './components/ValidationForm';
-
 
 class App extends React.Component {
   componentDidMount = () => {
@@ -32,6 +32,7 @@ class App extends React.Component {
               <ValidationForm />
               <BranchForm />
               <CollectionFrom />
+              <ReduxForm />
               <SyntheticFormEvent />
             </div>
           </div>

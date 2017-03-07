@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 import definitions from '../definitions';
-import {collection, compose, withProps, withState} from '../../../lib/index';
+import {collection, compose, withProps, withState} from '../../../lib';
 
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';

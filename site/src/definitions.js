@@ -61,6 +61,12 @@ const methods = {
   ]
 }
 
+const extensions = {
+  withReduxState: [
+    'Propagates form state into a reducer instead of keeping in component state'
+  ]
+}
+
 const utils = {
   SyntheticFormEvent: [
     'It is Proxy Event object similar to React\'s SyntheticEvent.',
@@ -70,6 +76,7 @@ const utils = {
 }
 
 export default {
+  extensions,
   methods,
   props,
   utils

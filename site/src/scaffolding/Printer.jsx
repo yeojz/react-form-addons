@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
-import Highlight from 'react-highlight';
-import isEmpty from 'lodash/isEmpty';
+import JsonOutput from './JsonOutput';
 
 const propTypes = {
   className: PropTypes.string,
@@ -12,26 +11,16 @@ const defaultProps = {
   className: ''
 };
 
-const renderContent = (header, value, showAlways = false) => {
-  if (isEmpty(value) && !showAlways) {
-    return null;
-  }
-  return (
-    <div className='printer__dataset'>
-      <h4>{header}</h4>
-      <div className='printer__content'>
-        <Highlight className='json'>
-          {JSON.stringify(value, null, 2)}
-        </Highlight>
-      </div>
-    </div>
-  );
-};
-
 const Printer = (props) => (
   <div className={`is-one-third column printer ${props.className}`}>
-    {renderContent('FormData', props.formData, true)}
-    {renderContent('FormMeta', props.formMeta, true)}
+    <JsonOutput
+      header='FormData'
+      value={props.formData}
+    />
+    <JsonOutput
+      header='FormMeta'
+      value={props.formMeta}
+    />
   </div>
 )
 

@@ -3,7 +3,7 @@ import mapValues from 'lodash/mapValues';
 import validate from 'validate.js';
 
 import definitions from '../definitions';
-import {compose, withProps, withState, withValidation} from '../../../lib/index';
+import {compose, withProps, withState, withValidation} from '../../../lib';
 
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
