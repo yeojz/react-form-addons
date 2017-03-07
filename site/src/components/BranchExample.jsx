@@ -1,0 +1,43 @@
+import React from 'react';
+import definitions from '../definitions';
+import Code from '../scaffolding/Code';
+import DisplaySection from '../scaffolding/DisplaySection';
+import Printer from '../scaffolding/Printer';
+import createExample from '../scaffolding/createExample';
+import BranchForm from './forms/BranchForm';
+
+const getCode = () => ([
+  `
+  const SubBranch = compose(
+    branch(),
+    withProps()
+  )(SubForm);
+  `, `
+  const Form = (props) => (
+    <div>
+      <Input {...props} name='nobranch' />
+      <SubBranch {...props} name='branch1' />
+      <SubBranch {...props} name='branch2' />
+    </div>
+  )
+  `, `
+  export default compose(
+    withState()
+  )(Form);
+  `
+]);
+
+const BranchExample = (props) => (
+  <DisplaySection
+    name='branch'
+    description={definitions.methods.branch}
+  >
+    <div className='columns'>
+      <BranchForm />
+      <Printer {...props} />
+      <Code data={getCode()} />
+    </div>
+  </DisplaySection>
+);
+
+export default createExample(BranchExample);

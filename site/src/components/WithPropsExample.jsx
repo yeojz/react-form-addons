@@ -13,7 +13,7 @@ const getCode = () => (
   `
 );
 
-const PropsForm = () => (
+const WithPropsExample = () => (
   <DisplaySection
     name='withProps'
     description={definitions.methods.withProps}
@@ -25,4 +25,4 @@ const PropsForm = () => (
   </DisplaySection>
 );
 
-export default PropsForm;
+export default WithPropsExample;

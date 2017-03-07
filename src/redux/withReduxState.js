@@ -6,14 +6,13 @@ import actions from './actions';
 
 const propTypes = {
   getReduxData: PropTypes.func,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   onReset: PropTypes.func,
   onSubmit: PropTypes.func
 };
 
 const defaultProps = {
-  name: 'default',
   onChange: noop,
   onSubmit: noop
 };

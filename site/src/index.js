@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css';
-import 'highlight.js/styles/github-gist.css';
+import 'highlight.js/styles/solarized-dark.css';
 import './index.css';
 
 import React from 'react';
@@ -8,9 +8,10 @@ import {Provider} from 'react-redux';
 import App from './App';
 import store from './store';
 
-ReactDOM.render(
+const elem = (
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
+
+ReactDOM.render(elem, document.getElementById('root'));

@@ -2,13 +2,13 @@ import constants from './constants';
 import update from 'immutability-helper';
 
 const defaultState = () => ({
-  lastActionName: '',
+  lastFormName: '',
   lastActionType: '',
   data: {}
 });
 
 const getDelta = (type, name, data) => ({
-  lastActionName: {
+  lastFormName: {
     $set: name
   },
   lastActionType: {

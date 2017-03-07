@@ -16,7 +16,7 @@ const getWith = () => (
   `
 );
 
-const PropsForm = () => (
+const ComposeExample = () => (
   <DisplaySection
     name='compose'
     description={definitions.methods.compose}
@@ -36,4 +36,4 @@ const PropsForm = () => (
   </DisplaySection>
 );
 
-export default PropsForm;
+export default ComposeExample;

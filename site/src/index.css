@@ -110,6 +110,11 @@ code.hljs {
   margin-left: 1em;
 }
 
+.table-overflow {
+  overflow: auto;
+  width: 100%;
+}
+
 .form-section .control-label {
   padding-top: 0;
 }
