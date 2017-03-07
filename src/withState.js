@@ -61,10 +61,6 @@ const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) =>
       this.props.onChange(syntheticFormEvent);
     }
 
-    handleSubmit = () => {
-      this.props.onSubmit(this.state.formData, this.state.formMeta);
-    }
-
     render() {
       return (
         <Component
@@ -72,7 +68,6 @@ const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) =>
           formData={this.state.formData}
           formMeta={this.state.formMeta}
           onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
         />
       );
     }

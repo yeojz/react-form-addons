@@ -29,11 +29,6 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
       this.props.onReset(this.props.name);
     }
 
-    handleSubmit = () => {
-      const data = this.props.getReduxData(this.props.name);
-      this.props.onSubmit(data.formData, data.formMeta);
-    }
-
     render() {
       const data = this.props.getReduxData(this.props.name);
 
@@ -45,7 +40,6 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
           name={void 0}
           onChange={this.handleChange}
           onReset={this.handleReset}
-          onSubmit={this.handleSubmit}
         />
       );
     }
