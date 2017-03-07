@@ -1,14 +1,15 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'redux';
+import {connect} from 'react-redux';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
-import actions from './redux/actions';
+import actions from './actions';
 
 const propTypes = {
   formData: PropTypes.object,
   formMeta: PropTypes.object,
   name: PropTypes.string,
   onChange: PropTypes.func,
+  onReset: PropTypes.func,
   onSubmit: PropTypes.func
 };
 
@@ -28,6 +29,10 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
       this.props.onChange(this.props.name, syntheticFormEvent);
     }
 
+    handleReset = () => {
+      this.props.onReset(this.props.name);
+    }
+
     handleSubmit = () => {
       this.props.onSubmit(this.state.formData, this.state.formMeta);
     }
@@ -40,6 +45,7 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
           formMeta={this.props.formMeta}
           name={void 0}
           onChange={this.handleChange}
+          onReset={this.handleReset}
           onSubmit={this.handleSubmit}
         />
       );
@@ -55,7 +61,8 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
   });
 
   const mapDispatchToProps = {
-    onChange: actions.update
+    onChange: actions.update,
+    onReset: actions.reset
   };
 
   return connect(mapStateToProps, mapDispatchToProps)(ComponentWithReduxState);

@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import constants from './constants';
 import update from 'immutability-helper';
 
 const defaultState = () => ({
@@ -24,7 +24,7 @@ const getDelta = (type, name, data) => ({
 const doUpdateAction = (state, action) => {
   const {payload} = action;
 
-  const delta = getDelta('update', payload.name, {
+  const delta = getDelta(constants.UPDATE, payload.name, {
     formData: payload.formData,
     formMeta: payload.formMeta
   });
@@ -32,19 +32,19 @@ const doUpdateAction = (state, action) => {
   return update(state, delta);
 }
 
-const doUnsetAction = (state, action) => {
+const doResetAction = (state, action) => {
   const {payload} = action;
-  const delta = getDelta('unset', payload.name, {});
+  const delta = getDelta(constants.RESET, payload.name, {});
   return update(state, delta);
 }
 
 function reducer(state = defaultState(), action = {}) {
-  if (action.type === actionTypes.UPDATE) {
+  if (action.type === constants.UPDATE) {
     return doUpdateAction(state, action);
   }
 
-  if (action.type === actionTypes.UNSET) {
-    return doUnsetAction(state, action);
+  if (action.type === constants.RESET) {
+    return doResetAction(state, action);
   }
 
 	return state;

@@ -1,7 +1,7 @@
-import actionTypes from './actionTypes';
+import constants from './constants';
 
 const update = (name, syntheticFormEvent) => ({
-  type: actionTypes.UPDATE,
+  type: constants.UPDATE,
   payload: {
     name,
     formData: syntheticFormEvent.formData,
@@ -9,8 +9,8 @@ const update = (name, syntheticFormEvent) => ({
   }
 });
 
-const unset = (name) => ({
-  type: actionTypes.UNSET,
+const reset = (name) => ({
+  type: constants.RESET,
   payload: {
     name
   }
@@ -18,5 +18,5 @@ const unset = (name) => ({
 
 export default {
   update,
-  unset
+  reset
 };
