@@ -34,6 +34,10 @@ const Navigation = () => (
 
         <p className='menu-label'>Methods</p>
         <ul className='menu-list'>{renderLinks('methods')}</ul>
+
+        <p className='menu-label'>Extensions</p>
+        <ul className='menu-list'>{renderLinks('extensions')}</ul>
+
         <p className='menu-label'>Utils</p>
         <ul className='menu-list'>{renderLinks('utils')}</ul>
       </aside>

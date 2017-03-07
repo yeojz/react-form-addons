@@ -24,15 +24,17 @@ const renderTableBody = () => (
 const PropsTable = () => (
   <div className='is-two-third column'>
     <h4>Injected Props</h4>
-    <table className='table is-bordered is-narrow is-striped'>
-      <thead>
-        <tr>
-          <th>Props</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>{renderTableBody()}</tbody>
-    </table>
+    <div className='table-overflow'>
+      <table className='table is-bordered is-narrow is-striped'>
+        <thead>
+          <tr>
+            <th>Props</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>{renderTableBody()}</tbody>
+      </table>
+    </div>
   </div>
 );
 

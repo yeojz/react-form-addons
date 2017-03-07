@@ -30,13 +30,15 @@ const handleChange = (sideEffects) => (props) => (evt) => {
 const withSideEffects = (...sideEffects) => (Component) => {
   const onChangeHandler = handleChange(sideEffects);
 
-  function FormWithSideEffects(props) {
-    return (
-      <Component
-        {...props}
-        onChange={onChangeHandler(props)}
-      />
-    );
+  class FormWithSideEffects extends React.Component {
+    render() {
+      return (
+        <Component
+          {...this.props}
+          onChange={onChangeHandler(this.props)}
+        />
+      );
+    }
   }
   FormWithSideEffects.propTypes = propTypes;
   FormWithSideEffects.defaultProps = defaultProps;

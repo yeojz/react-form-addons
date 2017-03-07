@@ -33,7 +33,7 @@ const getCode = () => (
   `
 );
 
-const SyntheticFormEvent = () => (
+const SyntheticFormEventExample = () => (
   <DisplaySection
     name='SyntheticFormEvent'
     description={definitions.utils.SyntheticFormEvent}
@@ -52,4 +52,4 @@ const SyntheticFormEvent = () => (
   </DisplaySection>
 );
 
-export default SyntheticFormEvent;
+export default SyntheticFormEventExample;

@@ -1,11 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
 import 'bulma/css/bulma.css';
-import 'highlight.js/styles/github-gist.css';
+import 'highlight.js/styles/solarized-dark.css';
 import './index.css';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import App from './App';
+import store from './store';
+
+const elem = (
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
+
+ReactDOM.render(elem, document.getElementById('root'));

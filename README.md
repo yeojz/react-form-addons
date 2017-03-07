@@ -16,8 +16,23 @@ This project is an exploration of possible ways of splitting responsibility duri
 
 ## Links
 
- - [Documentation][doc-link]
+#### Showcase
+
+ - [Documentation Site][doc-link]
  - [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
+
+#### Core Methods
+
+ - [compose](https://yeojz.github.io/react-form-addons#compose)
+ - [withProps](https://yeojz.github.io/react-form-addons#withProps)
+ - [withState](https://yeojz.github.io/react-form-addons#withState)
+ - [withSideEffects](https://yeojz.github.io/react-form-addons#withSideEffects)
+ - [withValidation](https://yeojz.github.io/react-form-addons#withValidation)
+ - [branch](https://yeojz.github.io/react-form-addons#branch)
+ - [collection](https://yeojz.github.io/react-form-addons#collection)
+
+#### Library Support
+ - [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
 
 ## Installation
 
@@ -45,8 +60,8 @@ const Form = (props) => (
 );
 
 export default compose(
-	withState(),
-	withProps()
+  withState(),
+  withProps()
 )(Form);
 ```
 
@@ -96,12 +111,38 @@ can become
 
 ```js
 export default compose(
-  withReduxState(),
+  withLocalStorage(),
   withProps()
 )(Form);
 ```
 
-For now, this library does not provide the `redux` connector, but it is highly possible that it'll be sheduled for a future release. PRs are welcome! :)
+### Redux Support
+
+This library also provides a component for handling state in [redux](https://github.com/reactjs/redux). You'll need to install `react-redux` as well as `redux` for it to work. 
+
+*Note:* Redux components are not under default library export. As such, you'll have to import from a sub folder. i.e.
+
+```js
+import {withReduxState, formReducer} from 'react-form-addons/lib/redux';
+
+// Creating stores
+const reducers = combineReducers({
+  forms: formReducer
+});
+
+const store = createStore(reducers);
+
+// During form composition
+const Form = compose(
+  withReduxState(),
+  withProps()
+)(FormInputs);
+
+// Usage (note: prop "name" is required)
+<Form name='example' />
+```
+
+There is a [live example](https://yeojz.github.io/react-form-addons#withReduxState) in the documentation site.
 
 ## Prior Art
 

@@ -27,18 +27,21 @@ const handleChange = ({formData, formMeta, onChange}) => (evt) => {
 };
 
 const withProps = () => (Component) => {
-  function FormWithProps(props) {
+
+  class FormWithProps extends React.Component {
+    render() {
       return (
-      <Component
-        {...props}
-        formData={props.formData}
-        formMeta={props.formMeta}
-        getFormData={getDataFromKey(props.formData)}
-        getFormMeta={getDataFromKey(props.formMeta)}
-        onChange={handleChange(props)}
-        onToggle={handleToggle(props)}
-      />
-    );
+        <Component
+          {...this.props}
+          formData={this.props.formData}
+          formMeta={this.props.formMeta}
+          getFormData={getDataFromKey(this.props.formData)}
+          getFormMeta={getDataFromKey(this.props.formMeta)}
+          onChange={handleChange(this.props)}
+          onToggle={handleToggle(this.props)}
+        />
+      );
+    }
   }
 
   FormWithProps.propTypes = propTypes;

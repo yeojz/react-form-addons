@@ -41,22 +41,24 @@ const handleChange = (name, props) => (evt) => {
 };
 
 const branch = (defaultName = 'default') => (Component) => {
-  function BranchedForm(props) {
-    const name = props.name || defaultName;
 
-    const formData = cloneData(name, props.formData);
-    const formMeta = cloneData(name, props.formMeta);
+  class BranchedForm extends React.Component {
+    render() {
+      const name = this.props.name || defaultName;
+      const formData = cloneData(name, this.props.formData);
+      const formMeta = cloneData(name, this.props.formMeta);
 
-    return (
-      <Component
-        {...props}
-        formData={formData}
-        formMeta={formMeta}
-        getFormData={getDataFromKey(formData)}
-        getFormMeta={getDataFromKey(formMeta)}
-        onChange={handleChange(name, props)}
-      />
-    );
+      return (
+        <Component
+          {...this.props}
+          formData={formData}
+          formMeta={formMeta}
+          getFormData={getDataFromKey(formData)}
+          getFormMeta={getDataFromKey(formMeta)}
+          onChange={handleChange(name, this.props)}
+        />
+      );
+    }
   }
 
   BranchedForm.propTypes = propTypes;

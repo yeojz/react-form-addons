@@ -25,3 +25,4 @@ deployment:
       - echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
       - npm publish
       - npm logout
+      - npm run deploy-gh-pages
