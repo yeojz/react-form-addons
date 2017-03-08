@@ -28,10 +28,11 @@ This project is an exploration of possible ways of splitting responsibility duri
  - [withState](https://yeojz.github.io/react-form-addons#withState)
  - [withSideEffects](https://yeojz.github.io/react-form-addons#withSideEffects)
  - [withValidation](https://yeojz.github.io/react-form-addons#withValidation)
- - [branch](https://yeojz.github.io/react-form-addons#branch)
+ - [branch](https://yeojz.github.io/react-form-addons#branch) (for nested forms)
  - [collection](https://yeojz.github.io/react-form-addons#collection)
 
-#### Library Support
+#### Extensions
+
  - [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
 
 ## Installation
@@ -39,7 +40,11 @@ This project is an exploration of possible ways of splitting responsibility duri
 Install the library:
 
 ```
-npm install react react-form-addons --save
+npm install react-form-addons --save
+
+// or
+
+yarn add react-form-addons
 ```
 
 ## Quick Look
@@ -90,7 +95,7 @@ Checkout the [v2.0.0 release notes](https://github.com/yeojz/react-form-addons/r
 
 Your event handlers will be passed instances of [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent) when it's piped through `withProps` onChange handler.
 
-It inherits `target.name`, `target.value`, `stopPropagation()` and `preventDefault()` from React's Event System and adds on 2 sub-properties `formData` and `formMeta`. 
+It inherits `target.name`, `target.value`, `stopPropagation()` and `preventDefault()` from React's Event System and adds on 2 sub-properties `formData` and `formMeta`.
 
 The 2 sub-properties are heavily used to calculate and update the current state of the form within the compose pipeline.
 
@@ -118,7 +123,7 @@ export default compose(
 
 ### Redux Support
 
-This library also provides a component for handling state in [redux](https://github.com/reactjs/redux). You'll need to install `react-redux` as well as `redux` for it to work. 
+This library also provides a component for handling state in [redux](https://github.com/reactjs/redux). You'll need to install `react-redux` as well as `redux` for it to work.
 
 *Note:* Redux components are not under default library export. As such, you'll have to import from a sub folder. i.e.
 
