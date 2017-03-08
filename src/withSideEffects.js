@@ -2,12 +2,7 @@ import React, {PropTypes} from 'react';
 import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
 
 const propTypes = {
-  formData: PropTypes.object,
   onChange: PropTypes.func
-};
-
-const defaultProps = {
-  formData: {}
 };
 
 const passthrough = (data) => data;
@@ -40,8 +35,8 @@ const withSideEffects = (...sideEffects) => (Component) => {
       );
     }
   }
+
   FormWithSideEffects.propTypes = propTypes;
-  FormWithSideEffects.defaultProps = defaultProps;
   return FormWithSideEffects;
 };
 

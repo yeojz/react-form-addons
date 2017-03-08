@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import * as exposed from '../../src/redux/index';
+import * as exposed from 'src/redux/index';
 
 describe('redux/index', function () {
   it('total number of exports', function () {
