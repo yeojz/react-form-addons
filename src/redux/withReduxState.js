@@ -8,13 +8,11 @@ const propTypes = {
   getReduxData: PropTypes.func,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
-  onReset: PropTypes.func,
-  onSubmit: PropTypes.func
+  onReset: PropTypes.func
 };
 
 const defaultProps = {
-  onChange: noop,
-  onSubmit: noop
+  onChange: noop
 };
 
 const withReduxState = (reducerKey = 'forms') => (Component) => {

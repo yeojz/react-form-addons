@@ -7,15 +7,13 @@ import isPropKeyEqual from './utils/isPropKeyEqual';
 const propTypes = {
   formData: PropTypes.object,
   formMeta: PropTypes.object,
-  onChange: PropTypes.func,
-  onSubmit: PropTypes.func
+  onChange: PropTypes.func
 };
 
 const defaultProps = {
   formData: {},
   formMeta: {},
-  onChange: noop,
-  onSubmit: noop
+  onChange: noop
 };
 
 const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) => {
