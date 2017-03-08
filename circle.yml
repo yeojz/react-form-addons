@@ -1,6 +1,9 @@
 machine:
   node:
     version: "6"
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
 general:
   branches:
     ignore:
@@ -25,3 +28,4 @@ deployment:
       - echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
       - npm publish
       - npm logout
+      - npm run deploy-gh-pages
