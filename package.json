@@ -31,7 +31,8 @@
     "builder",
     "factory",
     "composer",
-    "state"
+    "state",
+    "redux"
   ],
   "author": "Gerald Yeo <contact@fusedthought.com>",
   "license": "MIT",

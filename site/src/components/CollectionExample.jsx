@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
@@ -41,11 +41,15 @@ const CollectionExample = (props) => (
     description={definitions.methods.collection}
   >
     <div className='columns'>
-      <CollectionForm />
+      <CollectionForm onChange={props.onChange} />
       <Printer {...props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>
 );
+
+CollectionExample.propTypes = {
+  onChange: PropTypes.func
+}
 
 export default createExample(CollectionExample);

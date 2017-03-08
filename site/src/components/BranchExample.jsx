@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
@@ -33,11 +33,15 @@ const BranchExample = (props) => (
     description={definitions.methods.branch}
   >
     <div className='columns'>
-      <BranchForm />
+      <BranchForm onChange={props.onChange} />
       <Printer {...props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>
 );
+
+BranchExample.propTypes = {
+  onChange: PropTypes.func
+}
 
 export default createExample(BranchExample);

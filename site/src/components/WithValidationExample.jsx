@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
@@ -24,11 +24,15 @@ const WithValidationExample = (props) => (
     description={definitions.methods.withValidation}
   >
     <div className='columns'>
-      <ValidationForm />
+      <ValidationForm onChange={props.onChange} />
       <Printer {...props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>
 );
+
+WithValidationExample.propTypes = {
+  onChange: PropTypes.func
+}
 
 export default createExample(WithValidationExample);

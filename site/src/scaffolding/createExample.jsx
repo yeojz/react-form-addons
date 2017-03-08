@@ -14,7 +14,13 @@ const createExample = (Component) => {
       });
     }
     render() {
-      return <Component onChange={this.handleChange} />;
+      return (
+        <Component
+          formData={this.state.formData}
+          formMeta={this.state.formMeta}
+          onChange={this.handleChange}
+        />
+      );
     }
   }
 

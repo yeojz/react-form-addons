@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
@@ -21,10 +21,15 @@ const WithStateExample = (props) => (
     description={definitions.methods.withState}
   >
     <div className='columns'>
-      <StateForm />
+      <StateForm onChange={props.onChange} />
       <Printer {...props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>
 );
+
+WithStateExample.propTypes = {
+  onChange: PropTypes.func
+}
+
 export default createExample(WithStateExample);

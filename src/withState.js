@@ -57,8 +57,9 @@ const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) =>
       this.setState({
         formData: syntheticFormEvent.formData,
         formMeta: syntheticFormEvent.formMeta
+      }, () => {
+        this.props.onChange(syntheticFormEvent);
       });
-      this.props.onChange(syntheticFormEvent);
     }
 
     render() {

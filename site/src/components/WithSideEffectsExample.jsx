@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
@@ -25,11 +25,15 @@ const WithSideEffectsExample = (props) => (
     description={definitions.methods.withSideEffects}
   >
     <div className='columns'>
-      <SideEffectsForm />
+      <SideEffectsForm onChange={props.onChange} />
       <Printer {...props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>
 );
+
+WithSideEffectsExample.propTypes = {
+  onChange: PropTypes.func
+}
 
 export default createExample(WithSideEffectsExample);
