@@ -1,5 +1,7 @@
 #<img src="https://yeojz.github.io/react-form-addons/images/react-form-addons-with-text.svg" alt="react-form-addons" height="100" />
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/yeojz/react-form-addons.svg)](https://greenkeeper.io/)
+
 [![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]
 [![PRs Welcome][pr-welcome-badge]][pr-welcome-badge]
