@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../public/react-form-addons.svg';
+import logo from '../../public/images/react-form-addons.svg';
 
 const Header = () => (
   <header className='app-header'>

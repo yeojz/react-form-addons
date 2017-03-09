@@ -1,7 +1,7 @@
 {
   "name": "react-form-addons",
   "version": "2.3.0",
-  "description": "A set of pluggable higher-order components / decorators for composing forms in React",
+  "description": "Pluggable higher-order components / decorators for composing forms in React",
   "main": "lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib",

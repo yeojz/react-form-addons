@@ -26,12 +26,18 @@ const Navigation = () => (
   <div className='column is-2 app-nav'>
       <Header />
       <aside className='menu'>
-        <p className='menu-label'>Version: 2.x.x</p>
-        <ul className='menu-list'>
-          <li><a href='//github.com/yeojz/react-form-addons'>Github</a></li>
-          <li><a href='//npmjs.com/package/react-form-addons'>npm</a></li>
+        <ul className='badges'>
+          <li>
+            <a href='//npmjs.com/package/react-form-addons'>
+              <img src='//img.shields.io/npm/v/react-form-addons.svg?style=flat-square' alt='npm' />
+            </a>
+          </li>
+          <li>
+            <a href='//github.com/yeojz/react-form-addons'>
+              <img src='//img.shields.io/github/stars/yeojz/react-form-addons.svg?style=social&label=Star' alt='' />
+            </a>
+          </li>
         </ul>
-
         <p className='menu-label'>Methods</p>
         <ul className='menu-list'>{renderLinks('methods')}</ul>
 

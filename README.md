@@ -1,4 +1,4 @@
-#<img src="https://yeojz.github.io/react-form-addons/react-form-addons-with-text.svg" alt="react-form-addons" height="100" />
+#<img src="https://yeojz.github.io/react-form-addons/images/react-form-addons-with-text.svg" alt="react-form-addons" height="100" />
 
 [![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]

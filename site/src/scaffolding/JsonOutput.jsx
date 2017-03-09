@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Highlight from 'react-highlight';
+import Highlight from 'react-highlight.js';
 
 const propTypes = {
   header: PropTypes.string,

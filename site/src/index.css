@@ -64,6 +64,15 @@ code.hljs {
   border-bottom: 1px #ddd dotted;
 }
 
+.app-nav .badges {
+  list-style-type: none;
+}
+
+.app-nav .badges li {
+  display: inline-block;
+  padding: 0.5em;
+}
+
 .app-nav h1 {
   font-size: 1em;
 }
