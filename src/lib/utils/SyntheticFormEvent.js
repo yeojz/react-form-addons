@@ -10,7 +10,10 @@ class SyntheticFormEvent {
 
   extractEvent(evt) {
     return {
-      target: get(evt, 'target'),
+      target: {
+        name: get(evt, 'target.name'),
+        value: get(evt, 'target.value')
+      },
       preventDefault: get(evt, 'preventDefault', noop),
       stopPropagation: get(evt, 'stopPropagation', noop)
     }

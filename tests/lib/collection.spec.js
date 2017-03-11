@@ -1,8 +1,8 @@
 import React from 'react';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import collection from 'src/collection';
-import TestDiv from './mocks/TestDiv';
+import collection from 'src/lib/collection';
+import TestDiv from 'tests/mocks/TestDiv';
 
 describe('collection', function () {
   it('should throw an Error when argument not an array', function () {

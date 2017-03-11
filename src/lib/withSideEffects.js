@@ -1,28 +1,28 @@
 import React, {PropTypes} from 'react';
 import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
+import constants from './constants';
 
 const propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onError: PropTypes.func
 };
 
-const passthrough = (data) => data;
-
-const applySideEffects = (sideEffects, evt, props) => {
-  const effects = sideEffects.length > 0 ? sideEffects : [passthrough];
-
-  return effects.reduce(
-    (event, fn) => fn(event, props),
-    evt
-  );
-};
+const applySideEffects = (sideEffects, evt, props) => (
+  sideEffects.reduce(
+    (p, fn) => p.then((event) => fn(event, props)),
+    Promise.resolve(evt)
+  )
+);
 
 const handleChange = (sideEffects) => (props) => (evt) => {
   let event = createSyntheticFormEvent(evt);
-  event = applySideEffects(sideEffects, event, props);
-  return props.onChange(event);
+
+  applySideEffects(sideEffects, event, props)
+    .then((event) => props.onChange(event))
+    .catch((err) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
 };
 
-const withSideEffects = (...sideEffects) => (Component) => {
+const withSideEffects = (sideEffects = []) => (Component) => {
   const onChangeHandler = handleChange(sideEffects);
 
   class FormWithSideEffects extends React.Component {

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {stub} from 'sinon';
-import compose from 'src/compose';
+import compose from 'src/lib/compose';
 
 describe('compose', function () {
   it('compose is called in reverse order', function () {

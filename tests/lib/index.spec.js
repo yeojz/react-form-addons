@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import * as exposed from 'src/index';
+import * as exposed from 'src/lib/index';
 
 describe('index', function () {
   it('total number of exports', function () {

@@ -31,8 +31,8 @@ const FormInputs = (props) => (
 
 export default compose(
   withState(),
-  withValidation(
+  withValidation([
     runValidateDotJs
-  ),
+  ]),
   withProps()
 )(FormInputs);

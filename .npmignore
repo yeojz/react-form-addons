@@ -1,8 +1,8 @@
 .DS_Store
-src
-docs
-stories
-examples
-coverage
-tests
-site
+/src
+/docs
+/stories
+/examples
+/coverage
+/tests
+/site

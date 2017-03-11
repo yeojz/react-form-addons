@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import update from 'immutability-helper';
 import get from 'lodash/get';
+import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
-import isPropKeyEqual from './utils/isPropKeyEqual';
 
 const propTypes = {
   formData: PropTypes.object,
@@ -26,35 +26,40 @@ const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) =>
     }
 
     componentWillMount = () => {
-      const formData = {
-        ...defaultFormData,
-        ...this.props.formData
-      };
-      const formMeta = {
-        ...defaultFormMeta,
-        ...this.props.formMeta
-      };
-      this.setState({formData, formMeta});
+      this.setState({
+        formData: {
+          ...defaultFormData,
+          ...this.props.formData
+        },
+        formMeta: {
+          ...defaultFormMeta,
+          ...this.props.formMeta
+        }
+      });
     }
+
+    shouldComponentUpdate = (nextProps, nextState) => (
+      !isEqual(this.props, nextProps)
+      || !isEqual(this.state, nextState)
+    )
 
     componentWillReceiveProps = (nextProps) => {
-      this.validateAndRefreshData('formData', nextProps);
-      this.validateAndRefreshData('formMeta', nextProps);
+      this.setState({
+        formData: this.refreshData('formData', nextProps),
+        formMeta: this.refreshData('formMeta', nextProps)
+      });
     }
 
-    validateAndRefreshData = (key, nextProps) => {
-      if (isPropKeyEqual(key,this.props, nextProps)) {
-        const data = update(nextProps[key], {
-          $merge: get(this, ['state', key], {})
-        });
-        this.setState({[key]: data});
-      }
-    }
+    refreshData = (key, nextProps) => (
+      update(nextProps[key], {
+        $merge: get(this, ['state', key], {})
+      })
+    )
 
     handleChange = (syntheticFormEvent) => {
       this.setState({
-        formData: syntheticFormEvent.formData,
-        formMeta: syntheticFormEvent.formMeta
+        formData: {...syntheticFormEvent.formData},
+        formMeta: {...syntheticFormEvent.formMeta}
       }, () => {
         this.props.onChange(syntheticFormEvent);
       });

@@ -33,7 +33,7 @@ const BranchFormInputs = (props) => (
 
 const SubBranch = compose(
   branch(),
-  withValidation(runValidateDotJs),
+  withValidation([runValidateDotJs]),
   withProps(),
 )(BranchFormInputs);
 

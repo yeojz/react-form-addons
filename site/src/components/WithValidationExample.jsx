@@ -10,9 +10,9 @@ const getCode = () => (
   `
   export default compose(
     withState(),
-    withValidation(
+    withValidation([
       runValidateDotJs
-    ),
+    ]),
     withProps()
   )(Form);
   `

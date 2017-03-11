@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {compose, withProps} from '../../../../lib';
-import {withReduxState} from '../../../../lib/redux';
+import {withReduxState} from '../../../../redux';
 import FormSection from '../../scaffolding/FormSection';
 import Input from '../../scaffolding/Input';
 

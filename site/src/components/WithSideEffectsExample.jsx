@@ -10,10 +10,10 @@ const getCode = () => (
   `
   export default compose(
     withState(),
-    withSideEffects(
+    withSideEffects([
       syncInput1and2,
       incrementCount
-    ),
+    ]),
     withProps()
   )(Form);
   `
