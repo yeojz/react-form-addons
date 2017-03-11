@@ -26,8 +26,8 @@ describe('lib/index', function () {
     expect(exposed.constants).to.an.object;
   });
 
-  it('exports createField', function () {
-    expect(exposed.createField).to.a.function;
+  it('exports formControl', function () {
+    expect(exposed.formControl).to.a.function;
   });
 
   it('exports withProps', function () {

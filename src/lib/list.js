@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import update from 'immutability-helper';
 import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
-import FormComponent from './utils/FormComponent';
+import FormContainer from './utils/FormContainer';
+import listActions from './utils/listActions';
 
 const propTypes = {
   name: PropTypes.string,
@@ -11,54 +11,25 @@ const propTypes = {
   onChange: PropTypes.func
 };
 
-const getTarget = (name, value) => ({
-  name,
-  value
-});
-
-const updateData = (name, data, action) => {
-  const delta = {
-    [name]: action
-  }
-  return update(data, delta);
-}
-
 const handleChange = (name, props) => (idx) => (evt) => {
   let event = createSyntheticFormEvent(evt);
-  event.formData = updateData(name, props.formData, {
-    [idx]: {$set: event.formData}
-  });
-  event.formMeta = updateData(name, props.formMeta, {
-    [idx]: {$set: event.formMeta}
-  });
-  event.target = getTarget(name, event.formData);
+  event = listActions.change(idx, name, props, event);
   return props.onChange(event);
 };
 
 const handleAdd = (name, props) => () => {
   let event = createSyntheticFormEvent();
-  event.formData = updateData(name, props.formData, {
-    $push: [{}]
-  });
-  event.formMeta = updateData(name, props.formMeta, {
-    $push: [{}]
-  });
-  event.target = getTarget(name, event.formData);
+  event = listActions.add(name, props, event);
   return props.onChange(event);
 }
 
-const handleRemove = (name, props) => (idx) => {
+const handleRemove = (name, props) => (idx) => () => {
   let event = createSyntheticFormEvent();
-  event.formData = updateData(name, props.formData, {
-    $splice: [[idx, 1]]
-  });
-  event.formMeta = updateData(name, props.formMeta, {
-    $splice: [[idx, 1]]
-  });
+  event = listActions.remove(idx, name, props, event);
   return props.onChange(event);
 }
 
-const branchset = (defaultName = 'default', Container = FormComponent) => (Component) => {
+const list = (defaultName = 'default', Container = FormContainer) => (Component) => {
 
   const defaultProps = {
     name: defaultName,
@@ -66,7 +37,7 @@ const branchset = (defaultName = 'default', Container = FormComponent) => (Compo
     formMeta: {}
   };
 
-  class BranchSetForm extends React.component {
+  class ListForm extends React.component {
 
     getBranchData = (key) => (
       get(this, ['props', key, this.props.name], [])
@@ -101,9 +72,9 @@ const branchset = (defaultName = 'default', Container = FormComponent) => (Compo
     }
   }
 
-  BranchSetForm.propTypes = propTypes;
-  BranchSetForm.defaultProps = defaultProps;
-  return BranchSetForm;
+  ListForm.propTypes = propTypes;
+  ListForm.defaultProps = defaultProps;
+  return ListForm;
 }
 
-export default branchset;
+export default list;

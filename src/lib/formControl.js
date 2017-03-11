@@ -17,18 +17,18 @@ const defaultProps = {
 
 const propKeys = Object.keys(propTypes);
 
-const createField = (Element) => {
+const formControl = (Element) => {
 
   invariant(
     typeof Element === 'function' || typeof Element === 'string',
     `
-    Missing or invalid argument 1 for "createField".
+    Missing or invalid argument 1 for "formControl".
     Expects one of string:["input", "textarea"] or React Element.
     "${Element}" given
     `
   );
 
-  class Field extends React.Component {
+  class Control extends React.Component {
 
     state = {
       value: void 0
@@ -78,9 +78,9 @@ const createField = (Element) => {
     }
   }
 
-  Field.propTypes = propTypes;
-  Field.defaultProps = defaultProps;
-  return Field;
+  Control.propTypes = propTypes;
+  Control.defaultProps = defaultProps;
+  return Control;
 }
 
-export default createField;
+export default formControl;

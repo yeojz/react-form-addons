@@ -1,3 +1,3 @@
-import createField from '../lib/createField';
-const Input = createField('input');
+import formControl from '../lib/formControl';
+const Input = formControl('input');
 export default Input;
