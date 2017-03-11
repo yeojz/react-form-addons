@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import branch from 'src/lib/branch';
 import TestDiv from 'tests/mocks/TestDiv';
 
-describe('branch', function () {
+describe('lib/branch', function () {
   it('should return a react component', function () {
     const Component = branch()(TestDiv);
     const elem = shallow(<Component />);

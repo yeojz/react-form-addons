@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import getDataFromKey from 'src/lib/utils/getDataFromKey';
 
-describe('utils/getDataFromKey', function () {
+describe('lib/utils/getDataFromKey', function () {
 
   it('should return a function', function () {
     const result = getDataFromKey({});

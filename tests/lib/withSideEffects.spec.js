@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import withSideEffects from 'src/lib/withSideEffects';
 import TestDiv from 'tests/mocks/TestDiv';
 
-describe('withSideEffects', function () {
+describe('lib/withSideEffects', function () {
   it('should return a react component', function () {
     const Component = withSideEffects()(TestDiv);
     const elem = shallow(<Component />);

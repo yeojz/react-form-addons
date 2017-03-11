@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import withValidation from 'src/lib/withValidation';
 import TestDiv from 'tests/mocks/TestDiv';
 
-describe('withValidation', function () {
+describe('lib/withValidation', function () {
   it('should return a react component', function () {
     const Component = withValidation()(TestDiv);
     const elem = shallow(<Component />);

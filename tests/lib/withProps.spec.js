@@ -5,7 +5,7 @@ import {shallow} from 'enzyme';
 import withProps from 'src/lib/withProps';
 import TestDiv from 'tests/mocks/TestDiv';
 
-describe('withProps', function () {
+describe('lib/withProps', function () {
   it('should return a react component', function () {
     const Component = withProps()(TestDiv);
     const elem = shallow(<Component />);

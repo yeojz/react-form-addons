@@ -1,40 +1,48 @@
 import {expect} from 'chai';
 import * as exposed from 'src/lib/index';
 
-describe('index', function () {
+describe('lib/index', function () {
   it('total number of exports', function () {
-    expect(Object.keys(exposed)).to.be.length(8)
+    expect(Object.keys(exposed)).to.be.length(10)
   });
 
   it('exports SyntheticFormEvent', function () {
-    expect(exposed.SyntheticFormEvent).to.not.be.undefined;
+    expect(exposed.SyntheticFormEvent).to.a.class;
   });
 
   it('exports branch', function () {
-    expect(exposed.branch).to.not.be.undefined;
+    expect(exposed.branch).to.a.function;
   });
 
   it('exports collection', function () {
-    expect(exposed.collection).to.not.be.undefined;
+    expect(exposed.collection).to.a.function;
   });
 
   it('exports compose', function () {
-    expect(exposed.compose).to.not.be.undefined;
+    expect(exposed.compose).to.a.function;
+  });
+
+  it('exports constants', function () {
+    expect(exposed.constants).to.an.object;
+  });
+
+  it('exports createField', function () {
+    expect(exposed.createField).to.a.function;
   });
 
   it('exports withProps', function () {
-    expect(exposed.withProps).to.not.be.undefined;
+    expect(exposed.withProps).to.a.function;
   });
 
   it('exports withSideEffects', function () {
-    expect(exposed.withSideEffects).to.not.be.undefined;
+    expect(exposed.withSideEffects).to.a.function;
   });
 
   it('exports withState', function () {
-    expect(exposed.withState).to.not.be.undefined;
+    expect(exposed.withState).to.a.function;
   });
 
   it('exports withValidation', function () {
-    expect(exposed.withValidation).to.not.be.undefined;
+    expect(exposed.withValidation).to.a.function;
   });
 });
