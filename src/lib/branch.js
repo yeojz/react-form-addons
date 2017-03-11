@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
 import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
-import getDataFromKey from './utils/getDataFromKey';
 import updateObjectData from './utils/updateObjectData';
 
 const propTypes = {
@@ -11,16 +10,12 @@ const propTypes = {
   onChange: PropTypes.func
 };
 
-const cloneData = (name, data) => ({
-  ...get(data, name, {})
-});
-
 const getTarget = (name, value) => ({
   name,
   value
 });
 
-const updateKey = (name, data, value) => (
+const updateData = (name, data, value) => (
   updateObjectData(
     data,
     {target: getTarget(name, value)}
@@ -29,9 +24,9 @@ const updateKey = (name, data, value) => (
 
 const handleChange = (name, props) => (evt) => {
   let event = createSyntheticFormEvent(evt);
+  event.formData = updateData(name, props.formData, event.formData);
+  event.formMeta = updateData(name, props.formMeta, event.formMeta);
   event.target = getTarget(name, event.formData);
-  event.formData = updateKey(name, props.formData, event.formData);
-  event.formMeta = updateKey(name, props.formMeta, event.formMeta);
   return props.onChange(event);
 };
 
@@ -44,17 +39,20 @@ const branch = (defaultName = 'default') => (Component) => {
   };
 
   class BranchedForm extends React.Component {
+
+    getBranchData = (key) => (
+      get(this, ['props', key, this.props.name], {})
+    )
+
     render() {
-      const formData = cloneData(this.props.name, this.props.formData);
-      const formMeta = cloneData(this.props.name, this.props.formMeta);
+      const formData = this.getBranchData('formData');
+      const formMeta = this.getBranchData('formMeta');
 
       return (
         <Component
           {...this.props}
           formData={formData}
           formMeta={formMeta}
-          getFormData={getDataFromKey(formData)}
-          getFormMeta={getDataFromKey(formMeta)}
           onChange={handleChange(this.props.name, this.props)}
         />
       );
