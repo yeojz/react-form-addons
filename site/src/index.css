@@ -41,8 +41,27 @@ code.hljs {
   background-color: #f9f9f9;
 }
 
+pre.custom {
+  padding: 1em;
+}
+
 .checkbox {
   margin-top: 0.3em;
+}
+
+.sentence,
+.sentence:empty:first-child,
+.sentence:empty:last-child {
+  display: inline;
+}
+
+.sentence:empty {
+  display: block;
+  padding-bottom: 1em;
+}
+
+.information {
+  padding: 2em;
 }
 
 .app-header {
@@ -149,6 +168,7 @@ code.hljs {
 
 .form-section .button {
   float: right;
+  margin-left: 1em;
 }
 
 @media (min-width: 769px) {

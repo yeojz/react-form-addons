@@ -1,10 +1,10 @@
 import React from 'react';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import branch from 'src/branch';
-import TestDiv from './mocks/TestDiv';
+import branch from 'src/lib/branch';
+import TestDiv from 'tests/mocks/TestDiv';
 
-describe('branch', function () {
+describe('lib/branch', function () {
   it('should return a react component', function () {
     const Component = branch()(TestDiv);
     const elem = shallow(<Component />);

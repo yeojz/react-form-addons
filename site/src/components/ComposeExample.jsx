@@ -7,14 +7,12 @@ const getWithout = () => (
   `export default funcOne(funcTwo(Form));`
 );
 
-const getWith = () => (
-  `
+const getWith = () => (`
   export default compose(
     funcOne,
     funcTwo
   )(Form);
-  `
-);
+`);
 
 const ComposeExample = () => (
   <DisplaySection

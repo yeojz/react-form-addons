@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
+import LibInput from '../../../components/Input';
 
 const propTypes = {
   disabled: PropTypes.bool,
@@ -49,7 +50,7 @@ const Input = (props) => {
           <label className='label is-small'>{props.label || props.name}</label>
         </div>
         <div className='control'>
-          <input
+          <LibInput
             className={inputClass}
             disabled={props.disabled}
             name={props.name}

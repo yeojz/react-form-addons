@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Highlight from 'react-highlight.js';
+import marked from 'marked';
 
 const propTypes = {
   header: PropTypes.string,
@@ -15,9 +15,9 @@ const JsonOutput = (props) => {
     <div className='jsonoutput__dataset'>
       <h4>{props.header}</h4>
       <div className='jsonoutput__content'>
-        <Highlight className='json'>
-          {JSON.stringify(props.value, null, 2)}
-        </Highlight>
+        <div dangerouslySetInnerHTML={{
+          __html: marked('```js\n' + JSON.stringify(props.value, null, 2) + '\n```')
+        }} />
       </div>
     </div>
   );

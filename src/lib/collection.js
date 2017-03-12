@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import invariant from 'invariant';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 
@@ -33,9 +34,14 @@ const renderComponents = (components, props) => (
 );
 
 const collection = (components = []) => {
-  if (!Array.isArray(components)) {
-    throw new Error('expect argument 1 of collection to be an array');
-  }
+
+  invariant(
+    Array.isArray(components),
+    `
+    Missing or invalid argument 1 for "collection".
+    Expects an argument 1 of type "array". "${typeof components}" given.
+    `
+  );
 
   class FormCollection extends React.Component {
     render() {

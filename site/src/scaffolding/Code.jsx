@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Highlight from 'react-highlight.js';
+import marked from 'marked';
 
 const propTypes = {
   className: PropTypes.string,
@@ -12,22 +12,17 @@ const defaultProps = {
   title: 'Code'
 };
 
-const renderMulti = (data) => {
-  if (Array.isArray(data)) {
-    return data.map((str, key) => (
-      <Highlight key={key} className='js'>{str}</Highlight>
-    ))
-  }
-
-  return <Highlight className='js'>{data}</Highlight>
-}
+const renderCode = (str) => ({
+  __html: marked('```js\n' + str + '\n```')
+});
 
 const Code = (props) => (
   <div className={`column code ${props.className}`}>
     <h4>{props.title}</h4>
-    <div className='code_contents'>
-      {renderMulti(props.data)}
-    </div>
+    <div
+      className='code_contents'
+      dangerouslySetInnerHTML={renderCode(props.data)}
+    />
   </div>
 );
 

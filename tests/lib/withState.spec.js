@@ -1,10 +1,10 @@
 import React from 'react';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import withState from 'src/withState';
-import TestDiv from './mocks/TestDiv';
+import withState from 'src/lib/withState';
+import TestDiv from 'tests/mocks/TestDiv';
 
-describe('withState', function () {
+describe('lib/withState', function () {
   it('should return a react component', function () {
     const Component = withState()(TestDiv);
     const elem = shallow(<Component />);

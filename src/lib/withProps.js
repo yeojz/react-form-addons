@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
-import getDataFromKey from './utils/getDataFromKey';
-import updateObjectData from './utils/updateObjectData';
+import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
+import getDataFromKey from '../utils/getDataFromKey';
+import updateObjectData from '../utils/updateObjectData';
 
 const propTypes = {
   formData: PropTypes.object,

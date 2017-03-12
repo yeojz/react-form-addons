@@ -1,9 +1,11 @@
 export branch from './branch';
 export collection from './collection';
 export compose from './compose';
+export constants from './constants';
+export formControl from './formControl';
+export list from './list';
+export SyntheticFormEvent from '../utils/SyntheticFormEvent';
 export withProps from './withProps';
 export withSideEffects from './withSideEffects';
 export withState from './withState';
 export withValidation from './withValidation';
-
-export SyntheticFormEvent from './utils/SyntheticFormEvent';

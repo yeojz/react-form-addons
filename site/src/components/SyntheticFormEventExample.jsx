@@ -3,8 +3,7 @@ import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
 
-const getAPI = () => (
-  `
+const getAPI = () => (`
   // getters
   event.isSyntheticFormEvent // bool
   event.formData // obj {}
@@ -17,19 +16,18 @@ const getAPI = () => (
   event.target = {}
   event.formData = {}
   event.formMeta = {}
-  `
-);
+`);
 
 const getCode = () => (
   `
+  // "evt" represents the event from React's SyntheticEvent
+  // or browser event.
+
   createSyntheticFormEvent(evt);
 
   // or
 
   new SyntheticFormEvent(evt);
-
-  // where evt represents the event from React's SyntheticEvent
-  // or browser event.
   `
 );
 

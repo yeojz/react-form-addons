@@ -34,11 +34,13 @@ const FormInputs = (props) => (
 
 export default compose(
   withState({
-    count: 0
+    formData: {
+      count: 0
+    }
   }),
-  withSideEffects(
+  withSideEffects([
     syncInput1and2,
     incrementCount
-  ),
+  ]),
   withProps()
 )(FormInputs);

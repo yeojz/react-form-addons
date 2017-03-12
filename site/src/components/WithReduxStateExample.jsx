@@ -6,8 +6,9 @@ import DisplaySection from '../scaffolding/DisplaySection';
 import JsonOutput from '../scaffolding/JsonOutput';
 import ReduxForm from './forms/ReduxForm';
 
-const getCode = () => (
-  `
+const getCode = () => (`
+  import {withReduxState} from 'react-form-addons/redux'
+
   // Ensure reducers added to redux
   const reducers = combineReducers({
     forms: formReducer
@@ -21,8 +22,7 @@ const getCode = () => (
 
   // Usage (note: prop "name" is required)
   <Form name='example' />
-  `
-);
+`);
 
 const WithReduxStateExample = (props) => (
   <DisplaySection
