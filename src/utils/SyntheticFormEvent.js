@@ -19,6 +19,11 @@ class SyntheticFormEvent {
     }
   }
 
+  removeEventActions() {
+    this._event.preventDefault = noop;
+    this._event.stopPropagation = noop;
+  }
+
   set target(value) {
     this._event.target = value;
   }

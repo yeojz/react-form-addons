@@ -47,7 +47,7 @@ const withState = (defaultConfig = {}) => (Component) => {
 
     shouldComponentUpdate = (nextProps, nextState) => {
       if (config.shouldComponentUpdate) {
-        return config.shouldComponentUpdate(nextProps, nextState)
+        return config.shouldComponentUpdate(nextProps, nextState);
       }
 
       return !isEqual(this.props, nextProps)
@@ -68,6 +68,8 @@ const withState = (defaultConfig = {}) => (Component) => {
     )
 
     handleChange = (syntheticFormEvent) => {
+      syntheticFormEvent.removeEventActions();
+
       this.setState({
         formData: {...syntheticFormEvent.formData},
         formMeta: {...syntheticFormEvent.formMeta}
