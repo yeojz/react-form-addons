@@ -8,7 +8,7 @@ const writeup = `
   form data or even conditional form data into Higher-Order functions, and ultimately builds and
   exposes a final "formData" and "formMeta" to your chosen state engine.
 
-  It is __independent of state libraries__, i.e. if you want to use React Component State, Redux, MobX
+  It is __independent of state libraries__, i.e. if you want to use React Component State, Redux
   or any other state management engine, you should be able to do so with minimal effort.
   For examples, check out the [React Component State](https://github.com/yeojz/react-form-addons/blob/master/src/lib/withState.js) or [Redux State](//github.com/yeojz/react-form-addons/blob/master/src/redux/withReduxState.js) implementations.
 `;

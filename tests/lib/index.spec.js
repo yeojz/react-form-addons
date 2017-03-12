@@ -3,7 +3,7 @@ import * as exposed from 'src/lib/index';
 
 describe('lib/index', function () {
   it('total number of exports', function () {
-    expect(Object.keys(exposed)).to.be.length(10)
+    expect(Object.keys(exposed)).to.be.length(11)
   });
 
   it('exports SyntheticFormEvent', function () {
@@ -28,6 +28,10 @@ describe('lib/index', function () {
 
   it('exports formControl', function () {
     expect(exposed.formControl).to.a.function;
+  });
+
+  it('exports list', function () {
+    expect(exposed.list).to.a.function;
   });
 
   it('exports withProps', function () {

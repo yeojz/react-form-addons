@@ -6,7 +6,15 @@
 
 ## About
 
-`react-form-addons` provides a set of methods and components for composing forms in React. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
+`react-form-addons` provides a set of methods and components for composing forms in React. It aims to solves the complexity of building and handling large forms. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
+
+The library abstracts possible data input patterns like lists of data, nested
+form data or even conditional form data into Higher-Order functions, and ultimately builds and exposes a final "formData" and "formMeta" to your chosen state engine.
+
+It is __independent of state libraries__, i.e. if you want to use React Component State, Redux or any other state management engine, you should be able to do so with minimal effort.
+
+For examples, check out the [React Component State](https://github.com/yeojz/react-form-addons/blob/master/src/lib/withState.js) or [Redux State](//github.com/yeojz/react-form-addons/blob/master/src/redux/withReduxState.js) implementations.
+
 
 ## Motivation
 
@@ -14,9 +22,7 @@ During the course of my work which involves building an internal admin panel, th
 
 This project is an exploration of possible ways of splitting responsibility during a form lifecycle to make it more maintainable.
 
-## Links
-
-#### Showcase
+## Documentation
 
  - [Documentation Site][doc-link]
  - [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
@@ -24,16 +30,27 @@ This project is an exploration of possible ways of splitting responsibility duri
 #### Core Methods
 
  - [compose](https://yeojz.github.io/react-form-addons#compose)
+ - [formControl](https://yeojz.github.io/react-form-addons#formControl)
  - [withProps](https://yeojz.github.io/react-form-addons#withProps)
  - [withState](https://yeojz.github.io/react-form-addons#withState)
  - [withSideEffects](https://yeojz.github.io/react-form-addons#withSideEffects)
  - [withValidation](https://yeojz.github.io/react-form-addons#withValidation)
  - [branch](https://yeojz.github.io/react-form-addons#branch) (for nested forms)
- - [collection](https://yeojz.github.io/react-form-addons#collection)
+ - [list](https://yeojz.github.io/react-form-addons#list) (for replicating datasets)
+ - [collection](https://yeojz.github.io/react-form-addons#collection) (conditional forms)
+
+#### Utils
+
+ - [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent)
 
 #### Extensions
 
  - [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
+
+#### Components
+
+ - [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
+ - [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
 
 ## Installation
 
@@ -128,7 +145,7 @@ This library also provides a component for handling state in [redux](https://git
 *Note:* Redux components are not under default library export. As such, you'll have to import from a sub folder. i.e.
 
 ```js
-import {withReduxState, formReducer} from 'react-form-addons/lib/redux';
+import {withReduxState, formReducer} from 'react-form-addons/redux';
 
 // Creating stores
 const reducers = combineReducers({
@@ -163,7 +180,7 @@ The implementation of a `compose` methodology was highly inspired by [react-refo
 [npm-badge]: https://img.shields.io/npm/v/react-form-addons.svg?style=flat-square
 [npm-link]: https://www.npmjs.com/package/react-form-addons
 
-[build-badge]: https://img.shields.io/circleci/project/github/yeojz/react-form-addons.svg?style=flat-square
+[build-badge]: https://img.shields.io/circleci/project/github/yeojz/react-form-addons/master.svg?style=flat-square
 [build-link]: https://circleci.com/gh/yeojz/react-form-addons.svg
 
 [pr-welcome-badge]: https://img.shields.io/badge/PRs-Welcome-ff69b4.svg?style=flat-square

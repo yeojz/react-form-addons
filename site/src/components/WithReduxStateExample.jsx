@@ -7,6 +7,8 @@ import JsonOutput from '../scaffolding/JsonOutput';
 import ReduxForm from './forms/ReduxForm';
 
 const getCode = () => (`
+  import {withReduxState} from 'react-form-addons/redux'
+
   // Ensure reducers added to redux
   const reducers = combineReducers({
     forms: formReducer
