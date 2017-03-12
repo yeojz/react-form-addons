@@ -34,7 +34,9 @@ const FormInputs = (props) => (
 
 export default compose(
   withState({
-    count: 0
+    formData: {
+      count: 0
+    }
   }),
   withSideEffects([
     syncInput1and2,

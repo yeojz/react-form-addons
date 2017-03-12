@@ -6,11 +6,45 @@ import Printer from '../scaffolding/Printer';
 import createExample from '../scaffolding/createExample';
 import ListForm from './forms/ListForm';
 
-const getCode = () => ([
+const getCode = () => (
   `
-  // Example
+  const FormContainer = (props) => (
+    <div className='list-form-container'>
+      <button onClick={props.onAdd}>Add One</button>
+      {props.children}
+    </div>
+  );
+
+  const SubForm = (props) => (
+    <div>
+      <h5>{props.name}</h5>
+      <Input {...props} name='email' />
+      <Input {...props} name='number' />
+      <button onClick={props.onRemove}>Remove</button>
+    </div>
+  );
+
+  const SubList = compose(
+    list(FormContainer),
+    withValidation([
+      runValidateDotJs
+    ]),
+    withProps(),
+  )(SubForm);
+
+  const Form = (props) => (
+    <FormSection>
+      <Input {...props} name='root' />
+      <SubList {...props} name='list1' />
+    </FormSection>
+  );
+
+  export default compose(
+    withState(),
+    withProps()
+  )(Form);
   `
-]);
+);
 
 const ListExample = (props) => (
   <DisplaySection

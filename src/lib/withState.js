@@ -16,7 +16,14 @@ const defaultProps = {
   onChange: noop
 };
 
-const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) => {
+const withState = (defaultConfig = {}) => (Component) => {
+
+  const config = {
+    formData: {},
+    formMeta: {},
+    shouldComponentUpdate: null,
+    ...defaultConfig
+  }
 
   class ComponentWithState extends React.Component {
 
@@ -28,20 +35,24 @@ const withState = (defaultFormData = {}, defaultFormMeta = {}) => (Component) =>
     componentWillMount = () => {
       this.setState({
         formData: {
-          ...defaultFormData,
+          ...config.formData,
           ...this.props.formData
         },
         formMeta: {
-          ...defaultFormMeta,
+          ...config.formMeta,
           ...this.props.formMeta
         }
       });
     }
 
-    shouldComponentUpdate = (nextProps, nextState) => (
-      !isEqual(this.props, nextProps)
-      || !isEqual(this.state, nextState)
-    )
+    shouldComponentUpdate = (nextProps, nextState) => {
+      if (config.shouldComponentUpdate) {
+        return config.shouldComponentUpdate(nextProps, nextState)
+      }
+
+      return !isEqual(this.props, nextProps)
+        || !isEqual(this.state, nextState);
+    }
 
     componentWillReceiveProps = (nextProps) => {
       this.setState({

@@ -39,7 +39,7 @@ const collection = (components = []) => {
     Array.isArray(components),
     `
     Missing or invalid argument 1 for "collection".
-    Expects an argument of type "array". "${typeof components}" given.
+    Expects an argument 1 of type "array". "${typeof components}" given.
     `
   );
 

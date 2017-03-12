@@ -6,7 +6,7 @@ import Printer from '../scaffolding/Printer';
 import createExample from '../scaffolding/createExample';
 import CollectionForm from './forms/CollectionForm';
 
-const getCode = () => ([
+const getCode = () => (
   `
   // Sample Sub Component
   const CheckboxFlagOne = (props) => (
@@ -16,7 +16,7 @@ const getCode = () => ([
       name='flag_checkbox'
     />
   );
-  `, `
+
   // Create Collection
   const Form = collection([
     CheckboxFlagOne,
@@ -26,14 +26,14 @@ const getCode = () => ([
       formData.flag_input === 'open'
     )]
   ]);
-  `, `
+
   // Apply state
   export default compose(
     withState(),
     withProps()
   )(Form);
   `
-]);
+);
 
 const CollectionExample = (props) => (
   <DisplaySection

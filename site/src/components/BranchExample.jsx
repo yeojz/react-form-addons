@@ -6,26 +6,26 @@ import Printer from '../scaffolding/Printer';
 import createExample from '../scaffolding/createExample';
 import BranchForm from './forms/BranchForm';
 
-const getCode = () => ([
+const getCode = () => (
   `
   const SubBranch = compose(
     branch(),
     withProps()
   )(SubForm);
-  `, `
+
   const Form = (props) => (
     <div>
       <Input {...props} name='nobranch' />
       <SubBranch {...props} name='branch1' />
       <SubBranch {...props} name='branch2' />
     </div>
-  )
-  `, `
+  );
+
   export default compose(
     withState()
   )(Form);
   `
-]);
+);
 
 const BranchExample = (props) => (
   <DisplaySection

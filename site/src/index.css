@@ -45,6 +45,17 @@ code.hljs {
   margin-top: 0.3em;
 }
 
+.sentence,
+.sentence:empty:first-child,
+.sentence:empty:last-child {
+  display: inline;
+}
+
+.sentence:empty {
+  display: block;
+  padding-bottom: 1em;
+}
+
 .app-header {
   border-bottom: 1px #ddd dotted;
   padding: 1em 2em;
