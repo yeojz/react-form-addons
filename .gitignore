@@ -33,3 +33,4 @@ coverage
 /lib
 /components
 /redux
+/utils

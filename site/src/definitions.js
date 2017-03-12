@@ -58,6 +58,10 @@ const methods = {
      that may be dependent on the status of other fields`,
     `Note: Toggling of form sections do not modify the form data.
     If you want to clear the data of a hidden section, you can use "withSideEffect" to do so.`
+  ],
+  list: [
+    'Allows a form portion that can be relicated in a list',
+    'Example use case would be a key-value section which can have any amount of a predefined set of data'
   ]
 }
 

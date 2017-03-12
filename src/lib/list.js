@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
-import FormContainer from './utils/FormContainer';
-import listActions from './utils/listActions';
+import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
+import FormContainer from '../utils/FormContainer';
+import listActions from '../utils/listActions';
 
 const propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   formData: PropTypes.object,
   formMeta: PropTypes.object,
   onChange: PropTypes.func
@@ -29,23 +29,22 @@ const handleRemove = (name, props) => (idx) => () => {
   return props.onChange(event);
 }
 
-const list = (defaultName = 'default', Container = FormContainer) => (Component) => {
+const list = (Container = FormContainer) => (Component) => {
 
   const defaultProps = {
-    name: defaultName,
     formData: {},
     formMeta: {}
   };
 
-  class ListForm extends React.component {
+  class ListForm extends React.Component {
 
-    getBranchData = (key) => (
+    getListData = (key) => (
       get(this, ['props', key, this.props.name], [])
     )
 
-    renderSet = (onAddHandler, onChangeHandler, onRemoveHandler) => {
-      const formData = this.getBranchData('formData');
-      const formMeta = this.getBranchData('formMeta');
+    renderList = (onAddHandler, onChangeHandler, onRemoveHandler) => {
+      const formData = this.getListData('formData');
+      const formMeta = this.getListData('formMeta');
 
       return formData.map((entry, idx) => (
         <Component
@@ -66,7 +65,11 @@ const list = (defaultName = 'default', Container = FormContainer) => (Component)
 
       return (
         <Container onAdd={onAddHandler}>
-          {this.renderSet(onAddHandler, onChangeHandler, onRemoveHandler)}
+          {this.renderList(
+            onAddHandler,
+            onChangeHandler,
+            onRemoveHandler
+          )}
         </Container>
       );
     }

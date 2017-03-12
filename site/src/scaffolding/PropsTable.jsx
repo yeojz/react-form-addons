@@ -1,10 +1,21 @@
-import React from 'react';
-import definitions from '../definitions';
+import React, {PropTypes} from 'react';
 
-const renderTableBody = () => (
-  Object.keys(definitions.props)
+const propTypes = {
+  keyedList: PropTypes.object,
+  size: PropTypes.string,
+  title: PropTypes.string
+}
+
+const defaultProps = {
+  entries: {},
+  size: 'is-two-third',
+  title: 'Injected Props'
+}
+
+const renderTableBody = (entries) => (
+  Object.keys(entries)
     .map((prop) => {
-      let desc = definitions.props[prop];
+      let desc = entries[prop];
 
       if (Array.isArray(desc)) {
         desc = desc.map((value, key) => (
@@ -21,9 +32,9 @@ const renderTableBody = () => (
     })
 );
 
-const PropsTable = () => (
-  <div className='is-two-third column'>
-    <h4>Injected Props</h4>
+const PropsTable = (props) => (
+  <div className={`column ${props.size}`}>
+    <h4>{props.title}</h4>
     <div className='table-overflow'>
       <table className='table is-bordered is-narrow is-striped'>
         <thead>
@@ -32,10 +43,12 @@ const PropsTable = () => (
             <th>Description</th>
           </tr>
         </thead>
-        <tbody>{renderTableBody()}</tbody>
+        <tbody>{renderTableBody(props.entries)}</tbody>
       </table>
     </div>
   </div>
 );
 
+PropsTable.propTypes = propTypes;
+PropsTable.defaultProps = defaultProps;
 export default PropsTable;

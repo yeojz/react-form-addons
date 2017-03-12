@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
+import invariant from 'invariant';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
-import getDataFromKey from './utils/getDataFromKey';
+import getDataFromKey from '../utils/getDataFromKey';
 import constants from './constants';
 import withSideEffects from './withSideEffects';
 
@@ -35,6 +36,14 @@ const getValidator = (rules) => (event, props) => {
 };
 
 const withValidation = (rules = []) => (Component) => {
+  invariant(
+    Array.isArray(rules),
+    `
+    Missing or invalid argument 1 for "withValidation".
+    Expects an argument 1 of type "array". "${typeof rules}" given.
+    `
+  );
+
   const validator = getValidator(rules);
   const AppliedComponent = withSideEffects([validator])(Component);
 

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
-import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
+import invariant from 'invariant';
+import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import constants from './constants';
 
 const propTypes = {
@@ -23,6 +24,15 @@ const handleChange = (sideEffects) => (props) => (evt) => {
 };
 
 const withSideEffects = (sideEffects = []) => (Component) => {
+
+  invariant(
+    Array.isArray(sideEffects),
+    `
+    Missing or invalid argument 1 for "withSideEffects".
+    Expects an argument 1 of type "array". "${typeof sideEffects}" given.
+    `
+  );
+
   const onChangeHandler = handleChange(sideEffects);
 
   class FormWithSideEffects extends React.Component {

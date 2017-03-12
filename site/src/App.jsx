@@ -5,6 +5,7 @@ import Navigation from './scaffolding/Navigation';
 import BranchExample from './components/BranchExample';
 import CollectionExample from './components/CollectionExample';
 import ComposeExample from './components/ComposeExample';
+import ListExample from './components/ListExample';
 import SyntheticFormEventExample from './components/SyntheticFormEventExample';
 import WithPropsExample from './components/WithPropsExample';
 import WithReduxStateExample from './components/WithReduxStateExample';
@@ -31,6 +32,7 @@ class App extends React.Component {
               <WithSideEffectsExample />
               <WithValidationExample />
               <BranchExample />
+              <ListExample />
               <CollectionExample />
               <WithReduxStateExample />
               <SyntheticFormEventExample />

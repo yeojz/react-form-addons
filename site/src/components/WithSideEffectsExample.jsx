@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
+import createExample from '../scaffolding/createExample';
 import DisplaySection from '../scaffolding/DisplaySection';
 import Printer from '../scaffolding/Printer';
-import createExample from '../scaffolding/createExample';
+import PropsTable from '../scaffolding/PropsTable';
 import SideEffectsForm from './forms/SideEffectsForm';
 
 const getCode = () => (
@@ -19,11 +20,21 @@ const getCode = () => (
   `
 );
 
+const entries = {
+  onError: 'optional function which will be called when an unexpected exception occurred during validation. Arguments: err, type'
+};
+
 const WithSideEffectsExample = (props) => (
   <DisplaySection
     name='withSideEffects'
     description={definitions.methods.withSideEffects}
   >
+    <div className='columns'>
+      <PropsTable
+        title='Extra props'
+        entries={entries}
+      />
+    </div>
     <div className='columns'>
       <SideEffectsForm onChange={props.onChange} />
       <Printer {...props} />

@@ -2,8 +2,7 @@ import React from 'react';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';
-
-import PropsTable from './PropsTable';
+import PropsTable from '../scaffolding/PropsTable';
 
 const getCode = () => (
   `
@@ -19,7 +18,7 @@ const WithPropsExample = () => (
     description={definitions.methods.withProps}
   >
     <div className='columns'>
-      <PropsTable />
+      <PropsTable entries={definitions.props} />
       <Code data={getCode()} />
     </div>
   </DisplaySection>

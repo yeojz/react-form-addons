@@ -1,12 +1,16 @@
 import update from 'immutability-helper';
+import get from 'lodash/get';
 
 const getTarget = (name, value) => ({
   name,
-  value
+  value: get(value, name, [])
 });
 
 const addDelta = (name) => ({
   [name]: {
+    $apply: (item) => {
+      return item ? item : [];
+    },
     $push: [{}]
   }
 });

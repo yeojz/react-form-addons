@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
 import get from 'lodash/get';
-import createSyntheticFormEvent from './utils/createSyntheticFormEvent';
-import updateObjectData from './utils/updateObjectData';
+import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
+import updateObjectData from '../utils/updateObjectData';
 
 const propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   formData: PropTypes.object,
   formMeta: PropTypes.object,
   onChange: PropTypes.func
@@ -26,14 +26,13 @@ const handleChange = (name, props) => (evt) => {
   let event = createSyntheticFormEvent(evt);
   event.formData = updateData(name, props.formData, event.formData);
   event.formMeta = updateData(name, props.formMeta, event.formMeta);
-  event.target = getTarget(name, event.formData);
+  event.target = getTarget(name, get(event.formData, name));
   return props.onChange(event);
 };
 
-const branch = (defaultName = 'default') => (Component) => {
+const branch = () => (Component) => {
 
   const defaultProps = {
-    name: defaultName,
     formData: {},
     formMeta: {}
   };

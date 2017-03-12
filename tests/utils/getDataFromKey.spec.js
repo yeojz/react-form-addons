@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import getDataFromKey from 'src/lib/utils/getDataFromKey';
+import getDataFromKey from 'src/utils/getDataFromKey';
 
 describe('lib/utils/getDataFromKey', function () {
 

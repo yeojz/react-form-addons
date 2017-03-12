@@ -4,6 +4,7 @@ import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
 const propTypes = {
+  name: PropTypes.string.isRequired,
   defaultValue: PropTypes.any,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
@@ -71,6 +72,7 @@ const formControl = (Element) => {
         <Element
           {...props}
           disabled={this.props.disabled}
+          name={this.props.name}
           onChange={this.handleChange}
           value={this.getValue()}
         />
