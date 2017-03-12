@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import marked from 'marked';
+import textToHtml from '../textToHtml';
 
 const propTypes = {
   children: PropTypes.any,
@@ -8,21 +8,11 @@ const propTypes = {
   text: PropTypes.any
 };
 
-const processText = (text) => {
-  const sentences = text.split('\n');
-
-  return sentences.map((sentence, key) => (
-    <div className='sentence' key={key} dangerouslySetInnerHTML={{
-      __html: marked(sentence.replace(' ', '') + ' ')
-    }} />
-  ));
-}
-
 const Description = (props) => (
   <section className={`description-section ${props.className || ''}`}>
     {props.title ? <h3>{props.title}</h3> : null}
     <div className='description-section__content'>
-      {processText(props.text)}
+      {textToHtml(props.text)}
       {props.children}
     </div>
   </section>
