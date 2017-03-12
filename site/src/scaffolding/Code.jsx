@@ -13,7 +13,7 @@ const defaultProps = {
 };
 
 const renderCode = (str) => ({
-  __html: marked('```\n' + str.replace(' ', '') + '\n```')
+  __html: marked('```js\n' + str + '\n```')
 });
 
 const Code = (props) => (

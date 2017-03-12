@@ -7,8 +7,7 @@ import Printer from '../scaffolding/Printer';
 import PropsTable from '../scaffolding/PropsTable';
 import SideEffectsForm from './forms/SideEffectsForm';
 
-const getCode = () => (
-  `
+const getCode = () => (`
   export default compose(
     withState(),
     withSideEffects([
@@ -17,11 +16,13 @@ const getCode = () => (
     ]),
     withProps()
   )(Form);
-  `
-);
+`);
 
 const entries = {
-  onError: 'optional function which will be called when an unexpected exception occurred during validation. Arguments: err, type'
+  onError: `
+    optional function which will be called when an unexpected exception occurred when applying side effects.
+    Arguments: \`err, type\`
+  `
 };
 
 const WithSideEffectsExample = (props) => (

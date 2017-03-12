@@ -6,17 +6,24 @@ const getTarget = (name, value) => ({
   value: get(value, name, [])
 });
 
-const addDelta = (name) => ({
+const getAddAction = (position) => {
+  if (position === 'before') {
+    return '$unshift';
+  }
+  return '$push';
+}
+
+const addDelta = (name, action) => ({
   [name]: {
     $apply: (item) => {
       return item ? item : [];
     },
-    $push: [{}]
+    [action]: [{}]
   }
 });
 
-const add = (name, props, event) => {
-  const delta = addDelta(name);
+const add = (position, name, props, event) => {
+  const delta = addDelta(name, getAddAction(position));
   event.formData = update(props.formData, delta);
   event.formMeta = update(props.formMeta, delta);
   event.target = getTarget(name, event.formData);

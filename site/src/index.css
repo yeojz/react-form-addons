@@ -160,6 +160,7 @@ code.hljs {
 
 .form-section .button {
   float: right;
+  margin-left: 1em;
 }
 
 @media (min-width: 769px) {

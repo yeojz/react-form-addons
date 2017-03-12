@@ -17,9 +17,9 @@ const handleChange = (name, props) => (idx) => (evt) => {
   return props.onChange(event);
 };
 
-const handleAdd = (name, props) => () => {
+const handleAdd = (name, props) => (position = 'after') => () => {
   let event = createSyntheticFormEvent();
-  event = listActions.add(name, props, event);
+  event = listActions.add(position, name, props, event);
   return props.onChange(event);
 }
 
@@ -64,7 +64,10 @@ const list = (Container = FormContainer) => (Component) => {
       const onRemoveHandler = handleRemove(this.props.name, this.props);
 
       return (
-        <Container onAdd={onAddHandler}>
+        <Container
+          onAdd={onAddHandler}
+          onRemove={onRemoveHandler}
+        >
           {this.renderList(
             onAddHandler,
             onChangeHandler,

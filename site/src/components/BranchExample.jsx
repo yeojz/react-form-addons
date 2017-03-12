@@ -6,8 +6,7 @@ import Printer from '../scaffolding/Printer';
 import createExample from '../scaffolding/createExample';
 import BranchForm from './forms/BranchForm';
 
-const getCode = () => (
-  `
+const getCode = () => (`
   const SubBranch = compose(
     branch(),
     withProps()
@@ -24,8 +23,7 @@ const getCode = () => (
   export default compose(
     withState()
   )(Form);
-  `
-);
+`);
 
 const BranchExample = (props) => (
   <DisplaySection

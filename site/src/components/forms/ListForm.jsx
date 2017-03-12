@@ -25,7 +25,17 @@ const runValidateDotJs = (error, formData) => {
 
 const FormContainer = (props) => (
   <div className='list-form-container'>
-    <button className='button is-info' onClick={props.onAdd}>Add One</button>
+    <button
+      className='button is-info'
+      onClick={props.onAdd('after')}>
+      + 1 after
+    </button>
+    <button
+      className='button is-info'
+      onClick={props.onAdd('before')}>
+      + 1 before
+    </button>
+
     <div className='list-form-entries'>
       {props.children}
     </div>

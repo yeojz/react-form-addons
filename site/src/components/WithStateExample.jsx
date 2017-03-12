@@ -6,14 +6,12 @@ import Printer from '../scaffolding/Printer';
 import StateForm from './forms/StateForm';
 import createExample from '../scaffolding/createExample';
 
-const getCode = () => (
-  `
+const getCode = () => (`
   export default compose(
     withState(),
     withProps()
   )(Form);
-  `
-);
+`);
 
 const WithStateExample = (props) => (
   <DisplaySection

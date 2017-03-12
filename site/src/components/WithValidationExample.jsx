@@ -7,8 +7,7 @@ import Printer from '../scaffolding/Printer';
 import PropsTable from '../scaffolding/PropsTable';
 import ValidationForm from './forms/ValidationForm';
 
-const getCode = () => (
-  `
+const getCode = () => (`
   export default compose(
     withState(),
     withValidation([
@@ -16,11 +15,13 @@ const getCode = () => (
     ]),
     withProps()
   )(Form);
-  `
-);
+`);
 
 const entries = {
-  onError: 'optional function which will be called when an unexpected exception occurred during validation. Arguments: err, type'
+  onError: `
+    optional function which will be called when an unexpected exception occurred during validation.
+    Arguments: \`err, type\`
+  `
 };
 
 const WithValidationExample = (props) => (

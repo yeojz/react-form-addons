@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react';
+import marked from 'marked';
+import get from 'lodash/get';
 
 const propTypes = {
-  keyedList: PropTypes.object,
+  entries: PropTypes.object,
   size: PropTypes.string,
   title: PropTypes.string
 }
@@ -12,16 +14,23 @@ const defaultProps = {
   title: 'Injected Props'
 }
 
+const renderDesc = (entries) => (
+  entries.split('\n')
+    .map((entry, idx) => (
+      <div
+        key={idx}
+        className='sentence'
+        dangerouslySetInnerHTML={{
+          __html: marked(entry.replace(' ', ''))
+        }}
+      />
+    ))
+);
+
 const renderTableBody = (entries) => (
   Object.keys(entries)
     .map((prop) => {
-      let desc = entries[prop];
-
-      if (Array.isArray(desc)) {
-        desc = desc.map((value, key) => (
-          <p key={key}>{value}</p>
-        ));
-      }
+      const desc = renderDesc(get(entries, prop, ''))
 
       return (
         <tr key={prop}>

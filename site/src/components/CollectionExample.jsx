@@ -6,8 +6,7 @@ import Printer from '../scaffolding/Printer';
 import createExample from '../scaffolding/createExample';
 import CollectionForm from './forms/CollectionForm';
 
-const getCode = () => (
-  `
+const getCode = () => (`
   // Sample Sub Component
   const CheckboxFlagOne = (props) => (
     <input
@@ -32,8 +31,7 @@ const getCode = () => (
     withState(),
     withProps()
   )(Form);
-  `
-);
+`);
 
 const CollectionExample = (props) => (
   <DisplaySection

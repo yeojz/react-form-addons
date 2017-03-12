@@ -1,5 +1,5 @@
 import 'bulma/css/bulma.css';
-import 'highlight.js/styles/github-gist.css';
+import 'highlight.js/styles/atom-one-dark.css';
 import './index.css';
 
 import React from 'react';
