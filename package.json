@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir .",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf lib coverage .nyc_output",
+    "clean": "rimraf lib components redux utils coverage .nyc_output",
     "deploy-gh-pages": "cd site && yarn install && yarn run deploy",
     "coverage": "cross-env NODE_ENV=test nyc report --reporter=lcov",
     "coveralls": "cross-env NODE_ENV=test nyc report --reporter=text-lcov | coveralls",
