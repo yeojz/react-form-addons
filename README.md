@@ -2,7 +2,7 @@
 
 [![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]
-[![PRs Welcome][pr-welcome-badge]][pr-welcome-badge]
+[![PRs Welcome][pr-welcome-badge]][pr-welcome-link]
 
 ## About
 
@@ -24,33 +24,33 @@ This project is an exploration of possible ways of splitting responsibility duri
 
 ## Documentation
 
- - [Documentation Site][doc-link]
- - [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
+-   [Documentation Site][doc-link]
+-   [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
 
 #### Core Methods
 
- - [compose](https://yeojz.github.io/react-form-addons#compose)
- - [formControl](https://yeojz.github.io/react-form-addons#formControl)
- - [withProps](https://yeojz.github.io/react-form-addons#withProps)
- - [withState](https://yeojz.github.io/react-form-addons#withState)
- - [withSideEffects](https://yeojz.github.io/react-form-addons#withSideEffects)
- - [withValidation](https://yeojz.github.io/react-form-addons#withValidation)
- - [branch](https://yeojz.github.io/react-form-addons#branch) (for nested forms)
- - [list](https://yeojz.github.io/react-form-addons#list) (for replicating datasets)
- - [collection](https://yeojz.github.io/react-form-addons#collection) (conditional forms)
+-   [compose](https://yeojz.github.io/react-form-addons#compose)
+-   [formControl](https://yeojz.github.io/react-form-addons#formControl)
+-   [withProps](https://yeojz.github.io/react-form-addons#withProps)
+-   [withState](https://yeojz.github.io/react-form-addons#withState)
+-   [withSideEffects](https://yeojz.github.io/react-form-addons#withSideEffects)
+-   [withValidation](https://yeojz.github.io/react-form-addons#withValidation)
+-   [branch](https://yeojz.github.io/react-form-addons#branch) (for nested forms)
+-   [list](https://yeojz.github.io/react-form-addons#list) (for replicating datasets)
+-   [collection](https://yeojz.github.io/react-form-addons#collection) (conditional forms)
 
 #### Utils
 
- - [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent)
+-   [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent)
 
 #### Extensions
 
- - [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
+-   [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
 
 #### Components
 
- - [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
- - [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
+-   [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
+-   [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
 
 ## Installation
 
@@ -93,17 +93,17 @@ For more examples, check out the [documentation site][doc-link]
 
 This library has been totally reworked for v2. As such there are some breaking changes in the way the higher-order components (hoc) work. The biggest change is that Component properties are now decoupled to a `withProps` hoc and `withState` only handles keeping of state and not any of the state manipulations.
 
-**The following are temporarily deprecated.**
+__The following are temporarily deprecated.__
 
 It may make a comeback in a future release.
 
- - createField
- - createForm
+-   createField
+-   createForm
 
-**Method renames:**
+__Method renames:__
 
- -  what used to be `collection()` is now `branch()`
- -  what used to be `connect()` is now `collection()`
+-   what used to be `collection()` is now `branch()`
+-   what used to be `connect()` is now `collection()`
 
 Checkout the [v2.0.0 release notes](https://github.com/yeojz/react-form-addons/releases/tag/v2.0.0)
 
