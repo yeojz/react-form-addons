@@ -7,13 +7,13 @@ import TestDiv from 'tests/mocks/TestDiv';
 describe('lib/branch', function () {
   it('should return a react component', function () {
     const Component = branch()(TestDiv);
-    const elem = shallow(<Component />);
+    const elem = shallow(<Component name='test' />);
     expect(elem.html()).to.equal('<div>test</div>');
   });
 
   it('decorated component should be called with expected props', function () {
     const Component = branch()(TestDiv);
-    const elem = shallow(<Component />);
+    const elem = shallow(<Component name='test'/>);
     const props = elem.props();
 
     expect(props.formData).to.be.an.object;
