@@ -1,6 +1,6 @@
 {
   "name": "react-form-addons",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Pluggable higher-order components / decorators for composing forms in React",
   "main": "lib/index.js",
   "scripts": {
