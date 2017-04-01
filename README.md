@@ -6,7 +6,7 @@
 
 ## About
 
-`react-form-addons` provides a set of methods and components for composing forms in React. It aims to solves the complexity of building and handling large forms. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
+`react-form-addons` provides a set of methods and components for composing simple and nested forms in React. It aims to solves the complexity of building and handling large forms. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
 
 The library abstracts possible data input patterns like lists of data, nested
 form data or even conditional form data into Higher-Order functions, and ultimately builds and exposes a final "formData" and "formMeta" to your chosen state engine.
