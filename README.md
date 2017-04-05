@@ -184,4 +184,4 @@ The implementation of a `compose` methodology was highly inspired by [react-refo
 [build-link]: https://circleci.com/gh/yeojz/react-form-addons.svg
 
 [pr-welcome-badge]: https://img.shields.io/badge/PRs-Welcome-ff69b4.svg?style=flat-square
-[pr-welcome-link]: https://github.com/yeojz/redux-intl-connect/blob/master/CONTRIBUTING.md
+[pr-welcome-link]: https://github.com/yeojz/react-form-addons/blob/master/CONTRIBUTING.md
