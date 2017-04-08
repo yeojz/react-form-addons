@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react'; 
+import PropTypes from 'prop-types';
 import update from 'immutability-helper';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';

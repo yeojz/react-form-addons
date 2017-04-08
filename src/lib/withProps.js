@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react'; 
+import PropTypes from 'prop-types';
 import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import getDataFromKey from '../utils/getDataFromKey';
 import updateObjectData from '../utils/updateObjectData';
