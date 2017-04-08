@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import definitions from '../definitions';
 import Code from '../scaffolding/Code';
 import DisplaySection from '../scaffolding/DisplaySection';

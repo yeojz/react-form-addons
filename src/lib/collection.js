@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react'; 
+import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
