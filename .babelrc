@@ -10,8 +10,5 @@
     "dev-expression"
   ],
   "env": {
-    "test": {
-      "plugins": ["rewire"]
-    }
   }
 }
