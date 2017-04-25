@@ -1,16 +1,15 @@
-import {stub} from 'sinon';
 import compose from 'src/lib/compose';
 
 describe('lib/compose', function () {
   it('compose is called in reverse order', function () {
-    const fn1 = stub().returns('r1');
-    const fn2 = stub().returns('r2');
+    const fn1 = jest.fn(() => 'r1');
+    const fn2 = jest.fn(() => 'r2');
     const result = compose(fn2, fn1)('start');
 
-    expect(fn1.calledOnce).toBe(true);
-    expect(fn1.calledWith('start')).toBe(true);
-    expect(fn2.calledOnce).toBe(true);
-    expect(fn2.calledWith('r1')).toBe(true);
+    expect(fn1).toHaveBeenCalledTimes(1);
+    expect(fn1).toHaveBeenCalledWith('start');
+    expect(fn2).toHaveBeenCalledTimes(1);
+    expect(fn2).toHaveBeenCalledWith('r1');
     expect(result).toBe('r2');
   });
 });

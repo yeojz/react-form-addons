@@ -1,5 +1,4 @@
 import React from 'react';
-import {spy} from 'sinon';
 import {shallow} from 'enzyme';
 import withProps from 'src/lib/withProps';
 import TestDiv from 'tests/mocks/TestDiv';
@@ -26,13 +25,12 @@ describe('lib/withProps', function () {
 
   it('should call onChange event with a SyntheticFormEvent', function () {
     const Component = withProps()(TestDiv);
-    const onChange = spy();
+    const onChange = jest.fn();
     const elem = shallow(<Component onChange={onChange}/>);
     const props = elem.props();
 
     props.onChange({});
-
-    expect(onChange.called).toBe(true);
-    expect(onChange.args[0][0].isSyntheticFormEvent).toBe(true);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0].isSyntheticFormEvent).toBe(true);
   });
 });
