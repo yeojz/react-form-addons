@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import constants from 'src/redux/constants';
 import formActions from 'src/redux/formActions';
 
@@ -9,18 +8,18 @@ describe('redux/formActions', function () {
       formMeta: 'fm'
     });
 
-    expect(result.type).to.equal(constants.UPDATE);
-    expect(result.payload).to.be.an.object;
-    expect(result.payload.name).to.equal('test');
-    expect(result.payload.formData).to.equal('fd');
-    expect(result.payload.formMeta).to.equal('fm');
+    expect(result.type).toBe(constants.UPDATE);
+    expect(typeof result.payload).toBe('object');
+    expect(result.payload.name).toBe('test');
+    expect(result.payload.formData).toBe('fd');
+    expect(result.payload.formMeta).toBe('fm');
   });
 
   it('reset should return expected action', function () {
     const result = formActions.reset('test');
 
-    expect(result.type).to.equal(constants.RESET);
-    expect(result.payload).to.be.an.object;
-    expect(result.payload.name).to.equal('test');
+    expect(result.type).toBe(constants.RESET);
+    expect(typeof result.payload).toBe('object');
+    expect(result.payload.name).toBe('test');
   });
 });

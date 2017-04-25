@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import {stub} from 'sinon';
 import compose from 'src/lib/compose';
 
@@ -8,10 +7,10 @@ describe('lib/compose', function () {
     const fn2 = stub().returns('r2');
     const result = compose(fn2, fn1)('start');
 
-    expect(fn1.calledOnce).to.be.true;
-    expect(fn1.calledWith('start')).to.be.true;
-    expect(fn2.calledOnce).to.be.true;
-    expect(fn2.calledWith('r1')).to.be.true;
-    expect(result).to.equal('r2');
+    expect(fn1.calledOnce).toBe(true);
+    expect(fn1.calledWith('start')).toBe(true);
+    expect(fn2.calledOnce).toBe(true);
+    expect(fn2.calledWith('r1')).toBe(true);
+    expect(result).toBe('r2');
   });
 });

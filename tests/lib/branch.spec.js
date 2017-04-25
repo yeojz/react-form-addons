@@ -1,5 +1,4 @@
 import React from 'react';
-import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import branch from 'src/lib/branch';
 import TestDiv from 'tests/mocks/TestDiv';
@@ -8,7 +7,7 @@ describe('lib/branch', function () {
   it('should return a react component', function () {
     const Component = branch()(TestDiv);
     const elem = shallow(<Component name='test' />);
-    expect(elem.html()).to.equal('<div>test</div>');
+    expect(elem.html()).toBe('<div>test</div>');
   });
 
   it('decorated component should be called with expected props', function () {
@@ -16,10 +15,8 @@ describe('lib/branch', function () {
     const elem = shallow(<Component name='test'/>);
     const props = elem.props();
 
-    expect(props.formData).to.be.an.object;
-    expect(props.formMeta).to.be.an.object;
-    expect(props.getFormData).to.be.a.function;
-    expect(props.getFormMeta).to.be.a.function;
-    expect(props.onChange).to.be.a.function;
+    expect(typeof props.formData).toBe('object');
+    expect(typeof props.formMeta).toBe('object');
+    expect(typeof props.onChange).toBe('function');
   });
 });

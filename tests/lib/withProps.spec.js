@@ -1,5 +1,4 @@
 import React from 'react';
-import {expect} from 'chai';
 import {spy} from 'sinon';
 import {shallow} from 'enzyme';
 import withProps from 'src/lib/withProps';
@@ -9,7 +8,7 @@ describe('lib/withProps', function () {
   it('should return a react component', function () {
     const Component = withProps()(TestDiv);
     const elem = shallow(<Component />);
-    expect(elem.html()).to.equal('<div>test</div>');
+    expect(elem.html()).toBe('<div>test</div>');
   });
 
   it('decorated component should be called with expected props', function () {
@@ -17,12 +16,12 @@ describe('lib/withProps', function () {
     const elem = shallow(<Component />);
     const props = elem.props();
 
-    expect(props.formData).to.be.an.object;
-    expect(props.formMeta).to.be.an.object;
-    expect(props.getFormData).to.be.a.function;
-    expect(props.getFormMeta).to.be.a.function;
-    expect(props.onChange).to.be.a.function;
-    expect(props.onToggle).to.be.a.function;
+    expect(typeof props.formData).toBe('object');
+    expect(typeof props.formMeta).toBe('object');
+    expect(typeof props.getFormData).toBe('function');
+    expect(typeof props.getFormMeta).toBe('function');
+    expect(typeof props.onChange).toBe('function');
+    expect(typeof props.onToggle).toBe('function');
   });
 
   it('should call onChange event with a SyntheticFormEvent', function () {
@@ -33,7 +32,7 @@ describe('lib/withProps', function () {
 
     props.onChange({});
 
-    expect(onChange.called).to.be.true;
-    expect(onChange.args[0][0].isSyntheticFormEvent).to.be.true;
+    expect(onChange.called).toBe(true);
+    expect(onChange.args[0][0].isSyntheticFormEvent).toBe(true);
   });
 });
