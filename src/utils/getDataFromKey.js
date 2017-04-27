@@ -1,7 +1,8 @@
+// @flow
 import get from 'lodash/get';
 
-function getDataFromKey(dataset) {
-  return (key, defaultValue = '') => (
+function getDataFromKey(dataset: Object) {
+  return (key: string, defaultValue: string = '') => (
     get(dataset, key, defaultValue)
   );
 }

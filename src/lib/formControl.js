@@ -1,39 +1,48 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import invariant from 'invariant';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  defaultValue: PropTypes.any,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-  onToggle: PropTypes.func,
-  value: PropTypes.any
+type Props = {
+  name: string,
+  defaultValue: any,
+  disabled: boolean,
+  onChange: Function,
+  onToggle: Function,
+  value: any
 }
 
-const defaultProps = {
-  defaultValue: ''
+type State = {
+  value: any
 }
 
-const propKeys = Object.keys(propTypes);
+const propKeys = [
+  'name',
+  'defaultValue',
+  'disabled',
+  'onChange',
+  'onToggle',
+  'value'
+];
 
-const formControl = (Element) => {
+const formControl = (Element: Function | string) => {
 
   invariant(
     typeof Element === 'function' || typeof Element === 'string',
     `
     Missing or invalid argument 1 for "formControl".
     Expects one of string:["input", "textarea"] or React Element.
-    "${Element}" given
+    "${Element.toString()}" given
     `
   );
 
   class Control extends React.Component {
+    props: Props;
 
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
+    static defaultProps = {
+      defaultValue: ''
+    }
 
     state = {
       value: void 0
@@ -43,12 +52,12 @@ const formControl = (Element) => {
       this.setState({value: this.props.value});
     }
 
-    shouldComponentUpdate = (nextProps, nextState) => (
+    shouldComponentUpdate = (nextProps: Props, nextState: State) => (
       !isEqual(this.props, nextProps)
       || !isEqual(this.state, nextState)
     )
 
-    componentWillReceiveProps = (nextProps) => {
+    componentWillReceiveProps = (nextProps: Props) => {
       if (nextProps.value !== this.state.value) {
         this.setState({value: nextProps.value});
       }
@@ -61,7 +70,7 @@ const formControl = (Element) => {
       return this.state.value;
     }
 
-    handleChange = (evt) => {
+    handleChange = (evt: Event & {target: EventTarget}) => {
       if (!this.props.disabled) {
         const handler = this.props.onChange || this.props.onToggle;
         this.setState({value: evt.target.value});

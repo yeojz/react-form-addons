@@ -15,10 +15,12 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "flowtype"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:flowtype/recommended",
+    "plugin:react/recommended",
+    "eslint:recommended"
   ]
 }

@@ -5,7 +5,6 @@ import DisplaySection from '../scaffolding/DisplaySection';
 
 const getAPI = () => (`
   // getters
-  event.isSyntheticFormEvent // bool
   event.formData // obj {}
   event.formMeta // obj {}
   event.preventDefault() // func

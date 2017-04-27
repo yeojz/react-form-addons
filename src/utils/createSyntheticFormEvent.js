@@ -1,10 +1,11 @@
+// @flow
 import SyntheticFormEvent from './SyntheticFormEvent';
 
-function createSyntheticFormEvent(evt, ...args) {
+function createSyntheticFormEvent(evt: Event | SyntheticFormEvent, ...args: Array<*>): SyntheticFormEvent {
   if (!evt) {
-    return new SyntheticFormEvent();
+    return new SyntheticFormEvent({});
   }
-  if (evt.isSyntheticFormEvent) {
+  if (evt instanceof SyntheticFormEvent) {
     return evt;
   }
   return new SyntheticFormEvent(evt, ...args);

@@ -1,29 +1,31 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import get from 'lodash/get';
 import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import updateObjectData from '../utils/updateObjectData';
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  formData: PropTypes.object,
-  formMeta: PropTypes.object,
-  onChange: PropTypes.func
+type Props = {
+  name: string,
+  formData: Object,
+  formMeta: Object,
+  onChange: Function
 };
 
-const getTarget = (name, value) => ({
+const getTarget = (name: string, value: any) => ({
   name,
   value
 });
 
-const updateData = (name, data, value) => (
+const updateData = (name: string, data: Object, value: any) => (
   updateObjectData(
     data,
-    {target: getTarget(name, value)}
+    {
+      target: getTarget(name, value)
+    }
   )
 );
 
-const handleChange = (name, props) => (evt) => {
+const handleChange = (name: string, props: Props) => (evt: Event) => {
   let event = createSyntheticFormEvent(evt);
   event.formData = updateData(name, props.formData, event.formData);
   event.formMeta = updateData(name, props.formMeta, event.formMeta);
@@ -31,18 +33,17 @@ const handleChange = (name, props) => (evt) => {
   return props.onChange(event);
 };
 
-const branch = () => (Component) => {
-
-  const defaultProps = {
-    formData: {},
-    formMeta: {}
-  };
+const branch = () => (Component: WrappedComponent): WrappedComponent => {
 
   class BranchedForm extends React.Component {
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
+    props: Props
 
-    getBranchData = (key) => (
+    static defaultProps = {
+      formData: {},
+      formMeta: {}
+    };
+
+    getBranchData = (key: string) => (
       get(this, ['props', key, this.props.name], {})
     )
 
