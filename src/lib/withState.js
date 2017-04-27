@@ -28,6 +28,9 @@ const withState = (defaultConfig = {}) => (Component) => {
 
   class ComponentWithState extends React.Component {
 
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
+
     state = {
       formData: {},
       formMeta: {}
@@ -91,8 +94,6 @@ const withState = (defaultConfig = {}) => (Component) => {
     }
   }
 
-  ComponentWithState.propTypes = propTypes;
-  ComponentWithState.defaultProps = defaultProps;
   return ComponentWithState;
 };
 

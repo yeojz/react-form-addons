@@ -32,6 +32,9 @@ const formControl = (Element) => {
 
   class Control extends React.Component {
 
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
+
     state = {
       value: void 0
     }
@@ -81,8 +84,6 @@ const formControl = (Element) => {
     }
   }
 
-  Control.propTypes = propTypes;
-  Control.defaultProps = defaultProps;
   return Control;
 }
 

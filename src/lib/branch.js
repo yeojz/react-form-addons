@@ -39,6 +39,8 @@ const branch = () => (Component) => {
   };
 
   class BranchedForm extends React.Component {
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
 
     getBranchData = (key) => (
       get(this, ['props', key, this.props.name], {})
@@ -59,8 +61,6 @@ const branch = () => (Component) => {
     }
   }
 
-  BranchedForm.propTypes = propTypes;
-  BranchedForm.defaultProps = defaultProps;
   return BranchedForm;
 };
 

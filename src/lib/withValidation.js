@@ -49,6 +49,9 @@ const withValidation = (rules = []) => (Component) => {
   const AppliedComponent = withSideEffects([validator])(Component);
 
   class ComponentWithValidation extends React.Component {
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
+
     render() {
       const errors = get(this.props, 'formMeta.errors');
 
@@ -60,8 +63,7 @@ const withValidation = (rules = []) => (Component) => {
       );
     }
   }
-  ComponentWithValidation.propTypes = propTypes;
-  ComponentWithValidation.defaultProps = defaultProps;
+
   return ComponentWithValidation;
 };
 

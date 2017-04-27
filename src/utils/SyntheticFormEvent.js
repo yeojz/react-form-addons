@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import noop from 'lodash/noop';
 
 class SyntheticFormEvent {
-  constructor(evt, data = {}, meta = {}) {
+  constructor(evt = {}, data = {}, meta = {}) {
     this._event = this.extractEvent(evt);
     this._formMeta = meta;
     this._formData = data;

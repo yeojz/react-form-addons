@@ -45,6 +45,9 @@ const collection = (components = []) => {
   );
 
   class FormCollection extends React.Component {
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
+
     render() {
       const {className, ...props} = this.props;
       const classes = `rfa-collection ${className}`;
@@ -54,8 +57,6 @@ const collection = (components = []) => {
     }
   }
 
-  FormCollection.propTypes = propTypes;
-  FormCollection.defaultProps = defaultProps;
   return FormCollection;
 }
 

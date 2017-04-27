@@ -15,16 +15,16 @@ const defaultProps = {
   formMeta: {}
 };
 
-const handleToggle = ({formData, formMeta, onChange}) => (evt) => {
-  let event = createSyntheticFormEvent(evt, formData, formMeta);
-  event.formData = updateObjectData(formData, evt, true);
-  return onChange(event);
+const handleToggle = (props) => (evt) => {
+  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+  event.formData = updateObjectData(props.formData, evt, true);
+  return props.onChange(event);
 };
 
-const handleChange = ({formData, formMeta, onChange}) => (evt) => {
-  let event = createSyntheticFormEvent(evt, formData, formMeta);
-  event.formData = updateObjectData(formData, evt);
-  return onChange(event);
+const handleChange = (props) => (evt) => {
+  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+  event.formData = updateObjectData(props.formData, evt);
+  return props.onChange(event);
 };
 
 const withProps = () => (Component) => {

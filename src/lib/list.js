@@ -39,6 +39,9 @@ const list = (Container = FormContainer) => (Component) => {
 
   class ListForm extends React.Component {
 
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
+
     getListData = (key) => (
       get(this, ['props', key, this.props.name], [])
     )
@@ -79,8 +82,6 @@ const list = (Container = FormContainer) => (Component) => {
     }
   }
 
-  ListForm.propTypes = propTypes;
-  ListForm.defaultProps = defaultProps;
   return ListForm;
 }
 

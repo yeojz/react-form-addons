@@ -19,6 +19,8 @@ const defaultProps = {
 const withReduxState = (reducerKey = 'forms') => (Component) => {
 
   class ComponentWithReduxState extends React.Component {
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
 
     handleChange = (syntheticFormEvent) => {
       this.props.onChange(this.props.name, syntheticFormEvent);
@@ -43,9 +45,6 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
       );
     }
   }
-
-  ComponentWithReduxState.propTypes = propTypes;
-  ComponentWithReduxState.defaultProps = defaultProps;
 
   const mapStateToProps = (state) => ({
     getReduxData: (name) => ({

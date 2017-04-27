@@ -37,6 +37,8 @@ const withSideEffects = (sideEffects = []) => (Component) => {
   const onChangeHandler = handleChange(sideEffects);
 
   class FormWithSideEffects extends React.Component {
+    static propTypes = propTypes;
+
     render() {
       return (
         <Component
@@ -47,7 +49,6 @@ const withSideEffects = (sideEffects = []) => (Component) => {
     }
   }
 
-  FormWithSideEffects.propTypes = propTypes;
   return FormWithSideEffects;
 };
 
