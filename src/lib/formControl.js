@@ -33,44 +33,43 @@ const formControl = (Element: Function | string) => {
     `
     Missing or invalid argument 1 for "formControl".
     Expects one of string:["input", "textarea"] or React Element.
-    "${Element.toString()}" given
     `
   );
 
   class Control extends React.Component {
-    props: Props;
+    props: Props
 
     static defaultProps = {
       defaultValue: ''
     }
 
-    state = {
+    state: State = {
       value: void 0
     }
 
-    componentWillMount = () => {
+    componentWillMount = (): void => {
       this.setState({value: this.props.value});
     }
 
-    shouldComponentUpdate = (nextProps: Props, nextState: State) => (
+    shouldComponentUpdate = (nextProps: Props, nextState: State): boolean => (
       !isEqual(this.props, nextProps)
       || !isEqual(this.state, nextState)
     )
 
-    componentWillReceiveProps = (nextProps: Props) => {
+    componentWillReceiveProps = (nextProps: Props): void => {
       if (nextProps.value !== this.state.value) {
         this.setState({value: nextProps.value});
       }
     }
 
-    getValue = () => {
+    getValue = (): any => {
       if (typeof this.state.value === 'undefined') {
         return this.props.defaultValue;
       }
       return this.state.value;
     }
 
-    handleChange = (evt: Event & {target: EventTarget}) => {
+    handleChange = (evt: DefaultEvent) => {
       if (!this.props.disabled) {
         const handler = this.props.onChange || this.props.onToggle;
         this.setState({value: evt.target.value});

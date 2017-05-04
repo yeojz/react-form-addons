@@ -1,5 +1,5 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import invariant from 'invariant';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
@@ -7,23 +7,21 @@ import getDataFromKey from '../utils/getDataFromKey';
 import constants from './constants';
 import withSideEffects from './withSideEffects';
 
-const propTypes = {
-  formMeta: PropTypes.object,
-  onError: PropTypes.func
+type Props = {
+  formMeta: Object,
+  onError: Function
 };
 
-const defaultProps = {
-  onError: noop
-};
+type Rules = Array<Function>;
 
-const applyValidations = (rules, formData) => (
+const applyValidations = (rules: Rules, formData: Object) => (
   rules.reduce(
     (p, fn) => p.then((err) => fn(err, formData)),
     Promise.resolve(void 0)
   )
 );
 
-const getValidator = (rules) => (event, props) => {
+const getValidator = (rules: Rules) => (event: SyntheticFormEvent, props: Props) => {
   const formData = event.formData;
   let formMeta = event.formMeta;
 
@@ -36,7 +34,7 @@ const getValidator = (rules) => (event, props) => {
     .catch((err) => props.onError(err, constants.VALIDATION_ERROR));
 };
 
-const withValidation = (rules = []) => (Component) => {
+const withValidation = (rules: Rules = []) => (Component: RComponent): RComponent => {
   invariant(
     Array.isArray(rules),
     `
@@ -49,8 +47,11 @@ const withValidation = (rules = []) => (Component) => {
   const AppliedComponent = withSideEffects([validator])(Component);
 
   class ComponentWithValidation extends React.Component {
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
+    props: Props
+
+    static defaultProps = {
+      onError: noop
+    };
 
     render() {
       const errors = get(this.props, 'formMeta.errors');

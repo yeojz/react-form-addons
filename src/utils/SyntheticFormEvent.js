@@ -7,13 +7,13 @@ class SyntheticFormEvent {
   _formMeta: Object
   _formData: Object
 
-  constructor(evt: ?Event | Object, data: ?Object, meta: ?Object) {
+  constructor(evt: DefaultEvent | Object, data: ?Object, meta: ?Object) {
     this._event = this.extractEvent(evt || {});
     this._formMeta = meta || {};
     this._formData = data || {};
   }
 
-  extractEvent(evt: Event | Object): FormEvent {
+  extractEvent(evt: DefaultEvent | Object): FormEvent {
     return {
       target: {
         name: get(evt, 'target.name'),

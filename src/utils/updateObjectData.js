@@ -1,7 +1,8 @@
+// @flow
 import get from 'lodash/get';
 import update from 'immutability-helper';
 
-function getDelta(name, value) {
+function getDelta(name: string, value: any): Object {
   return {
     $merge: {
       [name]: value
@@ -9,12 +10,12 @@ function getDelta(name, value) {
   }
 }
 
-function getBooleanDelta(data, name) {
+function getBooleanDelta(data: Object, name: string) {
   const current = get(data, name, false);
   return getDelta(name, !current);
 }
 
-function updateObjectData(data, evt, bool = false) {
+function updateObjectData(data: Object, evt: DefaultEvent | SyntheticFormEvent, bool: boolean = false) {
   const name = get(evt, 'target.name');
   const value = get(evt, 'target.value');
 

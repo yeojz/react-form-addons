@@ -25,7 +25,7 @@ const updateData = (name: string, data: Object, value: any) => (
   )
 );
 
-const handleChange = (name: string, props: Props) => (evt: Event) => {
+const handleChange = (name: string, props: Props) => (evt: DefaultEvent) => {
   let event = createSyntheticFormEvent(evt);
   event.formData = updateData(name, props.formData, event.formData);
   event.formMeta = updateData(name, props.formMeta, event.formMeta);
@@ -33,7 +33,7 @@ const handleChange = (name: string, props: Props) => (evt: Event) => {
   return props.onChange(event);
 };
 
-const branch = () => (Component: WrappedComponent): WrappedComponent => {
+const branch = () => (Component: RComponent): RComponent => {
 
   class BranchedForm extends React.Component {
     props: Props

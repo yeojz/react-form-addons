@@ -1,6 +1,7 @@
+// @flow
 import constants from './constants';
 
-const update = (name, syntheticFormEvent) => ({
+const update = (name: string, syntheticFormEvent: SyntheticFormEvent): ReduxAction => ({
   type: constants.UPDATE,
   payload: {
     name,
@@ -9,7 +10,7 @@ const update = (name, syntheticFormEvent) => ({
   }
 });
 
-const reset = (name) => ({
+const reset = (name: string): ReduxAction => ({
   type: constants.RESET,
   payload: {
     name

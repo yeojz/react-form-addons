@@ -1,13 +1,22 @@
+// @flow
 import constants from './constants';
 import update from 'immutability-helper';
 
-const defaultState = () => ({
+type ActionType = constants.UPDATE | constants.RESET;
+
+type ReducerState = {
+  lastFormName: string;
+  lastActionType: string;
+  data: Object
+}
+
+const defaultState = (): ReducerState => ({
   lastFormName: '',
   lastActionType: '',
   data: {}
 });
 
-const getDelta = (type, name, data) => ({
+const getDelta = (type: ActionType, name: string, data: Object): Object => ({
   lastFormName: {
     $set: name
   },
@@ -21,7 +30,7 @@ const getDelta = (type, name, data) => ({
   }
 });
 
-const doUpdateAction = (state, action) => {
+const doUpdateAction = (state: ReducerState, action: Object): ReducerState => {
   const {payload} = action;
 
   const delta = getDelta(constants.UPDATE, payload.name, {
@@ -32,13 +41,13 @@ const doUpdateAction = (state, action) => {
   return update(state, delta);
 }
 
-const doResetAction = (state, action) => {
+const doResetAction = (state: ReducerState, action: Object): ReducerState => {
   const {payload} = action;
   const delta = getDelta(constants.RESET, payload.name, {});
   return update(state, delta);
 }
 
-function reducer(state = defaultState(), action = {}) {
+function reducer(state: ReducerState = defaultState(), action: Object = {}): ReducerState {
   if (action.type === constants.UPDATE) {
     return doUpdateAction(state, action);
   }

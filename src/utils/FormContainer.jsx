@@ -1,11 +1,13 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 
-const propTypes = {
-  children: PropTypes.any
+type Props = {
+  children: any
 }
 
 class FormContainer extends React.Component {
+  props: Props
+
   render() {
     return (
       <div className='rfa-form-container'>
@@ -15,5 +17,4 @@ class FormContainer extends React.Component {
   }
 }
 
-FormContainer.propTypes = propTypes;
 export default FormContainer;

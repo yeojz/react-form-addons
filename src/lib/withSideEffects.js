@@ -1,22 +1,24 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import invariant from 'invariant';
 import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import constants from './constants';
 
-const propTypes = {
-  onChange: PropTypes.func,
-  onError: PropTypes.func
+type Props = {
+  onChange: Function,
+  onError: Function
 };
 
-const applySideEffects = (sideEffects, evt, props) => (
+type SideEffects = Array<Function>;
+
+const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, props: Props): any => (
   sideEffects.reduce(
     (p, fn) => p.then((event) => fn(event, props)),
     Promise.resolve(evt)
   )
 );
 
-const handleChange = (sideEffects) => (props) => (evt) => {
+const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: DefaultEvent) => {
   let event = createSyntheticFormEvent(evt);
 
   applySideEffects(sideEffects, event, props)
@@ -24,7 +26,7 @@ const handleChange = (sideEffects) => (props) => (evt) => {
     .catch((err) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
 };
 
-const withSideEffects = (sideEffects = []) => (Component) => {
+const withSideEffects = (sideEffects: SideEffects = []) => (Component: RComponent): RComponent => {
 
   invariant(
     Array.isArray(sideEffects),
@@ -37,7 +39,7 @@ const withSideEffects = (sideEffects = []) => (Component) => {
   const onChangeHandler = handleChange(sideEffects);
 
   class FormWithSideEffects extends React.Component {
-    static propTypes = propTypes;
+    props: Props
 
     render() {
       return (

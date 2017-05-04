@@ -1,23 +1,22 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import update from 'immutability-helper';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import noop from 'lodash/noop';
 
-const propTypes = {
-  formData: PropTypes.object,
-  formMeta: PropTypes.object,
-  onChange: PropTypes.func
+type Props = {
+  formData: Object;
+  formMeta: Object;
+  onChange: Function;
 };
 
-const defaultProps = {
-  formData: {},
-  formMeta: {},
-  onChange: noop
-};
+type State = {
+  formData: Object;
+  formMeta: Object;
+}
 
-const withState = (defaultConfig = {}) => (Component) => {
+const withState = (defaultConfig: Object = {}) => (Component: RComponent): RComponent => {
 
   const config = {
     formData: {},
@@ -27,16 +26,20 @@ const withState = (defaultConfig = {}) => (Component) => {
   }
 
   class ComponentWithState extends React.Component {
+    props: Props
 
-    static propTypes = propTypes;
-    static defaultProps = defaultProps;
+    static defaultProps = {
+      formData: {},
+      formMeta: {},
+      onChange: noop
+    }
 
-    state = {
+    state: State = {
       formData: {},
       formMeta: {}
     }
 
-    componentWillMount = () => {
+    componentWillMount = (): void => {
       this.setState({
         formData: {
           ...config.formData,
@@ -49,7 +52,7 @@ const withState = (defaultConfig = {}) => (Component) => {
       });
     }
 
-    shouldComponentUpdate = (nextProps, nextState) => {
+    shouldComponentUpdate = (nextProps: Props, nextState: State): boolean => {
       if (config.shouldComponentUpdate) {
         return config.shouldComponentUpdate(nextProps, nextState);
       }
@@ -58,20 +61,20 @@ const withState = (defaultConfig = {}) => (Component) => {
         || !isEqual(this.state, nextState);
     }
 
-    componentWillReceiveProps = (nextProps) => {
+    componentWillReceiveProps = (nextProps: Props): void => {
       this.setState({
         formData: this.refreshData('formData', nextProps),
         formMeta: this.refreshData('formMeta', nextProps)
       });
     }
 
-    refreshData = (key, nextProps) => (
+    refreshData = (key: string, nextProps: Props): Object => (
       update(nextProps[key], {
         $merge: get(this, ['state', key], {})
       })
     )
 
-    handleChange = (syntheticFormEvent) => {
+    handleChange = (syntheticFormEvent: SyntheticFormEvent): void => {
       syntheticFormEvent.removeEventActions();
 
       this.setState({
