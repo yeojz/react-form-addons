@@ -24,7 +24,7 @@ For examples, check out the [React Component State](https://github.com/yeojz/rea
 -   [Documentation Site][doc-link]
 -   [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
 
-#### Core Methods
+#### core (lib)
 
 -   [compose](https://yeojz.github.io/react-form-addons#compose)
 -   [formControl](https://yeojz.github.io/react-form-addons#formControl)
@@ -36,18 +36,22 @@ For examples, check out the [React Component State](https://github.com/yeojz/rea
 -   [list](https://yeojz.github.io/react-form-addons#list) (for replicating datasets)
 -   [collection](https://yeojz.github.io/react-form-addons#collection) (conditional forms)
 
-#### Utils
+#### utils
 
 -   [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent)
 
-#### Extensions
+#### extensions
 
 -   [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
 
-#### Components
+#### components
 
 -   [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
 -   [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
+
+#### experimental
+
+-   withContext
 
 ## Installation
 
@@ -170,7 +174,6 @@ const Form = compose(
 ## Prior Art
 
 The implementation of a `compose` methodology was highly inspired by [react-reformed](https://github.com/davezuko/react-reformed).
-
 
 ## License
 
