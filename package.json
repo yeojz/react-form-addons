@@ -7,8 +7,9 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir .",
     "build:watch": "npm run build -- --watch",
     "clean": "rimraf lib components redux utils coverage .nyc_output",
-    "deploy-gh-pages": "cd site && yarn install && yarn run deploy",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "deploy-gh-pages": "cd site && yarn install && yarn run deploy",
+    "flow": "flow",
     "lint": "eslint --ext js src tests",
     "test": "cross-env NODE_PATH=. NODE_ENV=test jest --coverage"
   },

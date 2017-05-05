@@ -15,7 +15,7 @@ function getBooleanDelta(data: Object, name: string) {
   return getDelta(name, !current);
 }
 
-function updateObjectData(data: Object, evt: DefaultEvent | SyntheticFormEvent, bool: boolean = false) {
+function updateObjectData(data: Object, evt: PseudoEvent | SyntheticFormEvent, bool: boolean = false) {
   const name = get(evt, 'target.name');
   const value = get(evt, 'target.value');
 

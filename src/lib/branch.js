@@ -25,7 +25,7 @@ const updateData = (name: string, data: Object, value: any) => (
   )
 );
 
-const handleChange = (name: string, props: Props) => (evt: DefaultEvent) => {
+const handleChange = (name: string, props: Props) => (evt: PseudoEvent) => {
   let event = createSyntheticFormEvent(evt);
   event.formData = updateData(name, props.formData, event.formData);
   event.formMeta = updateData(name, props.formMeta, event.formMeta);

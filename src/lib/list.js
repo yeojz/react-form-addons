@@ -12,7 +12,7 @@ type Props = {
   onChange: Function
 }
 
-const handleChange = (name: string, props: Props) => (idx: number) => (evt: DefaultEvent): any => {
+const handleChange = (name: string, props: Props) => (idx: number) => (evt: PseudoEvent): any => {
   let event = createSyntheticFormEvent(evt);
   event = listActions.change(idx, name, props, event);
   return props.onChange(event);

@@ -18,7 +18,7 @@ const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, pro
   )
 );
 
-const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: DefaultEvent) => {
+const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: PseudoEvent) => {
   let event = createSyntheticFormEvent(evt);
 
   applySideEffects(sideEffects, event, props)

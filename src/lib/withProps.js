@@ -10,13 +10,13 @@ type Props = {
   onChange: Function
 };
 
-const handleToggle = (props: Props) => (evt: DefaultEvent): any => {
+const handleToggle = (props: Props) => (evt: PseudoEvent): any => {
   let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
   event.formData = updateObjectData(props.formData, evt, true);
   return props.onChange(event);
 };
 
-const handleChange = (props: Props) => (evt: DefaultEvent): any => {
+const handleChange = (props: Props) => (evt: PseudoEvent): any => {
   let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
   event.formData = updateObjectData(props.formData, evt);
   return props.onChange(event);

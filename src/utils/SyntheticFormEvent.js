@@ -7,13 +7,13 @@ class SyntheticFormEvent {
   _formMeta: Object
   _formData: Object
 
-  constructor(evt: DefaultEvent | Object, data: ?Object, meta: ?Object) {
+  constructor(evt?: PseudoEvent, data: ?Object, meta: ?Object) {
     this._event = this.extractEvent(evt || {});
     this._formMeta = meta || {};
     this._formData = data || {};
   }
 
-  extractEvent(evt: DefaultEvent | Object): FormEvent {
+  extractEvent(evt: PseudoEvent | Object): PseudoEvent {
     return {
       target: {
         name: get(evt, 'target.name'),
@@ -49,7 +49,7 @@ class SyntheticFormEvent {
     return {...this._formMeta};
   }
 
-  get event(): FormEvent {
+  get event(): PseudoEvent {
     return {...this._event};
   }
 
@@ -61,7 +61,7 @@ class SyntheticFormEvent {
     return get(this, '_event.stopPropagation', noop);
   }
 
-  get target(): FormEventTarget {
+  get target(): PseudoTarget {
     return {
       name: get(this, '_event.target.name'),
       value: get(this, '_event.target.value')

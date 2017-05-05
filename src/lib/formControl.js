@@ -69,7 +69,7 @@ const formControl = (Element: Function | string) => {
       return this.state.value;
     }
 
-    handleChange = (evt: DefaultEvent) => {
+    handleChange = (evt: PseudoEvent) => {
       if (!this.props.disabled) {
         const handler = this.props.onChange || this.props.onToggle;
         this.setState({value: evt.target.value});
