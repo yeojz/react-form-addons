@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import withState from 'src/lib/withState';
 import TestDiv from 'tests/TestDiv';
+import withState from './withState';
 
 describe('lib/withState', function () {
   it('should return a react component', function () {

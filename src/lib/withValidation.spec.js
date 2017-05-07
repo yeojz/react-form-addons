@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import withValidation from 'src/lib/withValidation';
 import TestDiv from 'tests/TestDiv';
+import withValidation from './withValidation';
 
 describe('lib/withValidation', function () {
   it('should return a react component', function () {

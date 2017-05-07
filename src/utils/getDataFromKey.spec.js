@@ -1,4 +1,4 @@
-import getDataFromKey from 'src/utils/getDataFromKey';
+import getDataFromKey from './getDataFromKey';
 
 describe('lib/utils/getDataFromKey', function () {
 

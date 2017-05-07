@@ -1,4 +1,4 @@
-import * as exposed from 'src/lib/index';
+import * as exposed from './index';
 
 describe('lib/index', function () {
   it('total number of exports', function () {

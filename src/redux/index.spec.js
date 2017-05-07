@@ -1,4 +1,4 @@
-import * as exposed from 'src/redux/index';
+import * as exposed from './index';
 
 describe('redux/index', function () {
   it('total number of exports', function () {

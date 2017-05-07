@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import collection from 'src/lib/collection';
 import TestDiv from 'tests/TestDiv';
+import collection from './collection';
 
 describe('lib/collection', function () {
   it('should throw an Error when argument not an array', function () {

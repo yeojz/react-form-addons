@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import withSideEffects from 'src/lib/withSideEffects';
+import withSideEffects from './withSideEffects';
 import TestDiv from 'tests/TestDiv';
 
 describe('lib/withSideEffects', function () {

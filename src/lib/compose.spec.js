@@ -1,4 +1,4 @@
-import compose from 'src/lib/compose';
+import compose from './compose';
 
 describe('lib/compose', function () {
   it('compose is called in reverse order', function () {

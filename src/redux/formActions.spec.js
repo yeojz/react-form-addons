@@ -1,5 +1,5 @@
-import constants from 'src/redux/constants';
-import formActions from 'src/redux/formActions';
+import constants from './constants';
+import formActions from './formActions';
 
 describe('redux/formActions', function () {
   it('update should return expected action', function () {

@@ -1,5 +1,5 @@
-import constants from 'src/redux/constants';
-import formReducer, {defaultState} from 'src/redux/formReducer';
+import constants from './constants';
+import formReducer, {defaultState} from './formReducer';
 
 describe('redux/formReducer', function () {
 
