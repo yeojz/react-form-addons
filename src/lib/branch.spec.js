@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import branch from 'src/lib/branch';
-import TestDiv from 'tests/mocks/TestDiv';
+import TestDiv from 'tests/TestDiv';
 
 describe('lib/branch', function () {
   it('should return a react component', function () {

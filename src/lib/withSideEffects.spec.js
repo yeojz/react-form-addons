@@ -1,20 +1,20 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import withValidation from 'src/lib/withValidation';
-import TestDiv from 'tests/mocks/TestDiv';
+import withSideEffects from 'src/lib/withSideEffects';
+import TestDiv from 'tests/TestDiv';
 
-describe('lib/withValidation', function () {
+describe('lib/withSideEffects', function () {
   it('should return a react component', function () {
-    const Component = withValidation()(TestDiv);
+    const Component = withSideEffects()(TestDiv);
     const elem = shallow(<Component />);
     expect(elem.html()).toBe('<div>test</div>');
   });
 
   it('decorated component should be called with expected props', function () {
-    const Component = withValidation()(TestDiv);
+    const Component = withSideEffects()(TestDiv);
     const elem = shallow(<Component />);
     const props = elem.props();
 
-    expect(typeof props.getFormError).toBe('function');
+    expect(typeof props.onChange).toBe('function')
   });
 });
