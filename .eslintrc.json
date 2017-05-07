@@ -19,8 +19,8 @@
     "flowtype"
   ],
   "extends": [
-    "plugin:flowtype/recommended",
+    "eslint:recommended",
     "plugin:react/recommended",
-    "eslint:recommended"
+    "plugin:flowtype/recommended"
   ]
 }
