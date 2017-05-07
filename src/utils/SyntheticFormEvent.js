@@ -41,6 +41,10 @@ class SyntheticFormEvent {
     this._formMeta = value;
   }
 
+  get isSyntheticFormEvent(): boolean {
+    return true;
+  }
+
   get formData(): Object {
     return {...this._formData};
   }
