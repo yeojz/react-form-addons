@@ -50,4 +50,25 @@ describe('utils/listActions', function () {
     expect(result.formData.test.length).toBe(1);
     expect(result.formMeta.test.length).toBe(1);
   });
+
+  it('should change values in event', function () {
+    const props = {
+      formData: {
+        test: [{a: 1}]
+      },
+      formMeta: {
+        test: [{a: 1}]
+      }
+    }
+    const evt = new SyntheticFormEvent();
+    evt.formData = {b: 1}
+    const result = listActions.change(0, 'test', props, evt);
+    expect(result.formData.test.length).toBe(1);
+    expect(result.formMeta.test.length).toBe(1);
+    expect(Object.keys(result.formData.test[0]).length).toBe(1);
+    expect(Object.keys(result.formData.test[0]).length).toBe(1);
+    expect(result.target.name).toBe('test');
+    expect(result.target.value).toBe(result.formData.test);
+    expect(result.target.value[0]).toEqual({b: 1});
+  });
 });
