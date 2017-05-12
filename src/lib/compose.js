@@ -2,7 +2,7 @@
 const compose = (...decorators: Array<Function>): Function => {
   const reversed = decorators.reverse();
 
-  return (Component: RComponent): RComponent => (
+  return (Component: ReactClass<any>): ReactClass<any> => (
     reversed.reduce(
       (wrapped, fn) => fn(wrapped),
       Component

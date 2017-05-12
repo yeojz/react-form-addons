@@ -22,7 +22,7 @@ const handleChange = (props: Props) => (evt: PseudoEvent): any => {
   return props.onChange(event);
 };
 
-const withProps = () => (Component: RComponent): RComponent => {
+const withProps = () => (Component: ReactClass<any>): ReactClass<any> => {
 
   class FormWithProps extends React.Component {
     props: Props

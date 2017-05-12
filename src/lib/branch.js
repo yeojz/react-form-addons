@@ -33,7 +33,7 @@ const handleChange = (name: string, props: Props) => (evt: PseudoEvent) => {
   return props.onChange(event);
 };
 
-const branch = () => (Component: RComponent): RComponent => {
+const branch = () => (Component: ReactClass<any>): ReactClass<any> => {
 
   class BranchedForm extends React.Component {
     props: Props

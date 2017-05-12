@@ -19,4 +19,15 @@ describe('lib/branch', function () {
     expect(typeof props.formMeta).toBe('object');
     expect(typeof props.onChange).toBe('function');
   });
+
+  it('should call onChange event with a SyntheticFormEvent', function () {
+    const Component = branch()(TestDiv);
+    const onChange = jest.fn();
+    const elem = shallow(<Component name='test' onChange={onChange}/>);
+    const props = elem.props();
+
+    props.onChange({});
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0].isSyntheticFormEvent).toBe(true);
+  });
 });

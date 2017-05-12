@@ -23,13 +23,24 @@ describe('lib/withProps', function () {
     expect(typeof props.onToggle).toBe('function');
   });
 
-  it('should call onChange event with a SyntheticFormEvent', function () {
+  it('should call onChange event with a SyntheticFormEvent (onChange)', function () {
     const Component = withProps()(TestDiv);
     const onChange = jest.fn();
     const elem = shallow(<Component onChange={onChange}/>);
     const props = elem.props();
 
     props.onChange({});
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange.mock.calls[0][0].isSyntheticFormEvent).toBe(true);
+  });
+
+  it('should call onChange event with a SyntheticFormEvent (onToggle)', function () {
+    const Component = withProps()(TestDiv);
+    const onChange = jest.fn();
+    const elem = shallow(<Component onChange={onChange}/>);
+    const props = elem.props();
+
+    props.onToggle({});
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange.mock.calls[0][0].isSyntheticFormEvent).toBe(true);
   });

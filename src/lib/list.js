@@ -24,13 +24,13 @@ const handleAdd = (name: string, props: Props) => (position: "before" | "after" 
   return props.onChange(event);
 }
 
-const handleRemove = (name: string, props: Props) => (idx: number) => () => {
+const handleRemove = (name: string, props: Props) => (idx: number) => (): any => {
   let event = createSyntheticFormEvent();
   event = listActions.remove(idx, name, props, event);
   return props.onChange(event);
 }
 
-const list = (Container: RComponent = FormContainer) => (Component: RComponent) => {
+const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactClass<any>) => {
 
   class ListForm extends React.Component {
     props: Props
@@ -44,7 +44,7 @@ const list = (Container: RComponent = FormContainer) => (Component: RComponent) 
       get(this, ['props', key, this.props.name], [])
     )
 
-    renderList = (onAddHandler: Function, onChangeHandler: Function, onRemoveHandler: Function): Array<RComponent> => {
+    renderList = (onAddHandler: Function, onChangeHandler: Function, onRemoveHandler: Function): Array<ReactClass<any>> => {
       const formData = this.getListData('formData');
       const formMeta = this.getListData('formMeta');
 

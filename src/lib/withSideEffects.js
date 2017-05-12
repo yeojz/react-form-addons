@@ -11,22 +11,22 @@ type Props = {
 
 type SideEffects = Array<Function>;
 
-const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, props: Props): any => (
+const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, props: Props): Promise<any> => (
   sideEffects.reduce(
     (p, fn) => p.then((event) => fn(event, props)),
     Promise.resolve(evt)
   )
 );
 
-const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: PseudoEvent) => {
+const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: PseudoEvent): Promise<any>  => {
   let event = createSyntheticFormEvent(evt);
 
-  applySideEffects(sideEffects, event, props)
+  return applySideEffects(sideEffects, event, props)
     .then((event) => props.onChange(event))
     .catch((err) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
 };
 
-const withSideEffects = (sideEffects: SideEffects = []) => (Component: RComponent): RComponent => {
+const withSideEffects = (sideEffects: SideEffects = []) => (Component: ReactClass<any>): ReactClass<any> => {
 
   invariant(
     Array.isArray(sideEffects),

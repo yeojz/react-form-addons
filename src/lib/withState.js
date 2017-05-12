@@ -16,7 +16,7 @@ type State = {
   formMeta: Object;
 }
 
-const withState = (defaultConfig: Object = {}) => (Component: RComponent): RComponent => {
+const withState = (defaultConfig: Object = {}) => (Component: ReactClass<any>): ReactClass<any> => {
 
   const config = {
     formData: {},

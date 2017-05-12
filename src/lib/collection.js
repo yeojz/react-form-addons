@@ -16,7 +16,7 @@ const isActive = (rule: any, props: Object): boolean => {
   return !!get(props.formData, rule);
 };
 
-const validateEntry = (component: RComponent | Array<*>, props: Object) => {
+const validateEntry = (component: ReactClass<any> | Array<any>, props: Object): ReactClass<any> | void => {
   if (Array.isArray(component)) {
     const [Entry, rule] = component;
     return isActive(rule, props) ? Entry : void 0;
@@ -24,14 +24,14 @@ const validateEntry = (component: RComponent | Array<*>, props: Object) => {
   return component;
 };
 
-const renderComponents = (components: Array<RComponent | Array<*>>, props: Object): Array<React$Element<*> | null> => (
+const renderComponents = (components: Array<ReactClass<any> | Array<any>>, props: Object): Array<React$Element<any> | null> => (
   components.map((component, key) => {
     const Entry = validateEntry(component, props);
     return Entry ? <Entry {...props} key={key} /> : null;
   })
 );
 
-const collection = (components: Array<RComponent | Array<*>> = []) => {
+const collection = (components: Array<ReactClass<any> | Array<any>> = []) => {
 
   invariant(
     Array.isArray(components),

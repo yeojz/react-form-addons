@@ -14,14 +14,14 @@ type Props = {
 
 type Rules = Array<Function>;
 
-const applyValidations = (rules: Rules, formData: Object) => (
+const applyValidations = (rules: Rules, formData: Object): Promise<any> => (
   rules.reduce(
     (p, fn) => p.then((err) => fn(err, formData)),
     Promise.resolve(void 0)
   )
 );
 
-const getValidator = (rules: Rules) => (event: SyntheticFormEvent, props: Props) => {
+const getValidator = (rules: Rules) => (event: SyntheticFormEvent, props: Props): Promise<any> => {
   const formData = event.formData;
   let formMeta = event.formMeta;
 
@@ -34,7 +34,7 @@ const getValidator = (rules: Rules) => (event: SyntheticFormEvent, props: Props)
     .catch((err) => props.onError(err, constants.VALIDATION_ERROR));
 };
 
-const withValidation = (rules: Rules = []) => (Component: RComponent): RComponent => {
+const withValidation = (rules: Rules = []) => (Component: ReactClass<any>): ReactClass<any> => {
   invariant(
     Array.isArray(rules),
     `

@@ -11,7 +11,7 @@ type ChildContextType = {
   formMeta: Object;
 }
 
-const withContext = () => (Component: RComponent): RComponent => {
+const withContext = () => (Component: ReactClass<any>): ReactClass<any> => {
 
   class ComponentWithContext extends React.Component {
     props: Props
