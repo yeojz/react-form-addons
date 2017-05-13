@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 
 type Props = {
   formData: Object;
@@ -15,7 +16,11 @@ const withContext = () => (Component: ReactClass<any>): ReactClass<any> => {
 
   class ComponentWithContext extends React.Component {
     props: Props
-    childContextTypes: ChildContextType
+
+    static childContextTypes: ChildContextType = {
+      formData: PropTypes.object,
+      formMeta: PropTypes.object
+    }
 
     getChildContext = (): ChildContextType => ({
       formData: this.props.formData,
