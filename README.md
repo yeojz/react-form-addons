@@ -49,10 +49,6 @@ For examples, check out the [React Component State](https://github.com/yeojz/rea
 -   [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
 -   [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
 
-#### experimental
-
--   withContext
-
 ## Installation
 
 Install the library:

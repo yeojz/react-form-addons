@@ -18,10 +18,10 @@ const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, pro
   )
 );
 
-const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: PseudoEvent): Promise<any>  => {
+const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: PseudoEvent): void  => {
   let event = createSyntheticFormEvent(evt);
 
-  return applySideEffects(sideEffects, event, props)
+  applySideEffects(sideEffects, event, props)
     .then((event) => props.onChange(event))
     .catch((err) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
 };

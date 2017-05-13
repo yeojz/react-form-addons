@@ -2,7 +2,7 @@ import * as exposed from './index';
 
 describe('lib/index', function () {
   it('total number of exports', function () {
-    expect(Object.keys(exposed)).toHaveLength(12)
+    expect(Object.keys(exposed)).toHaveLength(11)
   });
 
   [
@@ -13,7 +13,6 @@ describe('lib/index', function () {
     ['constants', 'object'],
     ['formControl', 'function'],
     ['list', 'function'],
-    ['withContext', 'function'],
     ['withSideEffects', 'function'],
     ['withState', 'function'],
     ['withValidation', 'function']

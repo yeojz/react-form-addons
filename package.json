@@ -26,8 +26,7 @@
       "!**/node_modules/**",
       "!**/vendor/**"
     ],
-    "setupFiles": [
-    ]
+    "setupFiles": []
   },
   "repository": {
     "type": "git",
@@ -85,7 +84,6 @@
   "dependencies": {
     "immutability-helper": "^2.1.1",
     "invariant": "^2.2.2",
-    "lodash": "^4.0.0",
-    "prop-types": "^15.5.4"
+    "lodash": "^4.0.0"
   }
 }
