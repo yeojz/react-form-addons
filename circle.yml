@@ -18,6 +18,7 @@ test:
   override:
     - yarn test
     - yarn run lint
+    - yarn run flow
 deployment:
   coverage:
     branch: [master, /^hotfix\/.*$/, /^feature\/.*$/]

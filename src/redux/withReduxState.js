@@ -12,7 +12,7 @@ type Props = {
   onReset: Function;
 };
 
-const withReduxState = (reducerKey: string = 'forms') => (Component: RComponent): RComponent => {
+const withReduxState = (reducerKey: string = 'forms') => (Component: ReactClass<*>): ReactClass<*> => {
 
   class ComponentWithReduxState extends React.Component {
     props: Props
