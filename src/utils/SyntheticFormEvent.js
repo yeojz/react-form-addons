@@ -1,14 +1,19 @@
+// @flow
 import get from 'lodash/get';
 import noop from 'lodash/noop';
 
 class SyntheticFormEvent {
-  constructor(evt, data = {}, meta = {}) {
-    this._event = this.extractEvent(evt);
-    this._formMeta = meta;
-    this._formData = data;
+  _event: Object
+  _formMeta: Object
+  _formData: Object
+
+  constructor(evt?: PseudoEvent, data: ?Object, meta: ?Object) {
+    this._event = this.extractEvent(evt || {});
+    this._formMeta = meta || {};
+    this._formData = data || {};
   }
 
-  extractEvent(evt) {
+  extractEvent(evt: PseudoEvent | Object): PseudoEvent {
     return {
       target: {
         name: get(evt, 'target.name'),
@@ -19,48 +24,48 @@ class SyntheticFormEvent {
     }
   }
 
-  removeEventActions() {
+  removeEventActions(): void {
     this._event.preventDefault = noop;
     this._event.stopPropagation = noop;
   }
 
-  set target(value) {
+  set target(value: any) {
     this._event.target = value;
   }
 
-  set formData(value) {
+  set formData(value: Object) {
     this._formData = value;
   }
 
-  set formMeta(value) {
+  set formMeta(value: Object) {
     this._formMeta = value;
   }
 
-  get isSyntheticFormEvent() {
+  get isSyntheticFormEvent(): boolean {
     return true;
   }
 
-  get formData() {
+  get formData(): Object {
     return {...this._formData};
   }
 
-  get formMeta() {
+  get formMeta(): Object {
     return {...this._formMeta};
   }
 
-  get event() {
+  get event(): PseudoEvent {
     return {...this._event};
   }
 
-  get preventDefault() {
+  get preventDefault(): Function {
     return get(this, '_event.preventDefault', noop);
   }
 
-  get stopPropagation() {
+  get stopPropagation(): Function {
     return get(this, '_event.stopPropagation', noop);
   }
 
-  get target() {
+  get target(): PseudoTarget {
     return {
       name: get(this, '_event.target.name'),
       value: get(this, '_event.target.value')

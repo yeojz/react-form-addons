@@ -1,35 +1,37 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import getDataFromKey from '../utils/getDataFromKey';
 import updateObjectData from '../utils/updateObjectData';
 
-const propTypes = {
-  formData: PropTypes.object,
-  formMeta: PropTypes.object,
-  onChange: PropTypes.func
+type Props = {
+  formData: Object,
+  formMeta: Object,
+  onChange: Function
 };
 
-const defaultProps = {
-  formData: {},
-  formMeta: {}
+const handleToggle = (props: Props) => (evt: PseudoEvent): any => {
+  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+  event.formData = updateObjectData(props.formData, evt, true);
+  return props.onChange(event);
 };
 
-const handleToggle = ({formData, formMeta, onChange}) => (evt) => {
-  let event = createSyntheticFormEvent(evt, formData, formMeta);
-  event.formData = updateObjectData(formData, evt, true);
-  return onChange(event);
+const handleChange = (props: Props) => (evt: PseudoEvent): any => {
+  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+  event.formData = updateObjectData(props.formData, evt);
+  return props.onChange(event);
 };
 
-const handleChange = ({formData, formMeta, onChange}) => (evt) => {
-  let event = createSyntheticFormEvent(evt, formData, formMeta);
-  event.formData = updateObjectData(formData, evt);
-  return onChange(event);
-};
-
-const withProps = () => (Component) => {
+const withProps = () => (Component: ReactClass<any>): ReactClass<any> => {
 
   class FormWithProps extends React.Component {
+    props: Props
+
+    static defaultProps = {
+      formData: {},
+      formMeta: {}
+    }
+
     render() {
       return (
         <Component
@@ -45,8 +47,6 @@ const withProps = () => (Component) => {
     }
   }
 
-  FormWithProps.propTypes = propTypes;
-  FormWithProps.defaultProps = defaultProps;
   return FormWithProps;
 };
 

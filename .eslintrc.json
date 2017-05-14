@@ -4,7 +4,7 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "mocha" : true
+    "jest": true
   },
   "parserOptions": {
     "ecmaVersion": 6,
@@ -15,10 +15,12 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "flowtype"
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
   ]
 }

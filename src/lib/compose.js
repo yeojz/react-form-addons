@@ -1,7 +1,8 @@
-const compose = (...decorators) => {
+// @flow
+const compose = (...decorators: Array<Function>): Function => {
   const reversed = decorators.reverse();
 
-  return (Component) => (
+  return (Component: ReactClass<any>): ReactClass<any> => (
     reversed.reduce(
       (wrapped, fn) => fn(wrapped),
       Component

@@ -1,12 +1,16 @@
-# <img src="https://yeojz.github.io/react-form-addons/images/react-form-addons-with-text.svg" alt="react-form-addons" height="100" />
+# react-form-addons
+
+> Form utilities for building function components in react.
 
 [![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]
 [![PRs Welcome][pr-welcome-badge]][pr-welcome-link]
 
+<img src="https://yeojz.github.io/react-form-addons/images/react-form-addons-with-text.svg" alt="react-form-addons" height="64" />
+
 ## About
 
-`react-form-addons` provides a set of methods and components for composing simple and nested forms in React. It aims to solves the complexity of building and handling large forms. Conceptually it adopts the style of `decorators` / `higher-order components`, allowing you to keep your actual declaration of forms as Functional Components.
+`react-form-addons` enables the construction of simple or nested forms in React while keeping the components as _functional_ components.
 
 The library abstracts possible data input patterns like lists of data, nested
 form data or even conditional form data into Higher-Order functions, and ultimately builds and exposes a final "formData" and "formMeta" to your chosen state engine.
@@ -15,19 +19,12 @@ It is __independent of state libraries__, i.e. if you want to use React Componen
 
 For examples, check out the [React Component State](https://github.com/yeojz/react-form-addons/blob/master/src/lib/withState.js) or [Redux State](//github.com/yeojz/react-form-addons/blob/master/src/redux/withReduxState.js) implementations.
 
-
-## Motivation
-
-During the course of my work which involves building an internal admin panel, the amount of forms that have to be built is not small. Every single form has it's own set of rules and side-effects, which may be nested or have a dependency in other form.
-
-This project is an exploration of possible ways of splitting responsibility during a form lifecycle to make it more maintainable.
-
-## Documentation
+## Table of Contents
 
 -   [Documentation Site][doc-link]
 -   [Documentation Source](https://github.com/yeojz/react-form-addons/tree/master/site)
 
-#### Core Methods
+#### core (lib)
 
 -   [compose](https://yeojz.github.io/react-form-addons#compose)
 -   [formControl](https://yeojz.github.io/react-form-addons#formControl)
@@ -39,15 +36,15 @@ This project is an exploration of possible ways of splitting responsibility duri
 -   [list](https://yeojz.github.io/react-form-addons#list) (for replicating datasets)
 -   [collection](https://yeojz.github.io/react-form-addons#collection) (conditional forms)
 
-#### Utils
+#### utils
 
 -   [SyntheticFormEvent](https://yeojz.github.io/react-form-addons#SyntheticFormEvent)
 
-#### Extensions
+#### extensions
 
 -   [withReduxState](https://yeojz.github.io/react-form-addons#withReduxState) (Redux)
 
-#### Components
+#### components
 
 -   [Input](https://yeojz.github.io/react-form-addons#formControl) (via formControl)
 -   [Textarea](https://yeojz.github.io/react-form-addons#formControl) (via  formControl)
@@ -76,6 +73,12 @@ const Form = (props) => (
       name='input1'
       onChange={props.onChange}
       value={props.getFormData('input1')}
+    />
+    // Or just access the property
+    <input
+      name='input2'
+      onChange={props.onChange}
+      value={props.formData.input2}
     />
     // ...other inputs
   </div>
@@ -142,7 +145,7 @@ export default compose(
 
 This library also provides a component for handling state in [redux](https://github.com/reactjs/redux). You'll need to install `react-redux` as well as `redux` for it to work.
 
-*Note:* Redux components are not under default library export. As such, you'll have to import from a sub folder. i.e.
+_Note:_ Redux components are not under default library export. As such, you'll have to import from a sub folder. i.e.
 
 ```js
 import {withReduxState, formReducer} from 'react-form-addons/redux';
@@ -164,12 +167,9 @@ const Form = compose(
 <Form name='example' />
 ```
 
-There is a [live example](https://yeojz.github.io/react-form-addons#withReduxState) in the documentation site.
-
 ## Prior Art
 
 The implementation of a `compose` methodology was highly inspired by [react-reformed](https://github.com/davezuko/react-reformed).
-
 
 ## License
 

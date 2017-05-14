@@ -1,19 +1,22 @@
+// @flow
 import update from 'immutability-helper';
 import get from 'lodash/get';
 
-const getTarget = (name, value) => ({
+type Props = Object;
+
+const getTarget = (name: string, value: any): Object => ({
   name,
   value: get(value, name, [])
 });
 
-const getAddAction = (position) => {
+const getAddAction = (position: "before" | "after"): string => {
   if (position === 'before') {
     return '$unshift';
   }
   return '$push';
 }
 
-const addDelta = (name, action) => ({
+const addDelta = (name: string, action: string): Object => ({
   [name]: {
     $apply: (item) => {
       return item ? item : [];
@@ -22,7 +25,7 @@ const addDelta = (name, action) => ({
   }
 });
 
-const add = (position, name, props, event) => {
+const add = (position: "before" | "after", name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
   const delta = addDelta(name, getAddAction(position));
   event.formData = update(props.formData, delta);
   event.formMeta = update(props.formMeta, delta);
@@ -30,7 +33,7 @@ const add = (position, name, props, event) => {
   return event;
 }
 
-const changeDelta = (name, idx) => (value) => ({
+const changeDelta = (name: string, idx: number) => (value: any): Object => ({
   [name]: {
     [idx]: {
       $set: value
@@ -38,7 +41,7 @@ const changeDelta = (name, idx) => (value) => ({
   }
 });
 
-const change = (idx, name, props, event) => {
+const change = (idx: number, name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
   const delta = changeDelta(name, idx);
   event.formData = update(props.formData, delta(event.formData));
   event.formMeta = update(props.formMeta, delta(event.formMeta));
@@ -46,13 +49,13 @@ const change = (idx, name, props, event) => {
   return event;
 };
 
-const removeDelta = (name, idx) => ({
+const removeDelta = (name: string, idx: number): Object => ({
   [name]: {
     $splice: [[idx, 1]]
   }
 });
 
-const remove = (idx, name, props, event) => {
+const remove = (idx: number, name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
   const delta = removeDelta(name, idx);
   event.formData = update(props.formData, delta);
   event.formMeta = update(props.formMeta, delta);

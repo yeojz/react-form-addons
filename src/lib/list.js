@@ -1,53 +1,54 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import get from 'lodash/get';
 import createSyntheticFormEvent from '../utils/createSyntheticFormEvent';
 import FormContainer from '../utils/FormContainer';
 import listActions from '../utils/listActions';
 
-const propTypes = {
-  name: PropTypes.string.isRequired,
-  formData: PropTypes.object,
-  formMeta: PropTypes.object,
-  onChange: PropTypes.func
-};
+type Props = {
+  name: string,
+  formData: Object,
+  formMeta: Object,
+  onChange: Function
+}
 
-const handleChange = (name, props) => (idx) => (evt) => {
+const handleChange = (name: string, props: Props) => (idx: number) => (evt: PseudoEvent): any => {
   let event = createSyntheticFormEvent(evt);
   event = listActions.change(idx, name, props, event);
   return props.onChange(event);
 };
 
-const handleAdd = (name, props) => (position = 'after') => () => {
+const handleAdd = (name: string, props: Props) => (position: "before" | "after" = 'after') => (): any => {
   let event = createSyntheticFormEvent();
   event = listActions.add(position, name, props, event);
   return props.onChange(event);
 }
 
-const handleRemove = (name, props) => (idx) => () => {
+const handleRemove = (name: string, props: Props) => (idx: number) => (): any => {
   let event = createSyntheticFormEvent();
   event = listActions.remove(idx, name, props, event);
   return props.onChange(event);
 }
 
-const list = (Container = FormContainer) => (Component) => {
-
-  const defaultProps = {
-    formData: {},
-    formMeta: {}
-  };
+const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactClass<any>) => {
 
   class ListForm extends React.Component {
+    props: Props
 
-    getListData = (key) => (
+    static defaultProps = {
+      formData: {},
+      formMeta: {}
+    }
+
+    getListData = (key: string) => (
       get(this, ['props', key, this.props.name], [])
     )
 
-    renderList = (onAddHandler, onChangeHandler, onRemoveHandler) => {
+    renderList = (onAddHandler: Function, onChangeHandler: Function, onRemoveHandler: Function): Array<ReactClass<any>> => {
       const formData = this.getListData('formData');
       const formMeta = this.getListData('formMeta');
 
-      return formData.map((entry, idx) => (
+      return formData.map((entry: any, idx: number) => (
         <Component
           key={idx}
           name={idx}
@@ -79,8 +80,6 @@ const list = (Container = FormContainer) => (Component) => {
     }
   }
 
-  ListForm.propTypes = propTypes;
-  ListForm.defaultProps = defaultProps;
   return ListForm;
 }
 

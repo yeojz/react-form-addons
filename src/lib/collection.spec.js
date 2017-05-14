@@ -1,13 +1,12 @@
 import React from 'react';
-import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import collection from 'src/lib/collection';
-import TestDiv from 'tests/mocks/TestDiv';
+import TestDiv from 'tests/TestDiv';
+import collection from './collection';
 
 describe('lib/collection', function () {
   it('should throw an Error when argument not an array', function () {
     const test = () => collection('test');
-    expect(test).to.throw(Error);
+    expect(test).toThrowError(Error);
   });
 
   it('should return a react component', function () {
@@ -15,6 +14,6 @@ describe('lib/collection', function () {
       TestDiv
     ]);
     const elem = shallow(<Component />);
-    expect(elem.is('.rfa-collection')).to.be.true;
+    expect(elem.is('.rfa-collection')).toBe(true);
   });
 });

@@ -1,0 +1,10 @@
+[ignore]
+
+[include]
+
+[libs]
+typedef
+flow-typed
+
+[options]
+unsafe.enable_getters_and_setters=true

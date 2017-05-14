@@ -1,14 +1,13 @@
 import React from 'react';
-import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import withState from 'src/lib/withState';
-import TestDiv from 'tests/mocks/TestDiv';
+import TestDiv from 'tests/TestDiv';
+import withState from './withState';
 
 describe('lib/withState', function () {
   it('should return a react component', function () {
     const Component = withState()(TestDiv);
     const elem = shallow(<Component />);
-    expect(elem.html()).to.equal('<div>test</div>');
+    expect(elem.html()).toBe('<div>test</div>');
   });
 
   it('decorated component should be called with expected props', function () {
@@ -16,8 +15,8 @@ describe('lib/withState', function () {
     const elem = shallow(<Component />);
     const props = elem.props();
 
-    expect(props.formData).to.be.an.object;
-    expect(props.formMeta).to.be.an.object;
-    expect(props.onChange).to.be.an.function;
+    expect(typeof props.formData).toBe('object');
+    expect(typeof props.formMeta).toBe('object');
+    expect(typeof props.onChange).toBe('function');
   });
 });

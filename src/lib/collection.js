@@ -1,25 +1,22 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import invariant from 'invariant';
 import get from 'lodash/get';
 import isFunction from 'lodash/isFunction';
 
-const propTypes = {
-  className: PropTypes.string
-};
+type Props = {
+  className: string,
+  formData: Object
+}
 
-const defaultProps = {
-  className: ''
-};
-
-const isActive = (rule, props) => {
+const isActive = (rule: any, props: Object): boolean => {
   if (isFunction(rule)) {
     return rule(props.formData, props);
   }
   return !!get(props.formData, rule);
 };
 
-const validateEntry = (component, props) => {
+const validateEntry = (component: ReactClass<any> | Array<any>, props: Object): ReactClass<any> | void => {
   if (Array.isArray(component)) {
     const [Entry, rule] = component;
     return isActive(rule, props) ? Entry : void 0;
@@ -27,14 +24,14 @@ const validateEntry = (component, props) => {
   return component;
 };
 
-const renderComponents = (components, props) => (
+const renderComponents = (components: Array<ReactClass<any> | Array<any>>, props: Object): Array<React$Element<any> | null> => (
   components.map((component, key) => {
     const Entry = validateEntry(component, props);
     return Entry ? <Entry {...props} key={key} /> : null;
   })
 );
 
-const collection = (components = []) => {
+const collection = (components: Array<ReactClass<any> | Array<any>> = []) => {
 
   invariant(
     Array.isArray(components),
@@ -45,6 +42,12 @@ const collection = (components = []) => {
   );
 
   class FormCollection extends React.Component {
+    props: Props
+
+    static defaultProps = {
+      className: ''
+    }
+
     render() {
       const {className, ...props} = this.props;
       const classes = `rfa-collection ${className}`;
@@ -54,8 +57,6 @@ const collection = (components = []) => {
     }
   }
 
-  FormCollection.propTypes = propTypes;
-  FormCollection.defaultProps = defaultProps;
   return FormCollection;
 }
 

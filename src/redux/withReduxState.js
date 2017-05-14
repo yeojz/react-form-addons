@@ -1,30 +1,31 @@
-import React from 'react'; 
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 import {connect} from 'react-redux';
 import get from 'lodash/get';
 import noop from 'lodash/noop';
 import formActions from './formActions';
 
-const propTypes = {
-  getReduxData: PropTypes.func,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  onReset: PropTypes.func
+type Props = {
+  getReduxData: Function;
+  name: string;
+  onChange: Function;
+  onReset: Function;
 };
 
-const defaultProps = {
-  onChange: noop
-};
-
-const withReduxState = (reducerKey = 'forms') => (Component) => {
+const withReduxState = (reducerKey: string = 'forms') => (Component: RComponent): RComponent => {
 
   class ComponentWithReduxState extends React.Component {
+    props: Props
 
-    handleChange = (syntheticFormEvent) => {
+    static defaultProps = {
+      onChange: noop
+    }
+
+    handleChange = (syntheticFormEvent: SyntheticFormEvent): void => {
       this.props.onChange(this.props.name, syntheticFormEvent);
     }
 
-    handleReset = () => {
+    handleReset = (): void => {
       this.props.onReset(this.props.name);
     }
 
@@ -36,7 +37,7 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
           {...this.props}
           formData={data.formData}
           formMeta={data.formMeta}
-          name={void 0}
+          name=''
           onChange={this.handleChange}
           onReset={this.handleReset}
         />
@@ -44,17 +45,14 @@ const withReduxState = (reducerKey = 'forms') => (Component) => {
     }
   }
 
-  ComponentWithReduxState.propTypes = propTypes;
-  ComponentWithReduxState.defaultProps = defaultProps;
-
-  const mapStateToProps = (state) => ({
-    getReduxData: (name) => ({
+  const mapStateToProps = (state: Object): Object => ({
+    getReduxData: (name: string) => ({
       formData: get(state, [reducerKey, 'data', name, 'formData'], {}),
       formMeta: get(state, [reducerKey, 'data', name, 'formMeta'], {})
     })
   });
 
-  const mapDispatchToProps = {
+  const mapDispatchToProps: Object = {
     onChange: formActions.update,
     onReset: formActions.reset
   };
