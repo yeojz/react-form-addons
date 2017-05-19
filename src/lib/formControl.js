@@ -26,7 +26,7 @@ const propKeys = [
   'value'
 ];
 
-const formControl = (Element: Function | string) => {
+const formControl = (Element: Function | string): ReactClass<any> => {
 
   invariant(
     typeof Element === 'function' || typeof Element === 'string',
@@ -62,7 +62,7 @@ const formControl = (Element: Function | string) => {
       }
     }
 
-    getValue = (): any => {
+    getValue = (): string | boolean | void => {
       if (typeof this.state.value === 'undefined') {
         return this.props.defaultValue;
       }
@@ -78,7 +78,7 @@ const formControl = (Element: Function | string) => {
     }
 
     render() {
-      const props = omit(this.props, propKeys)
+      const props: Object = omit(this.props, propKeys)
 
       return (
         <Element

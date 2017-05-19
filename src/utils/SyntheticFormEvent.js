@@ -29,15 +29,15 @@ class SyntheticFormEvent {
     this._event.stopPropagation = noop;
   }
 
-  set target(value: any) {
+  set target(value: any): void {
     this._event.target = value;
   }
 
-  set formData(value: Object) {
+  set formData(value: Object): void {
     this._formData = value;
   }
 
-  set formMeta(value: Object) {
+  set formMeta(value: Object): void {
     this._formMeta = value;
   }
 

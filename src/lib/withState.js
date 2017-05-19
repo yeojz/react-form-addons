@@ -28,7 +28,7 @@ const withState = (defaultConfig: Object = {}) => (Component: ReactClass<any>): 
   class ComponentWithState extends React.Component {
     props: Props
 
-    static defaultProps = {
+    static defaultProps: Props = {
       formData: {},
       formMeta: {},
       onChange: noop
@@ -70,7 +70,7 @@ const withState = (defaultConfig: Object = {}) => (Component: ReactClass<any>): 
 
     refreshData = (key: string, nextProps: Props): Object => (
       update(nextProps[key], {
-        $merge: get(this, ['state', key], {})
+        $merge: get(this.state, [key], {})
       })
     )
 

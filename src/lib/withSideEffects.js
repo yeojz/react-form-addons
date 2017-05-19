@@ -13,7 +13,7 @@ type SideEffects = Array<Function>;
 
 const applySideEffects = (sideEffects: SideEffects, evt: SyntheticFormEvent, props: Props): Promise<any> => (
   sideEffects.reduce(
-    (p, fn) => p.then((event) => fn(event, props)),
+    (p: Promise<any>, fn: Function) => p.then((event: SyntheticFormEvent) => fn(event, props)),
     Promise.resolve(evt)
   )
 );
@@ -22,8 +22,8 @@ const handleChange = (sideEffects: SideEffects) => (props: Props) => (evt: Pseud
   let event = createSyntheticFormEvent(evt);
 
   applySideEffects(sideEffects, event, props)
-    .then((event) => props.onChange(event))
-    .catch((err) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
+    .then((event: SyntheticFormEvent) => props.onChange(event))
+    .catch((err: Error) => props.onError(err, constants.SIDE_EFFECTS_ERROR));
 };
 
 const withSideEffects = (sideEffects: SideEffects = []) => (Component: ReactClass<any>): ReactClass<any> => {

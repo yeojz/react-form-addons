@@ -4,7 +4,7 @@ const compose = (...decorators: Array<Function>): Function => {
 
   return (Component: ReactClass<any>): ReactClass<any> => (
     reversed.reduce(
-      (wrapped, fn) => fn(wrapped),
+      (wrapped: ReactClass<any>, fn: Function) => fn(wrapped),
       Component
     )
   );

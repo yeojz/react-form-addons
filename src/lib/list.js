@@ -12,25 +12,25 @@ type Props = {
   onChange: Function
 }
 
-const handleChange = (name: string, props: Props) => (idx: number) => (evt: PseudoEvent): any => {
+const handleChange = (name: string, props: Props) => (idx: number) => (evt: PseudoEvent): void => {
   let event = createSyntheticFormEvent(evt);
   event = listActions.change(idx, name, props, event);
-  return props.onChange(event);
+  props.onChange(event);
 };
 
-const handleAdd = (name: string, props: Props) => (position: "before" | "after" = 'after') => (): any => {
-  let event = createSyntheticFormEvent();
+const handleAdd = (name: string, props: Props) => (position: "before" | "after" = 'after') => (): void => {
+  let event: SyntheticFormEvent = createSyntheticFormEvent();
   event = listActions.add(position, name, props, event);
-  return props.onChange(event);
+  props.onChange(event);
 }
 
-const handleRemove = (name: string, props: Props) => (idx: number) => (): any => {
-  let event = createSyntheticFormEvent();
+const handleRemove = (name: string, props: Props) => (idx: number) => (): void => {
+  let event: SyntheticFormEvent = createSyntheticFormEvent();
   event = listActions.remove(idx, name, props, event);
-  return props.onChange(event);
+  props.onChange(event);
 }
 
-const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactClass<any>) => {
+const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactClass<any>): ReactClass<any> => {
 
   class ListForm extends React.Component {
     props: Props
@@ -40,13 +40,13 @@ const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactCl
       formMeta: {}
     }
 
-    getListData = (key: string) => (
-      get(this, ['props', key, this.props.name], [])
+    getListData = (key: string): Array<any> => (
+      get(this.props, [key, this.props.name], [])
     )
 
-    renderList = (onAddHandler: Function, onChangeHandler: Function, onRemoveHandler: Function): Array<ReactClass<any>> => {
-      const formData = this.getListData('formData');
-      const formMeta = this.getListData('formMeta');
+    renderList = (onAddHandler: Function, onChangeHandler: Function, onRemoveHandler: Function): Array<React$Element<any>> => {
+      const formData: Array<any> = this.getListData('formData');
+      const formMeta: Array<any> = this.getListData('formMeta');
 
       return formData.map((entry: any, idx: number) => (
         <Component
@@ -61,9 +61,9 @@ const list = (Container: ReactClass<any> = FormContainer) => (Component: ReactCl
     }
 
     render() {
-      const onAddHandler = handleAdd(this.props.name, this.props);
-      const onChangeHandler = handleChange(this.props.name, this.props);
-      const onRemoveHandler = handleRemove(this.props.name, this.props);
+      const onAddHandler: Function = handleAdd(this.props.name, this.props);
+      const onChangeHandler: Function = handleChange(this.props.name, this.props);
+      const onRemoveHandler: Function = handleRemove(this.props.name, this.props);
 
       return (
         <Container

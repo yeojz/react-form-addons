@@ -18,7 +18,7 @@ const getAddAction = (position: "before" | "after"): string => {
 
 const addDelta = (name: string, action: string): Object => ({
   [name]: {
-    $apply: (item) => {
+    $apply: (item: Array<any>): Array<any> => {
       return item ? item : [];
     },
     [action]: [{}]
@@ -26,7 +26,7 @@ const addDelta = (name: string, action: string): Object => ({
 });
 
 const add = (position: "before" | "after", name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
-  const delta = addDelta(name, getAddAction(position));
+  const delta: Object = addDelta(name, getAddAction(position));
   event.formData = update(props.formData, delta);
   event.formMeta = update(props.formMeta, delta);
   event.target = getTarget(name, event.formData);
@@ -42,7 +42,7 @@ const changeDelta = (name: string, idx: number) => (value: any): Object => ({
 });
 
 const change = (idx: number, name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
-  const delta = changeDelta(name, idx);
+  const delta: Object = changeDelta(name, idx);
   event.formData = update(props.formData, delta(event.formData));
   event.formMeta = update(props.formMeta, delta(event.formMeta));
   event.target = getTarget(name, event.formData);
@@ -56,7 +56,7 @@ const removeDelta = (name: string, idx: number): Object => ({
 });
 
 const remove = (idx: number, name: string, props: Props, event: SyntheticFormEvent): SyntheticFormEvent => {
-  const delta = removeDelta(name, idx);
+  const delta: Object = removeDelta(name, idx);
   event.formData = update(props.formData, delta);
   event.formMeta = update(props.formMeta, delta);
   event.target = getTarget(name, event.formData);

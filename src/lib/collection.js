@@ -2,15 +2,16 @@
 import React from 'react';
 import invariant from 'invariant';
 import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
 
 type Props = {
   className: string,
   formData: Object
 }
 
-const isActive = (rule: any, props: Object): boolean => {
-  if (isFunction(rule)) {
+type Rule = Function | string | Array<string>;
+
+const isActive = (rule: Rule, props: Object): boolean => {
+  if (typeof rule === 'function') {
     return rule(props.formData, props);
   }
   return !!get(props.formData, rule);
@@ -31,7 +32,7 @@ const renderComponents = (components: Array<ReactClass<any> | Array<any>>, props
   })
 );
 
-const collection = (components: Array<ReactClass<any> | Array<any>> = []) => {
+const collection = (components: Array<ReactClass<any> | Array<any>> = []): ReactClass<any> => {
 
   invariant(
     Array.isArray(components),
