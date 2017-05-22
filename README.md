@@ -1,6 +1,6 @@
 # react-form-addons
 
-> Form utilities for building function components in react.
+> Utility belt for building forms with functional components in React.
 
 [![Build Status][build-badge]][build-link]
 [![npm package][npm-badge]][npm-link]
