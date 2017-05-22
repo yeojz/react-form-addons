@@ -10,16 +10,16 @@ type Props = {
   onChange: Function
 };
 
-const handleToggle = (props: Props) => (evt: PseudoEvent): any => {
-  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+const handleToggle = (props: Props) => (evt: PseudoEvent): void => {
+  let event: SyntheticFormEvent = createSyntheticFormEvent(evt, props.formData, props.formMeta);
   event.formData = updateObjectData(props.formData, evt, true);
-  return props.onChange(event);
+  props.onChange(event);
 };
 
-const handleChange = (props: Props) => (evt: PseudoEvent): any => {
-  let event = createSyntheticFormEvent(evt, props.formData, props.formMeta);
+const handleChange = (props: Props) => (evt: PseudoEvent): void => {
+  let event: SyntheticFormEvent = createSyntheticFormEvent(evt, props.formData, props.formMeta);
   event.formData = updateObjectData(props.formData, evt);
-  return props.onChange(event);
+  props.onChange(event);
 };
 
 const withProps = () => (Component: ReactClass<any>): ReactClass<any> => {

@@ -31,7 +31,7 @@ const getDelta = (type: ActionType, name: string, data: Object): Object => ({
 });
 
 const doUpdateAction = (state: ReducerState, action: Object): ReducerState => {
-  const {payload} = action;
+  const payload: Object = action.payload;
 
   const delta = getDelta(constants.UPDATE, payload.name, {
     formData: payload.formData,
@@ -42,7 +42,7 @@ const doUpdateAction = (state: ReducerState, action: Object): ReducerState => {
 }
 
 const doResetAction = (state: ReducerState, action: Object): ReducerState => {
-  const {payload} = action;
+  const payload: Object = action.payload;
   const delta = getDelta(constants.RESET, payload.name, {});
   return update(state, delta);
 }

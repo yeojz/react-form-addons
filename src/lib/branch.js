@@ -11,12 +11,12 @@ type Props = {
   onChange: Function
 };
 
-const getTarget = (name: string, value: any) => ({
+const getTarget = (name: string, value: any): Object => ({
   name,
   value
 });
 
-const updateData = (name: string, data: Object, value: any) => (
+const updateData = (name: string, data: Object, value: Object): Object => (
   updateObjectData(
     data,
     {
@@ -25,12 +25,12 @@ const updateData = (name: string, data: Object, value: any) => (
   )
 );
 
-const handleChange = (name: string, props: Props) => (evt: PseudoEvent) => {
-  let event = createSyntheticFormEvent(evt);
+const handleChange = (name: string, props: Props) => (evt: PseudoEvent): void => {
+  let event: SyntheticFormEvent = createSyntheticFormEvent(evt);
   event.formData = updateData(name, props.formData, event.formData);
   event.formMeta = updateData(name, props.formMeta, event.formMeta);
   event.target = getTarget(name, get(event.formData, name));
-  return props.onChange(event);
+  props.onChange(event);
 };
 
 const branch = () => (Component: ReactClass<any>): ReactClass<any> => {
@@ -43,13 +43,13 @@ const branch = () => (Component: ReactClass<any>): ReactClass<any> => {
       formMeta: {}
     };
 
-    getBranchData = (key: string) => (
-      get(this, ['props', key, this.props.name], {})
+    getBranchData = (key: string): Object => (
+      get(this.props, [key, this.props.name], {})
     )
 
     render() {
-      const formData = this.getBranchData('formData');
-      const formMeta = this.getBranchData('formMeta');
+      const formData: Object = this.getBranchData('formData');
+      const formMeta: Object = this.getBranchData('formMeta');
 
       return (
         <Component

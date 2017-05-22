@@ -46,7 +46,7 @@ const withReduxState = (reducerKey: string = 'forms') => (Component: ReactClass<
   }
 
   const mapStateToProps = (state: Object): Object => ({
-    getReduxData: (name: string) => ({
+    getReduxData: (name: string): Object => ({
       formData: get(state, [reducerKey, 'data', name, 'formData'], {}),
       formMeta: get(state, [reducerKey, 'data', name, 'formMeta'], {})
     })

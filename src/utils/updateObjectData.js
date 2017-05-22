@@ -11,13 +11,13 @@ function getDelta(name: string, value: any): Object {
 }
 
 function getBooleanDelta(data: Object, name: string) {
-  const current = get(data, name, false);
+  const current: any = get(data, name, false);
   return getDelta(name, !current);
 }
 
-function updateObjectData(data: Object, evt: PseudoEvent | SyntheticFormEvent, bool: boolean = false) {
-  const name = get(evt, 'target.name');
-  const value = get(evt, 'target.value');
+function updateObjectData(data: Object, evt: PseudoEvent | SyntheticFormEvent, bool: boolean = false): Object {
+  const name: string = get(evt, 'target.name');
+  const value: any = get(evt, 'target.value');
 
   const delta = bool
     ? getBooleanDelta(data, name)

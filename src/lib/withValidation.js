@@ -16,17 +16,17 @@ type Rules = Array<Function>;
 
 const applyValidations = (rules: Rules, formData: Object): Promise<any> => (
   rules.reduce(
-    (p, fn) => p.then((err) => fn(err, formData)),
+    (p: Promise<any>, fn: Function) => p.then((err: any) => fn(err, formData)),
     Promise.resolve(void 0)
   )
 );
 
 const getValidator = (rules: Rules) => (event: SyntheticFormEvent, props: Props): Promise<any> => {
-  const formData = event.formData;
-  let formMeta = event.formMeta;
+  const formData: Object = event.formData;
+  let formMeta: Object = event.formMeta;
 
   return applyValidations(rules, formData)
-    .then((err) => {
+    .then((err: any) => {
       formMeta.errors = err;
       event.formMeta = formMeta;
       return event;
