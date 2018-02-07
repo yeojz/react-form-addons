@@ -72,7 +72,7 @@
     "eslint": "^4.1.0",
     "eslint-plugin-flowtype": "^2.32.1",
     "eslint-plugin-react": "^7.0.1",
-    "flow-bin": "^0.47.0",
+    "flow-bin": "^0.65.0",
     "jest": "^21.0.0",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
